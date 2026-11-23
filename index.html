@@ -2925,36 +2925,42 @@
 
       document.getElementById('trainer-form').addEventListener('submit', e => {
         e.preventDefault();
-        const src = document.getElementById('train-src').value.trim();
-        const pos = document.getElementById('train-pos').value;
-        const origin = document.getElementById('train-origin').value;
-        const tgtOptional = (origin === 'Native / Dravidian' || origin === 'Name / Proper Noun' || pos === 'പേര്');
-        let tgt = document.getElementById('train-tgt').value.split(',').map(s => s.trim()).filter(Boolean);
-        if (!src) return;
-        if (!tgt.length) {
-          if (!tgtOptional) return;
-          tgt = [src];
+        try {
+          const src = document.getElementById('train-src').value.trim();
+          const pos = document.getElementById('train-pos').value;
+          const origin = document.getElementById('train-origin').value;
+          const tgtOptional = (origin === 'Native / Dravidian' || origin === 'Name / Proper Noun' || pos === 'പേര്');
+          let tgt = document.getElementById('train-tgt').value.split(',').map(s => s.trim()).filter(Boolean);
+          if (!src) return showToast('Enter a Standard Malayalam word first.');
+          if (!tgt.length) {
+            if (!tgtOptional) return showToast('Enter at least one Pacha Malayalam alternative.');
+            tgt = [src];
+          }
+          upsertEntry(
+            src, tgt, pos, origin,
+            document.getElementById('train-gendered').checked,
+            document.getElementById('train-r-sandhi').value,
+            document.getElementById('train-notes').value.trim(),
+            document.getElementById('edit-entry-id').value,
+            document.getElementById('train-is-root').checked,
+            document.getElementById('train-verb-root').value.trim(),
+            document.getElementById('train-verb-past').value.trim(),
+            document.getElementById('train-tgt-verb-root').value.trim(),
+            document.getElementById('train-tgt-verb-past').value.trim(),
+            document.getElementById('train-is-abusive').checked,
+            { ...pendingCustomCases }
+          );
+          document.getElementById('trainer-form').reset();
+          document.getElementById('edit-entry-id').value = '';
+          document.getElementById('trainer-form-title').textContent = 'Train New Malayalam → Pacha Malayalam Pair';
+          pendingCustomCases = {};
+          previewAltIdx = 0;
+          updateTrainerFormVisibility();
+          updateInflectionPreview();
+          showToast(`Trained: ${src} → ${tgt.join(', ')}`);
+        } catch (err) {
+          showToast('Save error: ' + err.message);
         }
-        upsertEntry(
-          src, tgt, pos, origin,
-          document.getElementById('train-gendered').checked,
-          document.getElementById('train-r-sandhi').value,
-          document.getElementById('train-notes').value.trim(),
-          document.getElementById('edit-entry-id').value,
-          document.getElementById('train-is-root').checked,
-          document.getElementById('train-verb-root').value.trim(),
-          document.getElementById('train-verb-past').value.trim(),
-          document.getElementById('train-tgt-verb-root').value.trim(),
-          document.getElementById('train-tgt-verb-past').value.trim(),
-          document.getElementById('train-is-abusive').checked,
-          { ...pendingCustomCases }
-        );
-        document.getElementById('trainer-form').reset();
-        document.getElementById('edit-entry-id').value = '';
-        pendingCustomCases = {};
-        updateTrainerFormVisibility();
-        updateInflectionPreview();
-        showToast(`Trained: ${src} → ${tgt.join(', ')}`);
       });
 
       // Queue & Overrides & Suffix Rules
@@ -3231,21 +3237,37 @@
       document.getElementById('btn-gh-pull').addEventListener('click', async () => {
         if (!SQL) return showToast('SQLite not initialized.');
         saveGhCfg();
-        const repo = document.getElementById('gh-repo').value.trim();
+        const slug = cleanRepoSlug(document.getElementById('gh-repo').value);
         const branch = document.getElementById('gh-branch').value.trim() || 'main';
-        const path = document.getElementById('gh-path').value.trim() || 'pacha_malayalam_iso.db';
+        const path = document.getElementById('gh-path').value.trim().replace(/^\/+/, '') || 'pacha_malayalam_iso.db';
         const token = document.getElementById('gh-token').value.trim();
         const statusEl = document.getElementById('gh-sync-status');
-        if (!repo) return showToast('Enter owner/repo first.');
+        if (!slug) return showToast('Enter owner/repo first.');
 
         statusEl.textContent = 'Pulling from GitHub...';
         try {
-          const apiUrl = `https://api.github.com/repos/${cleanRepoSlug(repo)}/contents/${encodeURIComponent(path.replace(/^\/+/, '')).replace(/%2F/g, '/')}?ref=${encodeURIComponent(branch)}&_=${Date.now()}`;
-          const headers = { 'Accept': 'application/vnd.github.raw' };
+          const apiUrl = `https://api.github.com/repos/${slug}/contents/${encodeURIComponent(path).replace(/%2F/g, '/')}?ref=${encodeURIComponent(branch)}&_=${Date.now()}`;
+          const headers = { 'Accept': 'application/vnd.github.object+json' };
           if (token) headers['Authorization'] = `Bearer ${token}`;
           const res = await fetch(apiUrl, { headers, cache: 'no-store' });
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const u8 = new Uint8Array(await res.arrayBuffer());
+          const meta = await res.json();
+          let b64 = meta.content ? String(meta.content).replace(/\s+/g, '') : '';
+          if (!b64 && meta.sha) {
+            const blobRes = await fetch(`https://api.github.com/repos/${slug}/git/blobs/${meta.sha}`, {
+              headers: { ...headers, 'Accept': 'application/vnd.github+json' },
+              cache: 'no-store'
+            });
+            if (!blobRes.ok) throw new Error(`Blob HTTP ${blobRes.status}`);
+            const blobData = await blobRes.json();
+            b64 = blobData.content ? String(blobData.content).replace(/\s+/g, '') : '';
+          }
+          if (!b64) throw new Error('Empty file content returned by GitHub');
+          const u8 = base64ToUint8(b64);
+          const magic = String.fromCharCode(...u8.slice(0, 6));
+          if (magic !== 'SQLite') {
+            throw new Error(`Not a SQLite file (starts with "${magic}")`);
+          }
           db = new SQL.Database(u8);
           ensureSqliteSchema(db);
           syncStateFromDb();
