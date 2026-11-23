@@ -1,0 +1,275 @@
+# Loan finder
+Transliteration. ISO 15919
+
+roots or stem (mostly verbs) are marked with - (example śēkhari- from which forms such as śēkhariccu, śēkharikkuka, śēkharikkunna, śēkharicca etc comes)
+The hypen (-) also indicates that words or letters might join in its place (its position may be -x before or x- after or -x- the target being inside)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# 1. Identifying loan words
+1.1 Words having Mahaprana letters: kh, gh, ch, jh, ṭh, ḍh, th, dh, ph, bh are all Sanskrit loan words with exceptions being viḍḍhi-, śēkharaṁ, śēkhari-
+
+1.2 Words with g, j, ḍ, d, b, ṣ are likely loans from Sanskrit or other languages with exceptions being daśa, daśanārŭ, gaḍi, gaḍḍi, guṇṭŭ, viḷambu-; words with s are likely loan words except srāvŭ, taṭassaṁ, urasuka, urasal
+
+1.3 r̥ (letter or sign), ḥ (letter or sign) are Sanskrit loans with no exceptions
+
+1.4 Words having consonant clusters: ḻs, sṯṯ, sk, bl, br, ḍr, phl, phr, gl, skr, sṭr,  ṭv, kc, kṭ and consonant-vowel clusters: isaṁ, kla, kli, kle, klō, krō, krē,  ṭra, ṭri, ṭrō, ṯṯai are likely english loan words.
+
+1.5 Words having consonant clusters ky, cy, ṭy, ṇy, ty, ny, py, my, ry, ly, vy, śy are Sanskrit loan words 
+
+1.6 Words having consonant clusters kv, cv, ṭv, ṇv, tv, nv, pv, mv, rv, lv, śv are Sanskrit loan words
+
+1.7 Words having consonant clusters kt, kn, kp, km, kr (except mākri, pōkri), kl (except klāvŭ), kś, ṅm, ṅr, ṅl, ṅḷ, ct, cn, cm, cr, cl, ñk, ṭk, ṭṇ, ṭn, ṭp, ṭr, ṭc, ṅc, pt, pr (except for prāvŭ), pl (except for plāvŭ, plāmpaḻaṁ), mt, mn, mr, ml (except for mlāvŭ), śk, śc, śṇ, śp, śn, śm, śl, śr are likely sanskrit loan words  
+
+1.8 Sanskrit derived tense markers: -karikku, -kariccu, -karikka, -karikkuka -valkkari-
+1.9 Sanskrit derived nominal markers: -tvam/-tva-, -karaṇaṁ/-karaṇa-, -ata, -ryam/-rya-, -ikaṁ, -vān/-mān, -vat/-mat, -vati/-mati, -īyam, -mayaṁ, -kāran/-kāri (can be marked as tadbhava), -vādi, -jñan, -tāvŭ, -paraṁ, -pūrṇaṁ, -śīlaṁ, -ātmakaṁ, -itaṁ, -anīyaṁ, -tyaṁ, -tamaṁ
+1.10 Sanskrit derived adjectival markers: -maya, -ika, -īya, -para, -paraṁāya, -pūrṇa, -śīla, ātmaka, -vattāya/-mattāya, -ita, -anīya, -tya, -tavya, -tama, 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# 2. Isolating the stem: sandhi and case
+Rules for isolating stem/root from sandhi and case markers
+
+2.1 Sandhi
+2.1.1 -āmalla → -āṁ + alla; -āmilla → -āṁ + alla; 
+2.1.2 Before any vowel-initial suffix, final ṁ becomes m (kalāṁ + ine → kalāmine)
+2.1.3 Words ending in chillu l and ṇ preceeded by short vowel will have their last letter duplicated when a suffix with vowel is succeeded. (kal/kaṇ -> kalluṁ, kaṇṇuṁ, kallumāyi, kaṇṇumāyi, kallumottŭ, kaṇṇumottŭ, kallilninnŭ, kaṇṇilninnŭ, kallāyi, kaṇṇāyi, kallinuvēṇṭi, kaṇṇinuvēṇṭi, kallāṇŭ, kaṇṇāṇŭ‌)
+2.1.4 Words ending in -ai will have the -ai replaced with -ayy- when a suffix with vowel is succeeded. (kai -> kayyuṁ, kayyumāyi, kayyōṭŭ, kayyumottŭ, kayyilninnŭ, kayyāyi, kayyāṇŭ)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.2 Case and Plural endings by final sound of stem: stem ends in;
+
+2.2.1 -aṁ [example maraṁ]
+	accusative: -tte (maratte)
+	dative: -ttinŭ (marattinŭ)
+	instrumental: -ttāl (marattāl)
+	comitative: -ttōṭŭ (marattōṭŭ)
+	genitive: -ttinṟe (marattinṟe) never uṭe
+	locative: -ttil/-ttiṅkal (marattil/marattiṅkal)
+	vocative: -mē (maramē)
+	additional locative: -ttinmē/-ttinmēl (marattinmē/marattinmēl)
+	additional locative: -ttinaṭiyil (marattinaṭiyil)
+	additional dative: -ttināyi/-ttināy (marattināyi)
+	
+	all nouns ending in -aṁ are non-gendered, hence their plural suffix is -ṅṅaḷ by deleting the -ṁ (maraṅṅaḷ)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.2.2 -āṁ / -īṁ / -ūṁ/ -ŭ/chillu ṇ (pure ṇ) preceeded by long vowel [example kalāṁ]
+	accusative: -ine (kalāmine)
+	dative: -inŭ (kalāminŭ)
+	instrumental: -āl (kalāmāl)
+	comitative: -ōṭŭ (kalāmōṭŭ)
+	genitive: -inṟe (kalāminṟe) never uṭe
+	locative: -il/-iṅkal (kalāmil/kalāmiṅkal)
+	vocative: -ē (kalāmē)
+	additional locative: -inmēl (kalāminmēl)
+	additional locative: -inaṭiyil (kalāminaṭiyil)
+	additional dative: -ināyi/-ināy (kalāmināyi)
+	
+	if nouns ending in -āṁ / -īṁ / -ūṁ is a person's name, then the plural suffix is -umār (kalāmumār), otherwise, the plural suffix is -ṅṅaḷ by deleting the -ṁ (vālīṁ -> vālīṅṅaḷ)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+2.2.3  -a/-i /-ī [example tala]
+		accusative: -ye (talaye)
+		dative: -ykkŭ (talaykkŭ)
+		instrumental: -yāl (talayāl)
+		comitative: -yōṭŭ (talayōṭŭ)
+		genitive: -yuṭe (talayuṭe) never -inṟe
+		locative: -yil/-yiṅkal (talayil/talayiṅkal)
+		vocative: -yē (talayē)
+		additional locative: -yinmēl (talayinmēl)
+		additional locative: -ykkaṭiyil (talaykkaṭiyil)
+		additional dative: -ykkāyi/-ykkāy (talaykkāyi)
+		
+		If noun is gendered then the plural suffix is -amār for -a (anilamār); -imār for -i (taruṇimār); -īmār for -ī (śālīmār). Otherwise, the plural suffix is -kaḷ (talakaḷ, kaṟikaḷ, mānīkaḷ)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------		
+2.2.4 -ā/ -u / -ū/ [example nilā]
+		accusative: -vine (nilāvine)
+		dative: -vinŭ (nilāvinŭ)
+		instrumental: -vāl (nilāvāl)
+		comitative: -vōṭŭ (nilāvōṭŭ)
+		genitive: -vinṟe (nilāvinṟe)
+		locative: -vil/-viṅkal (nilāvil/nilāviṅkal)
+		vocative: -vē (nilāvē)
+		additional locative: -vinmēl (nilāvinmēl)
+		additional locative: -vinaṭiyil (nilāvinaṭiyil)
+		additional dative: -vināyi/-vināy (nilāvināyi)
+		
+	If noun is gendered then the plural suffix is -āmār for -ā (śīlāmār); -umār for -u (anumār); -ūmār for -ū (tānūmār). Otherwise, the plural suffix is -kkaḷ for -ā, -u and -ū (nilākkaḷ, tanukkaḷ, pūkkaḷ); Sometimes, -ūvukaḷ appear for -ū (pūvukaḷ).
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.2.5 -ai [example kai] -ai is replaced wtih -a in all suffixations
+	accusative: -yye (kayye)
+	dative: -ykkŭ (kaykkŭ)
+	instrumental: -yyāl (kayyāl)
+	comitative: -yyōṭŭ (kayyōṭŭ)
+	genitive: -yyuṭe (kayyuṭe)
+	locative: -yyil/-yyiṅkal (kayyil/kayyiṅkal)
+	vocative: -yyē (kayyē)
+	additional locative: -yyinmēl (kayyinmēl)
+	additional locative:-ykkaṭiyil (kaykkaṭiyil)
+	additional dative: -ykkāyi/-ykkāy (kaykkāyi)
+	
+	If noun is gendered then the plural suffix is -mār (anavaimār). Otherwise , the plural suffix is -kaḷ (kaikaḷ)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.2.6 chillu -n (pure n) preceeded by short vowel [example avan]
+	accusative: -e (avane)
+	dative: -ŭ (avanŭ)
+	instrumental: -āl (avanāl)
+	comitative: -ōṭŭ (avanōṭŭ)
+	genitive: -ṟe (avanṟe)
+	locative: -il/-iṅkal (avanil/avaniṅkal)
+	vocative: -ē (avanē)
+	additional locative: -mēl (avanmēl)
+	additional locative: -aṭiyil (avanaṭiyil)
+
+ If noun is gendered then the plural suffix is -mār (avanmār). Otherwise , the plural suffix is -ṅkaḷ (kaṭaṅkaḷ)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+2.2.7 chillu -n (pure n) preceeded by long vowel [example mān]
+	same rules as "2.2.6 chillu n (pure n) preceeded by short vowel (example avan)" except for the following changes;
+	dative: -inŭ (māninŭ)
+	genitive: -inṟe (māninṟe)
+	additional locative: -ninaṭiyil (māninaṭiyil)
+	additional dative: -ināyi/-ināy (mānināyi)
+
+ If noun is gendered then the plural suffix is -mār (bhayavānmār). Otherwise , the plural suffix is -ukaḷ (mānukaḷ)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.2.8 chillu -ṇ (pure ṇ) preceeded by short vowel [example kaṇ]
+	accusative: -ṇine (kaṇṇine)
+	dative: -ṇinŭ (kaṇṇinŭ)
+	instrumental: -ṇāl (kaṇṇāl)
+	comitative: -ṇōṭŭ (kaṇṇōṭŭ)
+	genitive: -inṟe (kaṇṇinṟe)
+	locative: -ṇil/-ṇiṅkal (kaṇṇil/kaṇṇiṅkal)
+	vocative: -ṇē (kaṇṇē)
+	additional locative: -ṇinmēl (kaṇṇinmēl)
+	additional locative: -ṇinaṭiyil (kaṇṇinaṭiyil)
+	additional dative: -ṇināyi/-ṇināy (kaṇṇināyi)
+	
+ If noun is gendered then the plural suffix is -mār (bhayavānmār). Otherwise , the plural suffix is -ṇukaḷ (kaṇṇukaḷ)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.2.9 chillu -r (pure r)/chillu -l (pure -l) preceeded by a long vowel/ chillu ḷ (pure ḷ) preceeded by long vowel  [examples pār & kār]
+	accusative: -ine (pārine & kāṟine)
+	dative: -inŭ (pārinŭ & kāṟinŭ)
+	instrumental: -ināl (pārināl & kāṟināl)
+	comitative: -inōṭŭ (pārinōṭŭ & kāṟinōṭŭ)
+	genitive: -inṟe (pārinṯe & kāṟinṯe)
+	locative: -il/-iṅkal (pāril & kāṟil/pāriṅkal & kāṟiṅkal)
+	vocative: -ē/-ē (pārē & kāṟē)
+	additional locative: -inmēl (pārinmēl & kāṟinmēl)
+	additional locative: -inaṭiyil (pārinaṭiyil & kāṟinaṭiyil)
+	additional dative: -ināyi/-ināy (pārināyi & kāṟināyi)
+	
+There is no specific pattern when r or ṟ will appear, it needs to be marked in the lexicon : treat it as a per-lemma flag in the lexicon, and when stripping
+
+Even if noun is gendered for chillu -r ending words, the plural will be -kaḷ (arivarkaḷ), otherwise the plural suffix is -ukaḷ depending on the r or ṟ lemma flag (pārukaḷ & kāṟukaḷ)
+If noun is gendered then the plural suffix is -umār for chillu -l (pure -l) preceeded by a long vowel/ chillu ḷ (pure ḷ) preceeded by long vowel. Otherwise, the plural suffix -ukaḷ (ālukaḷ, kālāḷukaḷ)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.2.10 chillu -l (pure l) preceeded by short vowel [example kal]
+	accusative: -line (kalline)
+	dative: -linŭ (kallinŭ)
+	instrumental: -lāl (kallāl)
+	comitative: -lōṭŭ/-linōṭŭ (kallōṭŭ/kallinōṭŭ)
+	genitive: -linṟe (kallinṟe)
+	locative: -lil/-liṅkal (kallil/kalliṅkal)
+	vocative: -lē (kallē)
+	additional locative: -linmēl (kallinmēl)
+	additional locative: -linaṭiyil (kalliaṭiyil)
+	additional dative: -lināyi/-lināy (kallināyi)
+	
+ If noun is gendered then the plural suffix is -mār (amalmār). Otherwise , the plural suffix is -lukaḷ (kallukaḷ)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.2.11 chillu -ḷ (pure ḷ) preceeded by short vowel [example kaḷ]
+	accusative: -ḷine (kaḷḷine)
+	dative: -ḷinŭ (kaḷḷinŭ)
+	instrumentaḷ: -ḷāl (kaḷḷāl)
+	comitative: -ḷōṭŭ/-ḷinōṭŭ (kaḷḷōṭŭ/kaḷḷinōṭŭ)
+	genitive: -ḷinṟe (kaḷḷinṟe)
+	ḷocative: -ḷil/-ḷiṅkal (kaḷḷil/kaḷḷiṅkal)
+	vocative: -ḷē (kaḷḷē)
+	additionaḷ ḷocative: -ḷinmēl (kaḷḷinmēl)
+	additionaḷ ḷocative: -ḷinaṭiyil (kaḷḷiaṭiyil)
+	additional dative: -ḷināyi/-ḷināy (kaḷḷināyi)/if pronouns then -kkāyi/kkāy (avaḷkkāyi, taṅṅaḷkkāyi, tanikkāyi, enikkāyi)
+
+ If noun is gendered then the plural suffix is -umār (avaḷumār). Otherwise , the plural suffix is -ḷukaḷ (kaḷḷukaḷ)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.2.12 -ŭ (kalippŭ). -ŭ  is replaced by succeeding vowel
+	accusative: -ine (kalippine)
+	dative: -inŭ (kalippinŭ)
+	instrumentaḷ: -āl (kalippāl)
+	comitative: -ōṭŭ/-inōṭŭ (kalippōṭŭ)
+	genitive: -inṟe (kalippinṟe)
+	ḷocative: -il/-iṅkal (kalippil/kalippiṅkal)
+	vocative: -ē (kalippē)
+	additionaḷ ḷocative: -inmēl (kalippinmēl)
+	additionaḷ ḷocative: -inaṭiyil (kalippinaṭiyil)
+	additional dative: -ināyi/-ināy (kalippināyi)
+the plural suffix is -ukaḷ (kalippukaḷ)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.3 Suffix inventory - common suffixes for isolating stems/roots
+for case markers + suffixes, suffixation rules mentioned above for case markers apply
+
+2.3.1 -uṁ is 'and' (kalluṁ palluṁ = stone and teeth). 
+2.3.1.1 In agglutination, the 'and' suffix will only come after the plural suffix is added eg: (kalluṁ kallukaḷuṁ = stone and stones: kal[noun] + ḷukaḷ [plural marker] + -uṁ[and marker); -ṅṅaḷuṁ is plural + and. 
+
+2.3.2 -umāyi is 'with' (kallumāyi)
+
+2.3.3 -umottŭ is 'together with'. (kallumottŭ) 
+
+2.3.4 case marker: -ilninnŭ/-ilninnu is 'locative + engendering'. It is a combination of locative -il + ninnŭ/ninnu; -ilēkkŭ/-ilēkkuḷḷa is 'locative + towards'. it is a combination of locative -il + ēkkŭ/ il + ēkkuḷḷa
+
+2.3.5 -āyi is 'becoming' (kallāyi)
+
+2.3.6 -uvēṇṭi (dative + for) is a combination of dative -ŭ + vēṇṭi. Common variations include -uvēṇṭunna, -uvēṇṭātta, -uvēṇō, -uvēṇṭē, -uvēṇaṁ
+
+2.3.7 -āṇŭ/-āṇu is copula 'is/are'. paramāṇu is a sanskrit loan.
+2.3.7.1 for -aṁ/-āṁ / -īṁ / -ūṁ/ -ŭ/chillu ṇ (pure ṇ) preceeded by long vowel words ending nouns the suffix is -māṇŭ/-māṇu (maraṁ -> maramāṇŭ).
+2.3.7.2 for -a/-i /-ī ending words the suffix is -yāṇŭ/-yāṇu (talayāṇŭ)
+2.3.7.3 for -ā/ -u / -ū ending words the suffix is -vāṇŭ/-vāṇu (nilāvāṇŭ)
+2.3.7.4 for -ai ending words the suffix is -yyāṇŭ/-yyāṇu (kayyāṇŭ) where -ai is replaced
+2.3.7.5 for chillu -n (pure n) preceeded by short vowel/chillu -r (pure r)/chillu -l (pure -l) preceeded by a long vowel/ chillu ḷ (pure ḷ) preceeded by long vowel ending words the suffix is -āṇŭ/-āṇu (avanāṇŭ); chillu -ṇ (pure ṇ) preceeded by short vowel the suffix is -ṇāṇŭ/-ṇāṇu (kaṇṇāṇŭ); 
+2.3.7.6 for chillu -l (pure l) preceeded by short vowel the suffix is -lāṇŭ/-lāṇu; for chillu -ḷ (pure ḷ) preceeded by short vowel the suffix is -ḷāṇŭ/-ḷāṇu
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.3.8 Negative markers : -arutŭ, -alla, -illa, -pōra, -vēṇṭa are the negative markers and the above rules of suffixations apply 
+
+2.3.9 affirmative markers: -uṇṭu/-uṇṭŭ, -vēṇaṁ are the affirmative markers in addition to -āṇŭ/-āṇu and the above  rules of suffixations apply 
+
+2.4 Verb and Tense
+Only works with verbs
+2.4.1 -unnu is the present tense. verb root + -unnu. Most verb roots end in -u. So only -nnu is applied (root: tallu + -nnu = tallunnu); If verb root ends in chillu l or r then the suffix is -kkunnu (root: nil + -kkunnu = nilkkunnu); negative form of -unnu is -unnilla
+
+2.4.2 -ukayāṇŭ/ukayāṇu is infinitive verb form. Same rules of -unnu applies for chillu l and r. Negative form of -ukayāṇŭ/ukayāṇu is -ukayāyirunnilla
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.4.3 The simple past marker depends on the verb’s root ending; Following is a pattern with exceptions 
+2.4.3.1 "ku/kku oḻuku (flow) → oḻuki(flowed), taḻuku → taḻuki, pokku (lift) → pokki (lifted); Long vowel + ku/vu pōku → pōyi, pōvu → pōyi, āku → āyi
+ṟaku/rikku/llu maṟakku → maṟannu, irikku → irunnu, cellu → cennu
+lkku vilkku → viṯṯu, nōlkku → nōṯṯu, tōlkku → tōṯṯu, kalkku → kaṯṯu
+lkku nilkku → ninnu (exception word)
+ḷkku/ṭu kēḷkku → kēṭṭu, vēḷkku → vēṭṭu, toṭu → toṭṭu, peṭu → peṭṭu
+ukku taṇukku → taṇuttu, paḻukku → paḻuttu, puḻukku - puḻuttu
+ykku/rikku/ṟikku maṟaykku → maṟaccu, cirikku → ciriccu, carikku - cariccu, paṟikku - paṟiccu
+ttu cārttu → cārtti, pottu → potti, kuttu → kutti
+ru vaḷaru → vaḷarnnu, taḷaru → taḷarnnu, kalaru → kalarnnu
+ṟu/ṯṯu pataṟu → pataṟi, māṟu → māṟi, māṯṯu → māṯṯi, vāṯṯu → vāṯṯi
+ṭu cāṭu → cāṭi, pāṭu → pāṭi, vāṭu → vāṭi
+vu nōvu → nontu, vēvu → ventu
+ḷu uruḷu → uruṇṭu, puraḷu → puraṇṭu, varaḷu → varaṇṭu
+yu pāyu → pāññu, cāyu → cāññu, karayu → karaññu, tirayu → tiraññu
+ccu/ñcu piccu → picci, koñcu → koñci
+ḻu cūḻu → cūḻnnu, āḻu → āḻnnu, tāḻu → tāḻnnu
+ḻu tāḻu → tāṇu, vāḻu → vāṇu (older form but vāḻu → vāṇu is still used)
+mmu cammu → cammi, tummu → tummi, pammu → pammi
+ppu/mpu/ṅṅu tappu → tappi, viḷampu - viḷampi, kaṟaṅṅu → kaṟaṅṅi
+
+simple past exceptions – these verbs have their own rules
+koḷḷu → koṇṭu
+kakku → kaṭṭu
+tallu → talli
+kanakku → kanattu
+cāru → cāri
+cāku/cāvu → cattu"
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.5 Common native adjectival and participial markers
+-āya(copular), -āyi(past adverbial particple), -uḷḷa(having/existing), -aṟṟa(lacking), -uṟṟa(containing), -illātta (not having), -ārnna (filled with), -enna (complementiser), -ākunna (becoming), -takka (suitable), -ākāvunna/-ākkāvunna (probable), -koṇṭuḷḷa (made with), -niṟañña (filled with), -keṭṭa (not having/lacking), -pōluḷḷa/-pōlatte (similar)
+
+2.6 uṇṭŭ is past marker for 'having'. It can combine with other suffixes, if a suffix is succeeded, then the -ŭ is replaced by the succeeding vowel (nāluṇṭallō)
+
+2.7 -ō, -āṇō, -allē, -illē, -alleyō, -uṇṭō are question markers
+
+
+
+
