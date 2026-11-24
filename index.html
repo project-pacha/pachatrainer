@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>പച്ചമലയാളം മൊഴിമാറ്റി Trainer</title>
+  <title>പച്ചമലയാളം മൊഴിമാറ്റി Data Trainer</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.7.0/sql-wasm.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -127,10 +127,10 @@
         </div>
         <div>
           <h1 class="text-base sm:text-lg font-bold tracking-tight text-[#102b26] leading-tight">
-            പച്ചമലയാളം <span class="font-semibold text-[#146c43]"> Translator Trainer</span>
+            പച്ചമലയാളം <span class="font-semibold text-[#146c43]"> Data Trainer</span>
           </h1>
           <p class="text-xs text-[#42635b] flex flex-wrap items-center gap-2">
-            <span>Malayalam Sandhi Engine</span>
+            <span>Malayalam Engine</span>
             <span id="sqlite-status-badge" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#e3f3eb] text-[#146c43] border border-[#102b26]">SQLite WASM: Loading...</span>
           </p>
         </div>
@@ -226,7 +226,7 @@
           <!-- Purity Bar -->
           <div class="space-y-1.5 pt-1">
             <div class="flex items-center justify-between text-xs">
-              <span class="font-semibold text-[#102b26]">Pacha Score: <strong id="purity-score-text" class="text-[#146c43]">100%</strong></span>
+              <span class="font-semibold text-[#102b26]">Pacha Purity Score: <strong id="purity-score-text" class="text-[#146c43]">100%</strong></span>
               <span id="purity-counts" class="text-[#42635b]">0 replaced · 0 flagged</span>
             </div>
             <div class="w-full h-2.5 bg-gray-200 rounded-full border border-[#102b26] overflow-hidden">
@@ -1943,8 +1943,8 @@
         return { isOverride: false, entry: pastMatch, caseChain: [], caseType: 'verb_past', srcSuffix: '' };
       }
       // 1b. Verb root + valid verb suffix match (prevents false compound matches like akrami + nāḷukaḷ)
-      const VALID_VERB_PAST_REST = /^(ccukoṇṭirikk|ccukoṇṭ|ccirikk|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ppicc|ccuṁ|ccāl|cca|ccu|ttu|nnu|nna|iṭṭillātta|iṭṭilla|iṭṭŭ|i$)/;
-      const VALID_VERB_PRES_REST = /^(ppikkuka|ppikkunnu|ppikkunna|ppikkunnilla|ppikkumpōḷ|ppikkātta|ppikkukayilla|ppān|kkuka|ykkuka|uka|kkunnu|ykkunnu|unnu|kkunna|ykkunna|unna|kkunnilla|ykkunnilla|unnilla|kkumpōḷ|ykkumpōḷ|umpōḷ|kkātta|ykkātta|ātta|kkukayilla|ykkukayilla|ukayilla|ukilla|kkāṁ|ykkāṁ|āṁ|kkuṁ|ykkuṁ|uṁ|kkāte|ykkāte|āte|kkān|ykkān|ān|uvān|kkaṇaṁ|aṇaṁ|kkaṇṭa|aṇṭa|kku|ykku|kk|ykk)/;
+      const VALID_VERB_PAST_REST = /^(ccukoṇṭirikk|ccukoṇṭ|ccirikk|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ppicc|ppeṭuttiya|peṭuttiya|ppeṭṭa|peṭṭa|ccuṁ|ccāl|cca|ccu|ttu|nnu|nna|iṭṭillātta|iṭṭilla|iṭṭŭ|i$)/;
+      const VALID_VERB_PRES_REST = /^(ppikkuka|ppikkunnu|ppikkunna|ppikkunnilla|ppikkumpōḷ|ppikkātta|ppikkukayilla|ppān|kkappeṭṭa|ykkappeṭṭa|appeṭṭa|kkuka|ykkuka|uka|kkunnu|ykkunnu|unnu|kkunna|ykkunna|unna|kkunnilla|ykkunnilla|unnilla|kkumpōḷ|ykkumpōḷ|umpōḷ|kkātta|ykkātta|ātta|kkukayilla|ykkukayilla|ukayilla|ukilla|kkāṁ|ykkāṁ|āṁ|kkuṁ|ykkuṁ|uṁ|kkāte|ykkāte|āte|kkān|ykkān|ān|uvān|kkaṇaṁ|aṇaṁ|kkaṇṭa|aṇṭa|kku|ykku|kk|ykk)/;
       for (const e of state.lexicon) {
         if (!e.verbRoot) continue;
         const rIso = mlToIso(normalizeMalayalam(e.verbRoot.replace(/-+$/, '')));
@@ -2123,7 +2123,18 @@
           const effPast = tgtPastIso || (baseTgtIso.endsWith('uka') ? (baseTgtIso.slice(0, -3) + 'i') : baseTgtIso);
           if (/^(ccu|ppiccu|i)$/.test(rest)) return effPast;
           if (rest.startsWith('ccukoṇṭ')) return effPast + 'k' + rest.slice(3);
-          if (rest === 'cca' || rest === 'ppicca') return effPast.endsWith('i') ? (effPast + 'ya') : (effPast.slice(0, -1) + 'a');
+          if (rest === 'cca' || rest === 'ppeṭṭa' || rest === 'peṭṭa') {
+            if (effPast.endsWith('ōyi') || effPast.endsWith('āyi')) return effPast.slice(0, -1) + 'a'; // pōyi -> pōya
+            if (effPast.endsWith('i')) return effPast + 'ya'; // taḻuki -> taḻukiya, cāṭi -> cāṭiya
+            if (effPast.endsWith('u') || effPast.endsWith('ŭ')) return effPast.slice(0, -1) + 'a'; // maṟannu -> maṟanna, tōṯṯu -> tōṯṯa
+            return effPast + 'a';
+          }
+          if (rest === 'ppicca' || rest === 'ppeṭuttiya' || rest === 'peṭuttiya') {
+            let cStem = tgtRootIso.replace(/ŭ$/, '');
+            if (derivedStem && derivedStem.length > cStem.length && derivedStem.slice(0, 3) === cStem.slice(0, 3)) cStem = derivedStem;
+            cStem = cStem.replace(/u$/, '').replace(/y?kk$/, '');
+            return cStem + 'ppicca'; // tōlku -> tōlppicca, kēḷkku -> kēḷppicca
+          }
           const tail = rest.replace(/^(ppicc|cc)/, '');
           if (/^[aāiīuūeēoō]/.test(tail)) {
             if (effPast.endsWith('ŭ') || effPast.endsWith('u')) return effPast.slice(0, -1) + tail;
@@ -2146,7 +2157,7 @@
             const cleanStem = (!needsKk && stem.endsWith('u')) ? stem.slice(0, -1) : stem;
             return cleanStem + (needsKk ? 'kk' : '') + 'ān';
           }
-          if (/^(uka|unnu|unna|unnilla|umpōḷ|ātta|ukilla|uṁ|āṁ|aṇaṁ|aṇṭa|āte)$/.test(normRest)) {
+          if (/^(uka|unnu|unna|unnilla|umpōḷ|ātta|ukilla|uṁ|āṁ|aṇaṁ|aṇṭa|āte|appeṭṭa)$/.test(normRest)) {
             const cleanStem = (!needsKk && stem.endsWith('u') && /^[uāa]/.test(normRest)) ? stem.slice(0, -1) : stem;
             return cleanStem + (needsKk ? 'kk' : '') + normRest;
           }
