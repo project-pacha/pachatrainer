@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>പച്ചമലയാളം മൊഴിമാറ്റി Data Trainer</title>
+  <title>പച്ചമലയാളം മൊഴിമാറ്റി Trainer</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.7.0/sql-wasm.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -127,7 +127,7 @@
         </div>
         <div>
           <h1 class="text-base sm:text-lg font-bold tracking-tight text-[#102b26] leading-tight">
-            പച്ചമലയാളം <span class="font-semibold text-[#146c43]">ISO 15919 Translator &amp; Data Trainer</span>
+            പച്ചമലയാളം <span class="font-semibold text-[#146c43]"> Translator Trainer</span>
           </h1>
           <p class="text-xs text-[#42635b] flex flex-wrap items-center gap-2">
             <span>Malayalam Sandhi Engine</span>
@@ -199,7 +199,7 @@
             id="source-input"
             rows="5"
             class="w-full p-3 rounded-lg border-2 border-[#102b26] bg-[#fafdfb] text-base ml-text focus:outline-none focus:ring-2 focus:ring-[#146c43] resize-y"
-            placeholder="ഇവിടെ മലയാളം ടൈപ്പ് ചെയ്യുക അല്ലെങ്കിൽ ഒട്ടിക്കുക..."
+            placeholder="ഇവിടെ മലയാളം വാക്യങ്ങൾ ടൈപ്പ് ചെയ്യുക അല്ലെങ്കിൽ ഒട്ടിക്കുക..."
           ></textarea>
           <div class="flex items-center justify-between text-xs text-[#42635b]">
             <span id="input-word-count">0 words</span>
@@ -211,7 +211,7 @@
         <div class="pacha-card p-4 flex flex-col gap-3 bg-[#f9fcfa]">
           <div class="flex items-center justify-between">
             <div>
-              <span class="text-xs font-bold uppercase tracking-wider text-[#146c43]">Output</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-[#146c43]">Pure Dravidian Output</span>
               <h2 class="text-sm font-bold text-[#102b26] ml-text">പച്ചമലയാളം</h2>
             </div>
             <div class="flex items-center gap-2">
@@ -348,6 +348,10 @@
                 <input id="train-is-abusive" type="checkbox" class="w-4 h-4 accent-[#ea580c] rounded" />
                 <span>Flag as Abusive / Inappropriate (Orange highlight &amp; prompt alternatives)</span>
               </label>
+              <label class="inline-flex items-center gap-2 text-xs font-bold text-[#146c43] cursor-pointer bg-[#e3f3eb] px-3 py-1.5 rounded-lg border border-[#146c43]">
+                <input id="train-native-exact" type="checkbox" class="w-4 h-4 accent-[#146c43] rounded" />
+                <span>Already Native (Keep exact form, no root/inflection needed)</span>
+              </label>
             </div>
 
             <div>
@@ -480,7 +484,7 @@
             <span id="gh-sync-status" class="text-[11px] font-mono text-[#42635b]">Not synced yet</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
-            <input id="gh-repo" type="text" placeholder="owner/repo (e.g. owner/pacha)" class="sm:col-span-4 px-2.5 py-1.5 rounded-lg border-2 border-[#102b26] text-xs bg-white font-mono" />
+            <input id="gh-repo" type="text" placeholder="owner/repo (e.g. admin/pacha)" class="sm:col-span-4 px-2.5 py-1.5 rounded-lg border-2 border-[#102b26] text-xs bg-white font-mono" />
             <input id="gh-branch" type="text" value="main" placeholder="Branch (main)" class="sm:col-span-2 px-2.5 py-1.5 rounded-lg border-2 border-[#102b26] text-xs bg-white font-mono" />
             <input id="gh-path" type="text" value="pacha_malayalam_iso.db" placeholder="DB file path" class="sm:col-span-3 px-2.5 py-1.5 rounded-lg border-2 border-[#102b26] text-xs bg-white font-mono" />
             <input id="gh-token" type="password" placeholder="GitHub PAT (Contents: R/W)" class="sm:col-span-3 px-2.5 py-1.5 rounded-lg border-2 border-[#102b26] text-xs bg-white font-mono" />
@@ -1007,10 +1011,12 @@
       if (caseType === 'pl') {
         if (isGendered) {
           if (endsAm) return stemIso.slice(0, -2) + 'anmār';
+          if (stemIso.endsWith('ḷ')) return stemIso + 'umār'; // avaḷ -> avaḷumār
           if (stemIso.endsWith('ŭ')) return stemIso.slice(0, -1) + 'umār';
           return stemIso + 'mār';
         }
         if (endsAm) return stemIso.slice(0, -2) + 'aṅṅaḷ'; // maram -> maraṅṅaḷ
+        if (stemIso.endsWith('āvŭ')) return stemIso.slice(0, -2) + 'kkaḷ'; // akamitāvŭ -> akamitākkaḷ
         if (stemIso.endsWith('ŭ')) return stemIso.slice(0, -1) + 'ukaḷ'; // āṭŭ -> āṭukaḷ
         if (stemIso.endsWith('r')) {
           return rSandhi === 'ṟil' ? stemIso.slice(0, -1) + 'ṟukaḷ' : stemIso + 'ukaḷ'; // kāṟukaḷ / tārukaḷ
@@ -1392,7 +1398,7 @@
         'vinaṭiyil', 'vinmēl', 'vināyi', 'vināy', 'viṅkal', 'vinṟe', 'vinŭ', 'vōṭŭ', 'vāṇŭ', 'vāṇu',
         'inaṭiyil', 'inmēl', 'ināyi', 'ināy', 'iṅkal', 'inṟe', 'inŭ', 'ilninnŭ', 'ilninnu', 'ilēkkŭ',
         'ṅṅaḷuṁ', 'ṅṅaḷ', 'umottŭ', 'umāyi', 'uvēṇṭi', 'uvēṇō', 'uvēṇṭē', 'uvēṇaṁ',
-        'ccukoṇṭirikkunna', 'ccukoṇṭirikkunnu', 'kkātirikkunna', 'kkātirikkunnu', 'kkāteyuḷḷa', 'kkānākātta', 'kkānākātte', 'ykkāte', 'kkāte', 'āte', 'kkān', 'ykkān', 'kkaṇaṁ', 'kkaṇṭa', 'aṇaṁ', 'aṇṭa', 'ykkunnilla', 'kkunnilla', 'unnilla', 'ykkunnu', 'kkunnu', 'unnu', 'ykkunna', 'kkunna', 'unna', 'ykkuka', 'kkuka', 'uka', 'kkāṁ', 'kkuṁ', 'ccāl', 'ccu', 'cca', 'nna', 'nnilla', 'koṇṭuḷḷa', 'illātta', 'ākāvunna', 'ākkāvunna', 'pōluḷḷa', 'pōlatte',
+        'ccukoṇṭirikkunna', 'ccukoṇṭirikkunnu', 'cciṭṭillātta', 'cciṭṭilla', 'cciṭṭŭ', 'ppikkuka', 'ppiccu', 'ppicca', 'ppān', 'kkumpōḷ', 'ykkumpōḷ', 'umpōḷ', 'kkātta', 'ykkātta', 'ātta', 'kkukayilla', 'ykkukayilla', 'ukayilla', 'ukilla', 'kkān', 'ykkān', 'uvān', 'ān', 'kkātirikkunna', 'kkātirikkunnu', 'kkāteyuḷḷa', 'kkānākātta', 'kkānākātte', 'ykkāte', 'kkāte', 'āte', 'kkān', 'ykkān', 'kkaṇaṁ', 'kkaṇṭa', 'aṇaṁ', 'aṇṭa', 'ykkunnilla', 'kkunnilla', 'unnilla', 'ykkunnu', 'kkunnu', 'unnu', 'ykkunna', 'kkunna', 'unna', 'ykkuka', 'kkuka', 'uka', 'kkāṁ', 'kkuṁ', 'ccāl', 'ccu', 'cca', 'nna', 'nnilla', 'koṇṭuḷḷa', 'illātta', 'ākāvunna', 'ākkāvunna', 'pōluḷḷa', 'pōlatte',
         'ākunna', 'niṟañña', 'alleyō', 'uṇṭō', 'āṇō', 'allē', 'illē',
         'ttil', 'ttāl', 'tte', 'ttŭ', 'ykkŭ', 'yuṭe', 'yāl', 'yōṭŭ', 'yil', 'yē', 'ye', 'yāṇŭ', 'yāṇu',
         'vine', 'vāl', 'vē', 'vukaḷ', 'kkaḷ', 'ukaḷ', 'ṅkaḷ', 'mār', 'umār', 'amār', 'imār', 'īmār', 'āmār', 'ūmār', 'kaḷ',
@@ -1911,9 +1917,13 @@
           entry: { id: ov.id, src: ov.src_form, srcIso: ov.src_iso, tgt: ov.tgt_forms, tgtIso: ov.tgt_iso, pos: 'Override', isGendered: false, rSandhi: 'ril' },
           caseChain: [],
           caseType: '',
-          srcSuffix: ''
+          srcSuffix: '',
+          underlyingMatch: lookupIsoTokenNoOverride(wordIso)
         };
       }
+      return lookupIsoTokenNoOverride(wordIso);
+    }
+    function lookupIsoTokenNoOverride(wordIso) {
       // 1. Exact lexicon match in ISO (or verb past / verb root match)
       const exact = state.lexicon.find(e => e.srcIso === wordIso);
       if (exact) {
@@ -1933,8 +1943,8 @@
         return { isOverride: false, entry: pastMatch, caseChain: [], caseType: 'verb_past', srcSuffix: '' };
       }
       // 1b. Verb root + valid verb suffix match (prevents false compound matches like akrami + nāḷukaḷ)
-      const VALID_VERB_PAST_REST = /^(ccukoṇṭirikk|ccukoṇṭ|ccirikk|ccuṁ|ccāl|cca|ccu|ttu|nnu|nna|i$)/;
-      const VALID_VERB_PRES_REST = /^(kkuka|ykkuka|uka|kkunnu|ykkunnu|unnu|kkunna|ykkunna|unna|kkunnilla|ykkunnilla|unnilla|kkāṁ|ykkāṁ|āṁ|kkuṁ|ykkuṁ|uṁ|kkāte|ykkāte|āte|kkān|ykkān|ān|kkaṇaṁ|aṇaṁ|kkaṇṭa|aṇṭa|kku|ykku|kk|ykk)/;
+      const VALID_VERB_PAST_REST = /^(ccukoṇṭirikk|ccukoṇṭ|ccirikk|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ppicc|ccuṁ|ccāl|cca|ccu|ttu|nnu|nna|iṭṭillātta|iṭṭilla|iṭṭŭ|i$)/;
+      const VALID_VERB_PRES_REST = /^(ppikkuka|ppikkunnu|ppikkunna|ppikkunnilla|ppikkumpōḷ|ppikkātta|ppikkukayilla|ppān|kkuka|ykkuka|uka|kkunnu|ykkunnu|unnu|kkunna|ykkunna|unna|kkunnilla|ykkunnilla|unnilla|kkumpōḷ|ykkumpōḷ|umpōḷ|kkātta|ykkātta|ātta|kkukayilla|ykkukayilla|ukayilla|ukilla|kkāṁ|ykkāṁ|āṁ|kkuṁ|ykkuṁ|uṁ|kkāte|ykkāte|āte|kkān|ykkān|ān|uvān|kkaṇaṁ|aṇaṁ|kkaṇṭa|aṇṭa|kku|ykku|kk|ykk)/;
       for (const e of state.lexicon) {
         if (!e.verbRoot) continue;
         const rIso = mlToIso(normalizeMalayalam(e.verbRoot.replace(/-+$/, '')));
@@ -2111,10 +2121,10 @@
         const rest = match.srcSuffix || '';
         if (match.caseType === 'verb_root_past') {
           const effPast = tgtPastIso || (baseTgtIso.endsWith('uka') ? (baseTgtIso.slice(0, -3) + 'i') : baseTgtIso);
-          if (/^(ccu|i)$/.test(rest)) return effPast;
+          if (/^(ccu|ppiccu|i)$/.test(rest)) return effPast;
           if (rest.startsWith('ccukoṇṭ')) return effPast + 'k' + rest.slice(3);
-          if (rest === 'cca') return effPast.endsWith('i') ? (effPast + 'ya') : (effPast.slice(0, -1) + 'a');
-          const tail = rest.replace(/^cc/, '');
+          if (rest === 'cca' || rest === 'ppicca') return effPast.endsWith('i') ? (effPast + 'ya') : (effPast.slice(0, -1) + 'a');
+          const tail = rest.replace(/^(ppicc|cc)/, '');
           if (/^[aāiīuūeēoō]/.test(tail)) {
             if (effPast.endsWith('ŭ') || effPast.endsWith('u')) return effPast.slice(0, -1) + tail;
             if (effPast.endsWith('i')) return effPast + 'y' + tail;
@@ -2129,12 +2139,18 @@
             if (bridge && /^[ṭḍḷṟtkc]$/.test(bridge)) stem = stem + bridge;
           }
           const needsKk = baseTgtIso.endsWith('kkuka') || /[lr]$/.test(baseTgtIso);
-          const normRest = rest.replace(/^y?(kk)/, '');
-          if (normRest === 'uka' || normRest === 'unnu' || normRest === 'unna' || normRest === 'unnilla' || normRest === 'uṁ' || normRest === 'āṁ') {
-            const cleanStem = (!needsKk && stem.endsWith('u') && normRest.startsWith('u')) ? stem.slice(0, -1) : stem;
+          let normRest = rest.replace(/^(ppikk|y?kk|pp)/, '');
+          if (normRest === 'ukayilla') normRest = 'ukilla';
+          if (normRest === 'ān' || normRest === 'uvān') {
+            if (!needsKk && stem.endsWith('u')) return stem + 'vān';
+            const cleanStem = (!needsKk && stem.endsWith('u')) ? stem.slice(0, -1) : stem;
+            return cleanStem + (needsKk ? 'kk' : '') + 'ān';
+          }
+          if (/^(uka|unnu|unna|unnilla|umpōḷ|ātta|ukilla|uṁ|āṁ|aṇaṁ|aṇṭa|āte)$/.test(normRest)) {
+            const cleanStem = (!needsKk && stem.endsWith('u') && /^[uāa]/.test(normRest)) ? stem.slice(0, -1) : stem;
             return cleanStem + (needsKk ? 'kk' : '') + normRest;
           }
-          return tgtRootIso.replace(/ŭ$/, '') + rest;
+          return stem + normRest;
         }
       }
       const chain = match.caseChain || (match.caseType ? [match.caseType] : []);
@@ -2184,6 +2200,7 @@
               caseType: match.caseType,
               srcSuffix: match.srcSuffix,
               isOverride: match.isOverride,
+            underlyingMatch: match.underlyingMatch || null,
               key,
               idx
             });
@@ -2383,23 +2400,39 @@
               <span>${escapeHtml(tok.raw)} <span class="text-xs font-sans text-[#1e40af]">(Keep Proper Noun)</span></span>
               <span class="text-[11px] font-sans text-[#1e40af]">${currentIdx === -1 ? 'Selected' : 'Select'}</span>
             </button>` : ''}
-          ${entry.tgtIso.map((altIso, i) => {
-            if (isNameTok && isoToMl(altIso) === entry.src) return '';
-            const infIso = inflectEntryAltIso(entry, i, tok, altIso);
-            const infMl = isoToMl(infIso);
-            const active = i === currentIdx;
-            return `
-              <button type="button" data-choose-alt="${i}" data-key="${escapeHtml(key)}"
-                class="w-full text-left px-3 py-2 rounded-lg border-2 border-[#102b26] flex items-center justify-between ml-text text-sm ${active ? 'bg-[#e3f3eb] font-bold' : 'bg-white hover:bg-gray-50'}">
-                <span>${escapeHtml(infMl)} <span class="text-xs font-mono text-[#42635b]">(${escapeHtml(infIso)})</span></span>
-                <span class="text-[11px] font-sans text-[#42635b]">${active ? 'Selected' : 'Select'}</span>
-              </button>`;
-          }).join('')}
+          ${(() => {
+            const seen = new Set();
+            const items = [];
+            entry.tgtIso.forEach((altIso, i) => {
+              if (isNameTok && isoToMl(altIso) === entry.src) return;
+              const infIso = inflectEntryAltIso(entry, i, tok, altIso);
+              const infMl = isoToMl(infIso);
+              seen.add(infMl);
+              items.push({ idx: i, ml: infMl, iso: infIso, active: i === currentIdx });
+            });
+            if (tok.isOverride && tok.underlyingMatch && tok.underlyingMatch.entry) {
+              const ue = tok.underlyingMatch.entry;
+              ue.tgtIso.forEach((uIso, ui) => {
+                const infIso = inflectEntryAltIso(ue, ui, tok.underlyingMatch, uIso);
+                const infMl = isoToMl(infIso);
+                if (!seen.has(infMl)) {
+                  seen.add(infMl);
+                  items.push({ idx: -100 - ui, ml: infMl, iso: infIso, active: false, fromLex: true, customVal: infMl });
+                }
+              });
+            }
+            return items.map(it => `
+              <button type="button" data-choose-alt="${it.idx}" ${it.customVal ? `data-choose-custom="${escapeHtml(it.customVal)}"` : ''} data-key="${escapeHtml(key)}"
+                class="w-full text-left px-3 py-2 rounded-lg border-2 border-[#102b26] flex items-center justify-between ml-text text-sm ${it.active ? 'bg-[#e3f3eb] font-bold' : 'bg-white hover:bg-gray-50'}">
+                <span>${escapeHtml(it.ml)} <span class="text-xs font-mono text-[#42635b]">(${escapeHtml(it.iso)})</span>${it.fromLex ? ' <span class="text-[10px] font-sans text-[#146c43]">(Lexicon alt)</span>' : ''}</span>
+                <span class="text-[11px] font-sans text-[#42635b]">${it.active ? 'Selected' : 'Select'}</span>
+              </button>`).join('');
+          })()}
         </div>
         <div class="pt-3 border-t border-gray-200 space-y-2">
-          <div class="text-[11px] font-bold uppercase tracking-wider text-[#146c43]">Edit Inflection / Save Sandhi Override</div>
+          <div class="text-[11px] font-bold uppercase tracking-wider text-[#146c43]">Edit Inflection / Save Override (comma-separated for multiple alts)</div>
           <div class="flex gap-2">
-            <input id="modal-custom-inflection" type="text" value="${escapeHtml(tok.out)}" class="flex-1 px-2.5 py-1.5 rounded-lg border-2 border-[#102b26] text-sm ml-text" />
+            <input id="modal-custom-inflection" type="text" value="${escapeHtml(tok.isOverride ? entry.tgt.join(', ') : tok.out)}" class="flex-1 px-2.5 py-1.5 rounded-lg border-2 border-[#102b26] text-sm ml-text" />
             <button type="button" id="btn-save-modal-override" data-raw-word="${escapeHtml(tok.raw)}" class="pacha-btn bg-[#146c43] hover:bg-[#0f5132] text-white px-3 py-1.5 rounded-lg text-xs font-bold shrink-0">
               Save Override
             </button>
@@ -2817,9 +2850,21 @@
         if (e.target.id === 'alt-modal') document.getElementById('alt-modal').classList.add('hidden');
         const choice = e.target.closest('[data-choose-alt]');
         if (choice) {
-          const idxVal = Number(choice.dataset.chooseAlt);
-          if (idxVal < 0) delete state.selectedAlts[choice.dataset.key];
-          else state.selectedAlts[choice.dataset.key] = idxVal;
+          const customVal = choice.dataset.chooseCustom;
+          if (customVal) {
+            const tok = state.lastTranslation.find(t => t.key === choice.dataset.key);
+            if (tok && tok.entry) {
+              const newTgt = [...tok.entry.tgt];
+              if (!newTgt.includes(customVal)) newTgt.push(customVal);
+              tok.entry.tgt = newTgt;
+              tok.entry.tgtIso = newTgt.map(mlToIso);
+              state.selectedAlts[choice.dataset.key] = newTgt.indexOf(customVal);
+            }
+          } else {
+            const idxVal = Number(choice.dataset.chooseAlt);
+            if (idxVal < 0) delete state.selectedAlts[choice.dataset.key];
+            else state.selectedAlts[choice.dataset.key] = idxVal;
+          }
           document.getElementById('alt-modal').classList.add('hidden');
           renderTranslation();
           return;
@@ -2860,11 +2905,16 @@
       window.updateTrainerFormVisibility = function() {
         const pos = document.getElementById('train-pos').value;
         const origin = document.getElementById('train-origin').value;
+        const nativeExact = document.getElementById('train-native-exact')?.checked;
+        if (nativeExact && origin !== 'Native / Dravidian') {
+          document.getElementById('train-origin').value = 'Native / Dravidian';
+        }
+        const effOrigin = document.getElementById('train-origin').value;
         const verbGroup = document.getElementById('verb-fields-group');
         if (verbGroup) {
-          verbGroup.classList.toggle('hidden', pos !== 'ക്രിയ');
+          verbGroup.classList.toggle('hidden', pos !== 'ക്രിയ' || Boolean(nativeExact));
         }
-        const tgtOptional = (origin === 'Native / Dravidian' || origin === 'Name / Proper Noun' || pos === 'പേര്');
+        const tgtOptional = (effOrigin === 'Native / Dravidian' || effOrigin === 'Name / Proper Noun' || pos === 'പേര്' || Boolean(nativeExact));
         const tgtInput = document.getElementById('train-tgt');
         const tgtReq = document.getElementById('train-tgt-req');
         if (tgtInput) tgtInput.required = !tgtOptional;
@@ -2873,7 +2923,7 @@
       updateTrainerFormVisibility();
 
       ['train-src', 'train-tgt'].forEach(id => document.getElementById(id).addEventListener('input', updateInflectionPreview));
-      ['train-pos', 'train-origin', 'train-gendered', 'train-r-sandhi'].forEach(id => document.getElementById(id).addEventListener('change', () => {
+      ['train-pos', 'train-origin', 'train-gendered', 'train-r-sandhi', 'train-native-exact'].forEach(id => document.getElementById(id).addEventListener('change', () => {
         updateTrainerFormVisibility();
         updateInflectionPreview();
       }));
@@ -2928,7 +2978,8 @@
         try {
           const src = document.getElementById('train-src').value.trim();
           const pos = document.getElementById('train-pos').value;
-          const origin = document.getElementById('train-origin').value;
+          const nativeExact = document.getElementById('train-native-exact')?.checked;
+          const origin = nativeExact ? 'Native / Dravidian' : document.getElementById('train-origin').value;
           const tgtOptional = (origin === 'Native / Dravidian' || origin === 'Name / Proper Noun' || pos === 'പേര്');
           let tgt = document.getElementById('train-tgt').value.split(',').map(s => s.trim()).filter(Boolean);
           if (!src) return showToast('Enter a Standard Malayalam word first.');
