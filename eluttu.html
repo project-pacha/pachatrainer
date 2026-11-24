@@ -1945,18 +1945,18 @@
     function buildEndUserAnalysis(t) {
       const rows = [];
       if (t.type === 'replaced' && t.entry) {
-        rows.push(['മൂലപദം', t.entry.src]);
-        if (t.entry.pos) rows.push(['വിഭാഗം', t.entry.pos]);
+        rows.push(['വേര്', t.entry.src]);
+        if (t.entry.pos) rows.push(['വകുപ്പ്', t.entry.pos]);
         if (t.entry.origin) rows.push(['ഉറവിടം', t.entry.origin]);
-        if (t.caseType) rows.push(['രൂപം', t.caseType]);
+        if (t.caseType) rows.push(['വടിവ്', t.caseType]);
         if (t.entry.notes) rows.push(['കുറിപ്പ്', t.entry.notes]);
       } else if (t.type === 'abusive' && t.entry) {
-        rows.push(['യഥാർത്ഥ പദം', t.raw]);
-        rows.push(['നില', 'അനുചിതമായ പദം — പകരം മാറ്റി']);
+        rows.push(['ശരിക്കുമുള്ള വാക്ക്', t.raw]);
+        rows.push(['നില', 'തെറിവാക്ക് — പകരം മാറ്റി']);
         if (t.entry.notes) rows.push(['കുറിപ്പ്', t.entry.notes]);
       } else if (t.type === 'name') {
         rows.push(['പദം', t.raw]);
-        rows.push(['വിഭാഗം', 'വ്യക്തിനാമം / സ്ഥാപനനാമം']);
+        rows.push(['വകുപ്പ്', 'ആളുടെപേര് / നിലയിടലിന്റെ പേര്']);
       } else if (t.type === 'suspect' && t.loanInfo) {
         rows.push(['പദം', t.raw]);
         if (t.loanInfo.categories && t.loanInfo.categories.length) {
@@ -1979,7 +1979,7 @@
       let badgeCls = 'bg-emerald-100 text-emerald-800';
       let badgeText = 'പച്ചമലയാളം';
       if (t.type === 'suspect') { badgeCls = 'bg-red-100 text-red-800'; badgeText = 'കടംവാങ്ങിയ വാക്ക് (Loanword)'; }
-      else if (t.type === 'abusive') { badgeCls = 'bg-red-100 text-red-800'; badgeText = 'അനുചിതം — പകരം മാറ്റി'; }
+      else if (t.type === 'abusive') { badgeCls = 'bg-red-100 text-red-800'; badgeText = 'തെറിവാക്ക് — പകരം മാറ്റി'; }
       else if (t.type === 'name') { badgeCls = 'bg-violet-100 text-violet-800'; badgeText = 'പേര് (Proper Noun)'; }
 
       // Suggestions list
