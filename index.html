@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>പച്ചമലയാളം മൊഴിമാറ്റി (ISO 15919) &amp; Data Trainer</title>
+  <title>പച്ചമലയാളം മൊഴിമാറ്റി Data Trainer</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.7.0/sql-wasm.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -130,7 +130,7 @@
             പച്ചമലയാളം <span class="font-semibold text-[#146c43]">ISO 15919 Translator &amp; Data Trainer</span>
           </h1>
           <p class="text-xs text-[#42635b] flex flex-wrap items-center gap-2">
-            <span>ISO 15919 + ŭ (Samvrutokaram) Layer · Dravidian Sandhi Engine</span>
+            <span>Malayalam Sandhi Engine</span>
             <span id="sqlite-status-badge" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#e3f3eb] text-[#146c43] border border-[#102b26]">SQLite WASM: Loading...</span>
           </p>
         </div>
@@ -184,7 +184,7 @@
           <div class="flex items-center justify-between">
             <div>
               <span class="text-xs font-bold uppercase tracking-wider text-[#42635b]">Standard Malayalam</span>
-              <h2 class="text-sm font-bold text-[#102b26] ml-text">അച്ചടി മലയാളം / മണിപ്രവാളം</h2>
+              <h2 class="text-sm font-bold text-[#102b26] ml-text">അച്ചടി മലയാളം</h2>
             </div>
             <div class="flex items-center gap-2">
               <button id="btn-send-to-trainer" type="button" class="pacha-btn bg-amber-100 hover:bg-amber-200 text-[#102b26] px-2.5 py-1 rounded-md text-xs font-semibold">
@@ -199,7 +199,7 @@
             id="source-input"
             rows="5"
             class="w-full p-3 rounded-lg border-2 border-[#102b26] bg-[#fafdfb] text-base ml-text focus:outline-none focus:ring-2 focus:ring-[#146c43] resize-y"
-            placeholder="ഇവിടെ മലയാളം വാക്യങ്ങൾ ടൈപ്പ് ചെയ്യുക അല്ലെങ്കിൽ ഒട്ടിക്കുക..."
+            placeholder="ഇവിടെ മലയാളം ടൈപ്പ് ചെയ്യുക അല്ലെങ്കിൽ ഒട്ടിക്കുക..."
           ></textarea>
           <div class="flex items-center justify-between text-xs text-[#42635b]">
             <span id="input-word-count">0 words</span>
@@ -211,7 +211,7 @@
         <div class="pacha-card p-4 flex flex-col gap-3 bg-[#f9fcfa]">
           <div class="flex items-center justify-between">
             <div>
-              <span class="text-xs font-bold uppercase tracking-wider text-[#146c43]">Pure Dravidian Output</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-[#146c43]">Output</span>
               <h2 class="text-sm font-bold text-[#102b26] ml-text">പച്ചമലയാളം</h2>
             </div>
             <div class="flex items-center gap-2">
@@ -226,7 +226,7 @@
           <!-- Purity Bar -->
           <div class="space-y-1.5 pt-1">
             <div class="flex items-center justify-between text-xs">
-              <span class="font-semibold text-[#102b26]">Pacha Purity Score: <strong id="purity-score-text" class="text-[#146c43]">100%</strong></span>
+              <span class="font-semibold text-[#102b26]">Pacha Score: <strong id="purity-score-text" class="text-[#146c43]">100%</strong></span>
               <span id="purity-counts" class="text-[#42635b]">0 replaced · 0 flagged</span>
             </div>
             <div class="w-full h-2.5 bg-gray-200 rounded-full border border-[#102b26] overflow-hidden">
