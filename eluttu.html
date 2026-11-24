@@ -85,7 +85,7 @@
       </div>
       <div class="flex items-center gap-1.5 text-[11px] text-slate-500">
         <span class="hidden sm:inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>പച്ച</span>
-        <span class="hidden sm:inline-flex items-center gap-1 ml-2"><span class="w-2 h-2 rounded-full bg-red-500"></span>കടം</span>
+        <span class="hidden sm:inline-flex items-center gap-1 ml-2"><span class="w-2 h-2 rounded-full bg-red-500"></span>കടം/തെറി</span>
         <span class="hidden sm:inline-flex items-center gap-1 ml-2"><span class="w-2 h-2 rounded-full bg-violet-600"></span>പേര്</span>
       </div>
     </div>
@@ -96,7 +96,7 @@
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-slate-200 flex-1 min-h-[360px] sm:min-h-[420px]">
 
       <!-- Left: Input Pane -->
-      <div class="flex flex-col">
+      <div class="flex flex-col order-1">
         <div class="px-4 py-2.5 border-b border-slate-100 flex items-center justify-between gap-2">
           <label class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 cursor-pointer select-none">
             <input id="toggle-manglish" type="checkbox" class="w-3.5 h-3.5 accent-emerald-600 rounded" />
@@ -115,7 +115,7 @@
       </div>
 
       <!-- Right: Output Pane -->
-      <div class="flex flex-col bg-slate-50/40">
+      <div class="flex flex-col bg-slate-50/40 order-3 lg:order-2">
         <div class="px-4 py-2.5 border-b border-slate-100 flex items-center justify-end">
           <button id="btn-copy" type="button" title="Copy" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-medium bg-emerald-600 hover:bg-emerald-700 text-white transition">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
@@ -124,13 +124,14 @@
         </div>
         <div
           id="output-display"
-          class="flex-1 w-full p-4 sm:p-5 text-base sm:text-[17px] leading-loose ml-text text-slate-900 overflow-y-auto min-h-[180px] lg:min-h-[260px]"
+          class="flex-1 w-full p-4 sm:p-5 text-base sm:text-[17px] leading-loose ml-text text-slate-900 overflow-y-auto min-h-[180px] lg:min-h-[340px]"
         ></div>
-        <!-- Conditional Splitting Panel for Alternative Suggestions (hidden unless alternatives exist) -->
-        <div id="alt-split-panel" class="hidden border-t border-slate-200 bg-white/95 px-4 py-3 space-y-2 max-h-48 overflow-y-auto">
-          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">മറ്റു വഴക്കങ്ങൾ</div>
-          <div id="alt-split-list" class="space-y-1.5"></div>
-        </div>
+      </div>
+
+      <!-- Conditional Splitting Panel for Alternative Suggestions (bottom of Input on mobile, bottom bar on desktop) -->
+      <div id="alt-split-panel" class="hidden order-2 lg:order-3 lg:col-span-2 border-t border-slate-200 bg-white px-4 py-3 space-y-2 max-h-48 overflow-y-auto">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">മറ്റുവഴക്കങ്ങൾ</div>
+        <div id="alt-split-list" class="space-y-1.5"></div>
       </div>
 
     </div>
@@ -1904,6 +1905,9 @@
       displayEl.innerHTML = tokens.map((t, arrIdx) => {
         if (t.type === 'punct') return escapeHtml(t.out);
         if (t.type === 'native') return `<span class="lt-native">${escapeHtml(t.out)}</span>`;
+        if (t.type === 'name' && getAlternativesForToken(t).length <= 1) {
+          return `<span class="lt-native">${escapeHtml(t.out)}</span>`;
+        }
 
         const shownOut = state.customReplacements[t.key] || t.out;
         let cls = 'lt-green';
@@ -1951,25 +1955,25 @@
         if (t.caseType) rows.push(['വടിവ്', t.caseType]);
         if (t.entry.notes) rows.push(['കുറിപ്പ്', t.entry.notes]);
       } else if (t.type === 'abusive' && t.entry) {
-        rows.push(['ശരിക്കുമുള്ള വാക്ക്', t.raw]);
+        rows.push(['ശരിക്കുള്ള വാക്ക്', t.raw]);
         rows.push(['നില', 'തെറിവാക്ക് — പകരം മാറ്റി']);
         if (t.entry.notes) rows.push(['കുറിപ്പ്', t.entry.notes]);
       } else if (t.type === 'name') {
-        rows.push(['പദം', t.raw]);
-        rows.push(['വകുപ്പ്', 'ആളുടെപേര് / നിലയിടലിന്റെ പേര്']);
+        rows.push(['വാക്ക്', t.raw]);
+        rows.push(['വകുപ്പ്', 'ആളുടെ പേര് / പേര്']);
       } else if (t.type === 'suspect' && t.loanInfo) {
-        rows.push(['പദം', t.raw]);
+        rows.push(['വാക്ക്', t.raw]);
         if (t.loanInfo.categories && t.loanInfo.categories.length) {
           rows.push(['തരം', t.loanInfo.categories.join(', ')]);
         }
         if (t.loanInfo.reasons && t.loanInfo.reasons.length) {
-          rows.push(['കാരണം', t.loanInfo.reasons[0]]);
+          rows.push(['പൊരുട്ട്', t.loanInfo.reasons[0]]);
         }
       }
       if (!rows.length) return '';
       return `
         <div class="mt-2.5 pt-2.5 border-t border-slate-100 space-y-1 text-xs">
-          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Word Analysis</div>
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">അഴിച്ചുനോട്ടം</div>
           ${rows.map(([k, v]) => `<div class="flex justify-between gap-2"><span class="text-slate-500">${escapeHtml(k)}</span><span class="font-medium text-slate-800 text-right ml-text">${escapeHtml(v)}</span></div>`).join('')}
         </div>`;
     }
@@ -1978,9 +1982,9 @@
       const contentEl = document.getElementById('lt-popover-content');
       let badgeCls = 'bg-emerald-100 text-emerald-800';
       let badgeText = 'പച്ചമലയാളം';
-      if (t.type === 'suspect') { badgeCls = 'bg-red-100 text-red-800'; badgeText = 'കടംവാങ്ങിയ വാക്ക് (Loanword)'; }
+      if (t.type === 'suspect') { badgeCls = 'bg-red-100 text-red-800'; badgeText = 'കടംവാങ്ങിയ വാക്ക്'; }
       else if (t.type === 'abusive') { badgeCls = 'bg-red-100 text-red-800'; badgeText = 'തെറിവാക്ക് — പകരം മാറ്റി'; }
-      else if (t.type === 'name') { badgeCls = 'bg-violet-100 text-violet-800'; badgeText = 'പേര് (Proper Noun)'; }
+      else if (t.type === 'name') { badgeCls = 'bg-violet-100 text-violet-800'; badgeText = 'പേര്'; }
 
       // Suggestions list
       let suggestionsHtml = '';
