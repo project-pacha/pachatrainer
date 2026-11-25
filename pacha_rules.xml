@@ -210,5 +210,39 @@
     <rule id="r_ar_caus_atta2" src="peṭuttātta" caseType="verb_ātta" notes="Causative: -peṭuttātta (പ്പെടുത്താത്ത)" />
     <rule id="r_ar_caus_entatallatta" src="ppeṭuttēṇṭatallātta" caseType="verb_ēṇṭatallātta" notes="Causative: -ppeṭuttēṇṭatallātta (പ്പെടുത്തേണ്ടതല്ലാത്ത)" />
     <rule id="r_ar_caus_entatallatta2" src="peṭuttēṇṭatallātta" caseType="verb_ēṇṭatallātta" notes="Causative: -peṭuttēṇṭatallātta (പ്പെടുത്തേണ്ടതല്ലാത്ത)" />
+    <rule id="r_voc_o" src="ō" caseType="voc_ō" notes="Additional vocative/interrogative (-ō)" />
+    <rule id="r_cmp_olam" src="ōḷaṁ" caseType="ōḷaṁ" notes="Comparative (-ōḷaṁ)" />
+    <rule id="r_cmp_olamo" src="ōḷamō" caseType="ōḷamō" notes="Comparative question (-ōḷamō)" />
+    <rule id="r_cmp_olamilla" src="ōḷamilla" caseType="ōḷamilla" notes="Comparative neg (-ōḷamilla)" />
+    <rule id="r_cmp_olamalla" src="ōḷamalla" caseType="ōḷamalla" notes="Comparative neg (-ōḷamalla)" />
+    <rule id="r_quot_atre" src="atrē" caseType="atrē" notes="Quotative (-atrē)" />
+    <rule id="r_quot_itre" src="itrē" caseType="itrē" notes="Quotative (-itrē)" />
+    <rule id="r_quot_atreyullu" src="atrēyuḷḷu" caseType="atrēyuḷḷu" notes="Quotative (-atrēyuḷḷu)" />
+    <rule id="r_quot_atreyullo" src="atrēyuḷḷō" caseType="atrēyuḷḷō" notes="Quotative (-atrēyuḷḷō)" />
+    <rule id="r_quot_atreyulla" src="atrēyuḷḷa" caseType="atrēyuḷḷa" notes="Quotative (-atrēyuḷḷa)" />
+    <rule id="r_quot_atreyillatta" src="atrēyillātta" caseType="atrēyillātta" notes="Quotative (-atrēyillātta)" />
+    <rule id="r_quot_itreyullu" src="itrēyuḷḷu" caseType="itrēyuḷḷu" notes="Quotative (-itrēyuḷḷu)" />
+    <rule id="r_quot_itreyullo" src="itrēyuḷḷō" caseType="itrēyuḷḷō" notes="Quotative (-itrēyuḷḷō)" />
+    <rule id="r_quot_itreyulla" src="itrēyuḷḷa" caseType="itrēyuḷḷa" notes="Quotative (-itrēyuḷḷa)" />
+    <rule id="r_quot_itreyillatta" src="itrēyillātta" caseType="itrēyillātta" notes="Quotative (-itrēyillātta)" />
+    <rule id="r_conc_alum" src="āluṁ" caseType="āluṁ" notes="Concessive (-āluṁ)" />
+    <rule id="r_conc_alumulla" src="ālumulla" caseType="ālumulla" notes="Concessive (-ālumulla)" />
+    <rule id="r_conc_alumulla2" src="ālumuḷḷa" caseType="ālumuḷḷa" notes="Concessive (-ālumuḷḷa)" />
+    <rule id="r_conc_alulla" src="āluḷḷa" caseType="āluḷḷa" notes="Concessive (-āluḷḷa)" />
+    <rule id="r_conc_alallatta" src="ālallātta" caseType="ālallātta" notes="Concessive (-ālallātta)" />
+    <rule id="r_conc_alillatta" src="ālillātta" caseType="ālillātta" notes="Concessive (-ālillātta)" />
+    <rule id="r_dat_otta" src="otta" caseType="dat_otta" notes="Dative + like (-otta)" />
+    <rule id="r_dat_ottatalla" src="ottatalla" caseType="dat_ottatalla" notes="Dative + like (-ottatalla)" />
+    <rule id="r_dat_ottatanu" src="ottatāṇŭ" caseType="dat_ottatāṇŭ" notes="Dative + like (-ottatāṇŭ)" />
+    <rule id="r_dat_ottatano" src="ottatāṇō" caseType="dat_ottatāṇō" notes="Dative + like (-ottatāṇō)" />
+    <rule id="r_dat_ottatalle" src="ottatallē" caseType="dat_ottatallē" notes="Dative + like (-ottatallē)" />
+    <rule id="r_dist_torum" src="tōṟuṁ" caseType="dist_tōṟuṁ" notes="Distributive (-tōṟuṁ)" />
+    <rule id="r_dist_torumulla" src="tōṟumuḷḷa" caseType="dist_tōṟumuḷḷa" notes="Distributive (-tōṟumuḷḷa)" />
+    <rule id="r_dist_torumillatta" src="tōṟumillātta" caseType="dist_tōṟumillātta" notes="Distributive (-tōṟumillātta)" />
+    <rule id="r_dist_torumuntu" src="tōṟumuṇṭŭ" caseType="dist_tōṟumuṇṭŭ" notes="Distributive (-tōṟumuṇṭŭ)" />
+    <rule id="r_dist_torumilla" src="tōṟumilla" caseType="dist_tōṟumilla" notes="Distributive (-tōṟumilla)" />
+    <rule id="r_dist_ttorum" src="ttōṟuṁ" caseType="dist_tōṟuṁ" notes="Distributive (-ttōṟuṁ)" />
+    <rule id="r_dist_ntorum" src="ntōṟuṁ" caseType="dist_tōṟuṁ" notes="Distributive (-ntōṟuṁ)" />
+    <rule id="r_ins_ale" src="ālē" caseType="ālē" notes="Instrumental/emphatic (-ālē)" />
   </suffixRules>
 </pachaRules>
