@@ -85,7 +85,7 @@
       </div>
       <div class="flex items-center gap-1.5 text-[11px] text-slate-500">
         <span class="hidden sm:inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>പച്ച</span>
-        <span class="hidden sm:inline-flex items-center gap-1 ml-2"><span class="w-2 h-2 rounded-full bg-red-500"></span>കടം/തെറിവാക്ക്</span>
+        <span class="hidden sm:inline-flex items-center gap-1 ml-2"><span class="w-2 h-2 rounded-full bg-red-500"></span>കടം/അനുചിതം</span>
         <span class="hidden sm:inline-flex items-center gap-1 ml-2"><span class="w-2 h-2 rounded-full bg-violet-600"></span>പേര്</span>
       </div>
     </div>
@@ -110,7 +110,7 @@
         <textarea
           id="source-input"
           class="flex-1 w-full p-4 sm:p-5 text-[19px] sm:text-[18px] leading-relaxed ml-text text-slate-800 placeholder-slate-400 bg-transparent focus:outline-none resize-none min-h-[180px] lg:min-h-[340px]"
-          placeholder="ഇവിടെ എഴുതുക അല്ലെങ്കിൽ ഒട്ടിക്കുക... (മൊഴിമാറ്റം ഒഴിവാക്കാൻ *വാക്ക്* എന്ന് നൽകുക)"
+          placeholder="ഇവിടെ എഴുതുക അല്ലെങ്കിൽ ഒട്ടിക്കുക... (വിവർത്തനം ഒഴിവാക്കാൻ *പദം* എന്ന് നൽകുക)"
         ></textarea>
       </div>
 
@@ -781,7 +781,7 @@
         }
         return joinVowelSuffix(stemIso, caseType);
       }
-      if (/^verb_(arutŭ|attakka|ēṇṭa|aṭṭe|umō|illa|ēṇṭatilla|ēṇṭatillātta|ēṇṭatuṇṭō|ēṇṭatāṇō|ēṇṭatāya)$/.test(caseType)) {
+      if (/^verb_(arutŭ|attakka|ātta|ēṇṭa|ēṇṭatallātta|aṭṭe|umō|illa|ēṇṭatilla|ēṇṭatillātta|ēṇṭatuṇṭō|ēṇṭatāṇō|ēṇṭatāya)$/.test(caseType)) {
         const vSuf = caseType.slice(5);
         const needsKk = /[lr]$/.test(stemIso) || stemIso.endsWith('kkuka');
         const base = stemIso.replace(/(kkuka|ykkuka|uka|ŭ|u)$/, '');
@@ -1461,13 +1461,13 @@
           }
         }
       }
-      const pastMatch = state.lexicon.find(e => e.verbPast && mlToIso(normalizeMalayalam(e.verbPast)) === wordIso);
+      const pastMatch = state.lexicon.find(e => e.verbPast && e.verbPast.split(',').some(p => p.trim() && mlToIso(normalizeMalayalam(p.trim())) === wordIso));
       if (pastMatch) {
         return { isOverride: false, entry: pastMatch, caseChain: [], caseType: 'verb_past', srcSuffix: '' };
       }
       // 1b. Verb root + valid verb suffix match (prevents false compound matches like akrami + nāḷukaḷ)
       const VALID_VERB_PAST_REST = /^(ccukoṇṭirikk|ccukoṇṭ|ccirikk|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ppicc|ppeṭuttiya|peṭuttiya|ppeṭṭa|peṭṭa|ccuṁ|ccāl|cca|ccu|ttu|nnu|nna|iṭṭillātta|iṭṭilla|iṭṭŭ|i$)/;
-      const VALID_VERB_PRES_REST = /^(ppikkuka|ppikkunnu|ppikkunna|ppikkunnilla|ppikkumpōḷ|ppikkātta|ppikkukayilla|ppān|kkappeṭṭa|ykkappeṭṭa|appeṭṭa|kkuka|ykkuka|uka|kkunnu|ykkunnu|unnu|kkunna|ykkunna|unna|kkunnilla|ykkunnilla|unnilla|kkumpōḷ|ykkumpōḷ|umpōḷ|kkātta|ykkātta|ātta|kkukayilla|ykkukayilla|ukayilla|ukilla|kkāṁ|ykkāṁ|āṁ|kkuṁ|ykkuṁ|uṁ|kkāte|ykkāte|āte|kkān|ykkān|ān|uvān|kkaṇaṁ|aṇaṁ|kkaṇṭa|aṇṭa|kku|ykku|kk|ykk)/;
+      const VALID_VERB_PRES_REST = /^(ppeṭuttēṇṭatallātta|peṭuttēṇṭatallātta|ppeṭuttēṇṭa|peṭuttēṇṭa|ppeṭuttātta|peṭuttātta|ppikkuka|ppikkunnu|ppikkunna|ppikkunnilla|ppikkumpōḷ|ppikkātta|ppikkukayilla|ppān|kkappeṭṭa|ykkappeṭṭa|appeṭṭa|kkuka|ykkuka|uka|kkunnu|ykkunnu|unnu|kkunna|ykkunna|unna|kkunnilla|ykkunnilla|unnilla|kkumpōḷ|ykkumpōḷ|umpōḷ|kkātta|ykkātta|ātta|kkukayilla|ykkukayilla|ukayilla|ukilla|kkāṁ|ykkāṁ|āṁ|kkuṁ|ykkuṁ|uṁ|kkāte|ykkāte|āte|kkān|ykkān|ān|uvān|kkaṇaṁ|aṇaṁ|kkaṇṭa|aṇṭa|kku|ykku|kk|ykk)/;
       for (const e of state.lexicon) {
         if (!e.verbRoot) continue;
         const rIso = mlToIso(normalizeMalayalam(e.verbRoot.replace(/-+$/, '')));
@@ -1617,8 +1617,8 @@
             if (lastSpanIso.startsWith(vBase) && lastSpanIso.length > vBase.length) {
               let vRest = lastSpanIso.slice(vBase.length);
               if (lastEntryIso === 'ceyyuka' && vRest.startsWith('y')) vRest = vRest.slice(1);
-              const isPast = /^(tu|ta|tiṭṭ|nnu|nna|ccu|cca|iṭṭ|i$)/.test(vRest);
-              const normVRest = (lastEntryIso === 'ceyyuka' && /^(tu|ta|tiṭṭ)/.test(vRest)) ? ('cc' + vRest.slice(1)) : vRest;
+              const isPast = /^(tu|tŭ|ta|tiṭṭ|nnu|nnŭ|nna|ccu|ccŭ|cca|iṭṭ|i$)/.test(vRest);
+              const normVRest = (lastEntryIso === 'ceyyuka' && /^(tu|tŭ|ta|tiṭṭ)/.test(vRest)) ? ('cc' + vRest.slice(1)) : vRest;
               return {
                 endIdx: wordIndices[n - 1],
                 raw: spanRaw,
@@ -1672,6 +1672,7 @@
         const rest = match.srcSuffix || '';
         if (match.caseType === 'verb_root_past') {
           const effPast = tgtPastIso || (baseTgtIso.endsWith('uka') ? (baseTgtIso.slice(0, -3) + 'i') : baseTgtIso);
+          if (rest === 'ccŭ' || rest === 'tŭ') return effPast.endsWith('u') ? (effPast.slice(0, -1) + 'ŭ') : effPast;
           if (/^(ccu|ppiccu|i)$/.test(rest)) return effPast;
           if (rest.startsWith('ccukoṇṭ')) return effPast + 'k' + rest.slice(3);
           if (rest === 'cca' || rest === 'ppeṭṭa' || rest === 'peṭṭa') {
@@ -1701,14 +1702,14 @@
             if (bridge && /^[ṭḍḷṟtkc]$/.test(bridge)) stem = stem + bridge;
           }
           const needsKk = baseTgtIso.endsWith('kkuka') || /[lr]$/.test(baseTgtIso);
-          let normRest = rest.replace(/^(ppikk|y?kk|pp)/, '');
+          let normRest = rest.replace(/^(ppeṭutt|peṭutt|ppikk|y?kk|pp)/, '');
           if (normRest === 'ukayilla') normRest = 'ukilla';
           if (normRest === 'ān' || normRest === 'uvān') {
             if (!needsKk && stem.endsWith('u')) return stem + 'vān';
             const cleanStem = (!needsKk && stem.endsWith('u')) ? stem.slice(0, -1) : stem;
             return cleanStem + (needsKk ? 'kk' : '') + 'ān';
           }
-          if (/^(uka|unnu|unna|unnilla|umpōḷ|ātta|ukilla|uṁ|āṁ|aṇaṁ|aṇṭa|āte|appeṭṭa)$/.test(normRest)) {
+          if (/^(uka|unnu|unna|unnilla|umpōḷ|ātta|ēṇṭa|ēṇṭatallātta|ukilla|uṁ|āṁ|aṇaṁ|aṇṭa|āte|appeṭṭa)$/.test(normRest)) {
             const cleanStem = (!needsKk && stem.endsWith('u') && /^[uāa]/.test(normRest)) ? stem.slice(0, -1) : stem;
             return cleanStem + (needsKk ? 'kk' : '') + normRest;
           }
@@ -2058,7 +2059,7 @@
       const splitList = document.getElementById('alt-split-list');
 
       if (!input.trim()) {
-        displayEl.innerHTML = '<span class="text-slate-400 select-none">പച്ചമലയാളം മൊഴിമാറ്റം ഇവിടെ കാണാം...</span>';
+        displayEl.innerHTML = '<span class="text-slate-400 select-none">പച്ചമലയാളം വിവർത്തനം ഇവിടെ കാണാം...</span>';
         if (splitPanel) splitPanel.classList.add('hidden');
         return;
       }
@@ -2091,31 +2092,31 @@
     function buildEndUserAnalysis(t) {
       const rows = [];
       if (t.type === 'replaced' && t.entry) {
-        rows.push(['വേര്', t.entry.src]);
-        if (t.entry.pos) rows.push(['വകുപ്പ്', t.entry.pos]);
+        rows.push(['മൂലപദം', t.entry.src]);
+        if (t.entry.pos) rows.push(['വിഭാഗം', t.entry.pos]);
         if (t.entry.origin) rows.push(['ഉറവിടം', t.entry.origin]);
         if (t.caseType) rows.push(['രൂപം', t.caseType]);
         if (t.entry.notes) rows.push(['കുറിപ്പ്', t.entry.notes]);
       } else if (t.type === 'abusive' && t.entry) {
-        rows.push(['ശരിക്കുള്ള വാക്ക്', t.raw]);
-        rows.push(['നില', 'തെറിവാക്ക് — പകരം മാറ്റി']);
+        rows.push(['യഥാർത്ഥ പദം', t.raw]);
+        rows.push(['നില', 'അനുചിതമായ പദം — പകരം മാറ്റി']);
         if (t.entry.notes) rows.push(['കുറിപ്പ്', t.entry.notes]);
       } else if (t.type === 'name') {
-        rows.push(['വാക്ക്', t.raw]);
-        rows.push(['വകുപ്പ്', 'ആളുടെപേര് / പേര്']);
+        rows.push(['പദം', t.raw]);
+        rows.push(['വിഭാഗം', 'വ്യക്തിനാമം / സ്ഥാപനനാമം']);
       } else if (t.type === 'suspect' && t.loanInfo) {
-        rows.push(['വാക്ക്', t.raw]);
+        rows.push(['പദം', t.raw]);
         if (t.loanInfo.categories && t.loanInfo.categories.length) {
           rows.push(['തരം', t.loanInfo.categories.join(', ')]);
         }
         if (t.loanInfo.reasons && t.loanInfo.reasons.length) {
-          rows.push(['ഇടയായത്', t.loanInfo.reasons[0]]);
+          rows.push(['കാരണം', t.loanInfo.reasons[0]]);
         }
       }
       if (!rows.length) return '';
       return `
         <div class="mt-2.5 pt-2.5 border-t border-slate-100 space-y-1 text-xs">
-          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">അഴിച്ചുനോട്ടം</div>
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Word Analysis</div>
           ${rows.map(([k, v]) => `<div class="flex justify-between gap-2"><span class="text-slate-500">${escapeHtml(k)}</span><span class="font-medium text-slate-800 text-right ml-text">${escapeHtml(v)}</span></div>`).join('')}
         </div>`;
     }
@@ -2124,9 +2125,9 @@
       const contentEl = document.getElementById('lt-popover-content');
       let badgeCls = 'bg-emerald-100 text-emerald-800';
       let badgeText = 'പച്ചമലയാളം';
-      if (t.type === 'suspect') { badgeCls = 'bg-red-100 text-red-800'; badgeText = 'കടംവാങ്ങിയ വാക്ക്'; }
-      else if (t.type === 'abusive') { badgeCls = 'bg-red-100 text-red-800'; badgeText = 'തെറിവാക്ക് — പകരം മാറ്റി'; }
-      else if (t.type === 'name') { badgeCls = 'bg-violet-100 text-violet-800'; badgeText = 'പേര്'; }
+      if (t.type === 'suspect') { badgeCls = 'bg-red-100 text-red-800'; badgeText = 'കടംവാങ്ങിയ വാക്ക് (Loanword)'; }
+      else if (t.type === 'abusive') { badgeCls = 'bg-red-100 text-red-800'; badgeText = 'അനുചിതം — പകരം മാറ്റി'; }
+      else if (t.type === 'name') { badgeCls = 'bg-violet-100 text-violet-800'; badgeText = 'പേര് (Proper Noun)'; }
 
       // Suggestions list
       let suggestionsHtml = '';
