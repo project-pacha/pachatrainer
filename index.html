@@ -493,7 +493,7 @@
             <span id="gh-sync-status" class="text-[11px] font-mono text-[#42635b]">Not synced yet</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
-            <input id="gh-repo" type="text" placeholder="owner/repo (e.g. admin/pacha)" class="sm:col-span-4 px-2.5 py-1.5 rounded-lg border-2 border-[#102b26] text-xs bg-white font-mono" />
+            <input id="gh-repo" type="text" placeholder="owner/repo (e.g. arishv/pacha)" class="sm:col-span-4 px-2.5 py-1.5 rounded-lg border-2 border-[#102b26] text-xs bg-white font-mono" />
             <input id="gh-branch" type="text" value="main" placeholder="Branch (main)" class="sm:col-span-2 px-2.5 py-1.5 rounded-lg border-2 border-[#102b26] text-xs bg-white font-mono" />
             <input id="gh-path" type="text" value="pacha_malayalam_iso.db" placeholder="DB file path" class="sm:col-span-3 px-2.5 py-1.5 rounded-lg border-2 border-[#102b26] text-xs bg-white font-mono" />
             <input id="gh-token" type="password" placeholder="GitHub PAT (Contents: R/W)" class="sm:col-span-3 px-2.5 py-1.5 rounded-lg border-2 border-[#102b26] text-xs bg-white font-mono" />
@@ -852,6 +852,40 @@
       { id: 'r_v_anam', src_suffix: 'aṇaṁ', case_type: 'verb_aṇaṁ', notes: 'Verb optative/must (-aṇaṁ)' },
       { id: 'r_v_kkanta', src_suffix: 'kkaṇṭa', case_type: 'verb_aṇṭa', notes: 'Verb negative optative (-kkaṇṭa)' },
       { id: 'r_v_anta', src_suffix: 'aṇṭa', case_type: 'verb_aṇṭa', notes: 'Verb negative optative (-aṇṭa)' },
+      { id: 'r_voc_o', src_suffix: 'ō', case_type: 'voc_ō', notes: 'Additional vocative/interrogative (-ō)' },
+      { id: 'r_cmp_olam', src_suffix: 'ōḷaṁ', case_type: 'ōḷaṁ', notes: 'Comparative (-ōḷaṁ)' },
+      { id: 'r_cmp_olamo', src_suffix: 'ōḷamō', case_type: 'ōḷamō', notes: 'Comparative question (-ōḷamō)' },
+      { id: 'r_cmp_olamilla', src_suffix: 'ōḷamilla', case_type: 'ōḷamilla', notes: 'Comparative neg (-ōḷamilla)' },
+      { id: 'r_cmp_olamalla', src_suffix: 'ōḷamalla', case_type: 'ōḷamalla', notes: 'Comparative neg (-ōḷamalla)' },
+      { id: 'r_quot_atre', src_suffix: 'atrē', case_type: 'atrē', notes: 'Quotative (-atrē)' },
+      { id: 'r_quot_itre', src_suffix: 'itrē', case_type: 'itrē', notes: 'Quotative (-itrē)' },
+      { id: 'r_quot_atreyullu', src_suffix: 'atrēyuḷḷu', case_type: 'atrēyuḷḷu', notes: 'Quotative (-atrēyuḷḷu)' },
+      { id: 'r_quot_atreyullo', src_suffix: 'atrēyuḷḷō', case_type: 'atrēyuḷḷō', notes: 'Quotative (-atrēyuḷḷō)' },
+      { id: 'r_quot_atreyulla', src_suffix: 'atrēyuḷḷa', case_type: 'atrēyuḷḷa', notes: 'Quotative (-atrēyuḷḷa)' },
+      { id: 'r_quot_atreyillatta', src_suffix: 'atrēyillātta', case_type: 'atrēyillātta', notes: 'Quotative (-atrēyillātta)' },
+      { id: 'r_quot_itreyullu', src_suffix: 'itrēyuḷḷu', case_type: 'itrēyuḷḷu', notes: 'Quotative (-itrēyuḷḷu)' },
+      { id: 'r_quot_itreyullo', src_suffix: 'itrēyuḷḷō', case_type: 'itrēyuḷḷō', notes: 'Quotative (-itrēyuḷḷō)' },
+      { id: 'r_quot_itreyulla', src_suffix: 'itrēyuḷḷa', case_type: 'itrēyuḷḷa', notes: 'Quotative (-itrēyuḷḷa)' },
+      { id: 'r_quot_itreyillatta', src_suffix: 'itrēyillātta', case_type: 'itrēyillātta', notes: 'Quotative (-itrēyillātta)' },
+      { id: 'r_conc_alum', src_suffix: 'āluṁ', case_type: 'āluṁ', notes: 'Concessive (-āluṁ)' },
+      { id: 'r_conc_alumulla', src_suffix: 'ālumulla', case_type: 'ālumulla', notes: 'Concessive (-ālumulla)' },
+      { id: 'r_conc_alumulla2', src_suffix: 'ālumuḷḷa', case_type: 'ālumuḷḷa', notes: 'Concessive (-ālumuḷḷa)' },
+      { id: 'r_conc_alulla', src_suffix: 'āluḷḷa', case_type: 'āluḷḷa', notes: 'Concessive (-āluḷḷa)' },
+      { id: 'r_conc_alallatta', src_suffix: 'ālallātta', case_type: 'ālallātta', notes: 'Concessive (-ālallātta)' },
+      { id: 'r_conc_alillatta', src_suffix: 'ālillātta', case_type: 'ālillātta', notes: 'Concessive (-ālillātta)' },
+      { id: 'r_dat_otta', src_suffix: 'otta', case_type: 'dat_otta', notes: 'Dative + like (-otta)' },
+      { id: 'r_dat_ottatalla', src_suffix: 'ottatalla', case_type: 'dat_ottatalla', notes: 'Dative + like (-ottatalla)' },
+      { id: 'r_dat_ottatanu', src_suffix: 'ottatāṇŭ', case_type: 'dat_ottatāṇŭ', notes: 'Dative + like (-ottatāṇŭ)' },
+      { id: 'r_dat_ottatano', src_suffix: 'ottatāṇō', case_type: 'dat_ottatāṇō', notes: 'Dative + like (-ottatāṇō)' },
+      { id: 'r_dat_ottatalle', src_suffix: 'ottatallē', case_type: 'dat_ottatallē', notes: 'Dative + like (-ottatallē)' },
+      { id: 'r_dist_torum', src_suffix: 'tōṟuṁ', case_type: 'dist_tōṟuṁ', notes: 'Distributive (-tōṟuṁ)' },
+      { id: 'r_dist_torumulla', src_suffix: 'tōṟumuḷḷa', case_type: 'dist_tōṟumuḷḷa', notes: 'Distributive (-tōṟumuḷḷa)' },
+      { id: 'r_dist_torumillatta', src_suffix: 'tōṟumillātta', case_type: 'dist_tōṟumillātta', notes: 'Distributive (-tōṟumillātta)' },
+      { id: 'r_dist_torumuntu', src_suffix: 'tōṟumuṇṭŭ', case_type: 'dist_tōṟumuṇṭŭ', notes: 'Distributive (-tōṟumuṇṭŭ)' },
+      { id: 'r_dist_torumilla', src_suffix: 'tōṟumilla', case_type: 'dist_tōṟumilla', notes: 'Distributive (-tōṟumilla)' },
+      { id: 'r_dist_ttorum', src_suffix: 'ttōṟuṁ', case_type: 'dist_tōṟuṁ', notes: 'Distributive (-ttōṟuṁ)' },
+      { id: 'r_dist_ntorum', src_suffix: 'ntōṟuṁ', case_type: 'dist_tōṟuṁ', notes: 'Distributive (-ntōṟuṁ)' },
+      { id: 'r_ins_ale', src_suffix: 'ālē', case_type: 'ālē', notes: 'Instrumental/emphatic (-ālē)' },
       { id: 'r_v_kkum', src_suffix: 'kkuṁ', case_type: 'verb_fut', notes: 'Verb future (-kkuṁ)' },
       { id: 'r_cop_akanulla', src_suffix: 'ākānuḷḷa', case_type: 'ākānuḷḷa', notes: 'Copula becoming (-ākānuḷḷa)' },
       { id: 'r_cop_akan', src_suffix: 'ākān', case_type: 'ākān', notes: 'Copula to become (-ākān)' },
@@ -1056,6 +1090,8 @@
         }
         if (endsAm) return stemIso.slice(0, -2) + 'aṅṅaḷ'; // maram -> maraṅṅaḷ
         if (stemIso.endsWith('āvŭ')) return stemIso.slice(0, -2) + 'kkaḷ'; // akamitāvŭ -> akamitākkaḷ
+        if (stemIso.endsWith('vu')) return stemIso + 'kaḷ'; // anuvu -> anuvukaḷ
+        if (stemIso.endsWith('ā') || stemIso.endsWith('u') || stemIso.endsWith('ū')) return stemIso + 'kkaḷ'; // nilākkaḷ, aṇukkaḷ, tanukkaḷ
         if (stemIso.endsWith('ŭ')) return stemIso.slice(0, -1) + 'ukaḷ'; // āṭŭ -> āṭukaḷ
         if (stemIso.endsWith('r')) {
           return rSandhi === 'ṟil' ? stemIso.slice(0, -1) + 'ṟukaḷ' : stemIso + 'ukaḷ'; // kāṟukaḷ / tārukaḷ
@@ -1189,7 +1225,9 @@
         if (s.endsWith('m') || s.endsWith('ṁ')) return s.slice(0, -1) + 'm' + suf; // maram/karīṁ + āṇŭ -> maramāṇŭ/karīmāṇŭ
         if (s.endsWith('ŭ')) return s.slice(0, -1) + suf;
         if (s.endsWith('a') || s.endsWith('i') || s.endsWith('ī') || s.endsWith('e') || s.endsWith('ē') || s.endsWith('ai')) return s + (yGlide ? 'y' : '') + suf;
+        if (s.endsWith('vu')) return s.slice(0, -1) + suf; // anuvu + ō -> anuvō
         if (s.endsWith('ā') || s.endsWith('u') || s.endsWith('ū') || s.endsWith('o') || s.endsWith('ō') || s.endsWith('au')) return s + 'v' + suf;
+        if ((s.endsWith('l') || s.endsWith('ḷ')) && isShortVowelBefore(s) && s.length <= 4) return s + suf;
         if (s.endsWith('ṇ') && isShortVowelBefore(s)) return s + 'ṇ' + suf;
         if (s.endsWith('r')) return rSandhi === 'ṟil' ? s.slice(0, -1) + 'ṟ' + suf : s + suf;
         return s + suf;
@@ -1235,6 +1273,29 @@
       if (caseType === 'neg_alla') return joinVowelSuffix(stemIso, 'alla');
       if (caseType === 'neg_pōra') return stemIso + 'pōra';
       if (caseType === 'neg_vēṇṭa') return stemIso + 'vēṇṭa';
+      if (caseType === 'voc_ō') return joinVowelSuffix(stemIso, 'ō');
+      if (caseType.startsWith('dat_')) {
+        const ottaTail = caseType.slice(4); // otta, ottatalla, ottatāṇŭ, ottatāṇō, ottatallē
+        if (stemIso.endsWith('kaḷ')) return stemIso + ottaTail; // kaḷotta
+        const datForm = applyCaseSandhiIso(stemIso, 'dat', entryMeta);
+        return (datForm.endsWith('ŭ') ? datForm.slice(0, -1) : datForm) + ottaTail;
+      }
+      if (caseType.startsWith('dist_')) {
+        const distTail = caseType.slice(5); // tōṟuṁ, tōṟumuḷḷa, etc.
+        if (stemIso.endsWith('kaḷ') || stemIso.endsWith('mār')) return stemIso + 't' + distTail; // kaḷttōṟuṁ, mārttōṟuṁ
+        if (endsAm) return stemIso.slice(0, -1) + 'n' + distTail; // vaśantōṟuṁ
+        if (stemIso.endsWith('ā')) return stemIso + 'vu' + distTail; // nilāvutōṟuṁ
+        if (stemIso.endsWith('ŭ')) return stemIso.slice(0, -1) + 'u' + distTail; // vākkutōṟuṁ
+        if ((stemIso.endsWith('ṇ') || stemIso.endsWith('l') || stemIso.endsWith('ḷ')) && isShortVowelBefore(stemIso) && stemIso.length <= 4) {
+          return stemIso + stemIso.slice(-1) + 'u' + distTail; // kaṇṇutōṟuṁ, kallutōṟuṁ
+        }
+        if (stemIso.endsWith('l') || stemIso.endsWith('ḷ')) return stemIso + 'u' + distTail; // kālutōṟuṁ, vāḷutōṟuṁ, tukaḷutōṟuṁ
+        if (stemIso.endsWith('r')) {
+          if (isLongVowelBefore(stemIso)) return (rSandhi === 'ṟil' ? stemIso.slice(0, -1) + 'ṟu' : stemIso + 'u') + distTail;
+          return stemIso + 't' + distTail; // varttōṟuṁ
+        }
+        return stemIso + distTail; // karitōṟuṁ, aṇutōṟuṁ, māntōṟuṁ, avantōṟuṁ
+      }
       if (caseType === 'c_koṇṭŭ' || caseType === 'c_pōle' || caseType === 'c_koṇṭallāte') {
         const suf = caseType.slice(2);
         if (stemIso.endsWith('ŭ')) return stemIso.slice(0, -1) + 'u' + suf; // vākku + koṇṭŭ
@@ -2035,6 +2096,13 @@
         if (suf === 'ayye') candidates.push(stem + 'ai');
         if (suf === 'ine' && stem.endsWith('m')) candidates.push(stem.slice(0, -1) + 'ṁ');
         if (suf === 'nŭ') candidates.push(stem + 'n');
+        if (suf.startsWith('ott')) candidates.push(stem + 'ŭ');
+        if (suf.includes('tōṟu')) {
+          if (stem.endsWith('n')) candidates.push(stem.slice(0, -1) + 'ṁ', stem.slice(0, -1) + 'm');
+          if (stem.endsWith('vu')) candidates.push(stem.slice(0, -2));
+          if (stem.endsWith('u')) candidates.push(stem.slice(0, -1), stem.slice(0, -1) + 'ŭ');
+          if (stem.endsWith('t')) candidates.push(stem.slice(0, -1));
+        }
         if (suf.startsWith('tt') && !stem.endsWith('a')) candidates.push(stem + 'am', stem + 'aṁ');
         if (stem.endsWith('yy')) candidates.push(stem.slice(0, -2) + 'ai', stem.slice(0, -2));
         if (stem.endsWith('y') || stem.endsWith('v')) {
@@ -2081,8 +2149,8 @@
               const match = state.lexicon.find(e => e.srcIso === cand);
               if (match) {
                 const pos = match.pos || 'നാമം';
-                const hasNounCase = nextChain.some(ct => ['loc', 'gen', 'dat', 'acc', 'soc', 'pl', 'adj_e', 'abl', 'with', 'tog', 'for_āyi', 'for_vēṇṭi', 'towards', 'all', 'allative', 'skt_noun_only'].includes(ct));
-                if (hasNounCase && !NOUN_PRONOUN_POS.has(pos)) continue;
+                const hasNounCase = nextChain.some(ct => ['loc', 'gen', 'dat', 'acc', 'soc', 'pl', 'adj_e', 'abl', 'with', 'tog', 'for_āyi', 'for_vēṇṭi', 'towards', 'all', 'allative', 'voc_ō', 'ōḷaṁ', 'ōḷamō', 'ōḷamilla', 'ōḷamalla', 'atrē', 'itrē', 'āluṁ', 'ālē', 'skt_noun_only'].includes(ct));
+                if ((hasNounCase || nextChain.some(ct => ct.startsWith('dat_') || ct.startsWith('dist_') || ct.startsWith('atrē') || ct.startsWith('itrē') || ct.startsWith('ālu'))) && !NOUN_PRONOUN_POS.has(pos)) continue;
                 return { isOverride: false, entry: match, caseChain: nextChain, caseType: nextChain.join('+'), srcSuffix: nextSuf };
               }
             }
