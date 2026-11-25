@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>പച്ചമലയാളം Data Trainer</title>
+  <title>പച്ചമലയാളം മൊഴിമാറ്റി (ISO 15919) &amp; Data Trainer</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.7.0/sql-wasm.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -127,10 +127,10 @@
         </div>
         <div>
           <h1 class="text-base sm:text-lg font-bold tracking-tight text-[#102b26] leading-tight">
-            പച്ചമലയാളം <span class="font-semibold text-[#146c43]">Data Trainer</span>
+            പച്ചമലയാളം <span class="font-semibold text-[#146c43]">ISO 15919 Translator &amp; Data Trainer</span>
           </h1>
           <p class="text-xs text-[#42635b] flex flex-wrap items-center gap-2">
-            <span>Malayalam Engine</span>
+            <span>ISO 15919 + ŭ (Samvrutokaram) Layer · Dravidian Sandhi Engine</span>
             <span id="sqlite-status-badge" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#e3f3eb] text-[#146c43] border border-[#102b26]">SQLite WASM: Loading...</span>
           </p>
         </div>
@@ -184,7 +184,7 @@
           <div class="flex items-center justify-between">
             <div>
               <span class="text-xs font-bold uppercase tracking-wider text-[#42635b]">Standard Malayalam</span>
-              <h2 class="text-sm font-bold text-[#102b26] ml-text">അച്ചടി മലയാളം</h2>
+              <h2 class="text-sm font-bold text-[#102b26] ml-text">അച്ചടി മലയാളം / മണിപ്രവാളം</h2>
             </div>
             <div class="flex items-center gap-2">
               <button id="btn-send-to-trainer" type="button" class="pacha-btn bg-amber-100 hover:bg-amber-200 text-[#102b26] px-2.5 py-1 rounded-md text-xs font-semibold">
@@ -211,7 +211,7 @@
         <div class="pacha-card p-4 flex flex-col gap-3 bg-[#f9fcfa]">
           <div class="flex items-center justify-between">
             <div>
-              <span class="text-xs font-bold uppercase tracking-wider text-[#146c43]">Output</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-[#146c43]">Pure Dravidian Output</span>
               <h2 class="text-sm font-bold text-[#102b26] ml-text">പച്ചമലയാളം</h2>
             </div>
             <div class="flex items-center gap-2">
@@ -1249,7 +1249,7 @@
         }
         return joinVowelSuffix(stemIso, caseType);
       }
-      if (/^verb_(arutŭ|attakka|ēṇṭa|aṭṭe|umō|illa|ēṇṭatilla|ēṇṭatillātta|ēṇṭatuṇṭō|ēṇṭatāṇō|ēṇṭatāya)$/.test(caseType)) {
+      if (/^verb_(arutŭ|attakka|ātta|ēṇṭa|ēṇṭatallātta|aṭṭe|umō|illa|ēṇṭatilla|ēṇṭatillātta|ēṇṭatuṇṭō|ēṇṭatāṇō|ēṇṭatāya)$/.test(caseType)) {
         const vSuf = caseType.slice(5);
         const needsKk = /[lr]$/.test(stemIso) || stemIso.endsWith('kkuka');
         const base = stemIso.replace(/(kkuka|ykkuka|uka|ŭ|u)$/, '');
@@ -1998,13 +1998,13 @@
           }
         }
       }
-      const pastMatch = state.lexicon.find(e => e.verbPast && mlToIso(normalizeMalayalam(e.verbPast)) === wordIso);
+      const pastMatch = state.lexicon.find(e => e.verbPast && e.verbPast.split(',').some(p => p.trim() && mlToIso(normalizeMalayalam(p.trim())) === wordIso));
       if (pastMatch) {
         return { isOverride: false, entry: pastMatch, caseChain: [], caseType: 'verb_past', srcSuffix: '' };
       }
       // 1b. Verb root + valid verb suffix match (prevents false compound matches like akrami + nāḷukaḷ)
       const VALID_VERB_PAST_REST = /^(ccukoṇṭirikk|ccukoṇṭ|ccirikk|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ppicc|ppeṭuttiya|peṭuttiya|ppeṭṭa|peṭṭa|ccuṁ|ccāl|cca|ccu|ttu|nnu|nna|iṭṭillātta|iṭṭilla|iṭṭŭ|i$)/;
-      const VALID_VERB_PRES_REST = /^(ppikkuka|ppikkunnu|ppikkunna|ppikkunnilla|ppikkumpōḷ|ppikkātta|ppikkukayilla|ppān|kkappeṭṭa|ykkappeṭṭa|appeṭṭa|kkuka|ykkuka|uka|kkunnu|ykkunnu|unnu|kkunna|ykkunna|unna|kkunnilla|ykkunnilla|unnilla|kkumpōḷ|ykkumpōḷ|umpōḷ|kkātta|ykkātta|ātta|kkukayilla|ykkukayilla|ukayilla|ukilla|kkāṁ|ykkāṁ|āṁ|kkuṁ|ykkuṁ|uṁ|kkāte|ykkāte|āte|kkān|ykkān|ān|uvān|kkaṇaṁ|aṇaṁ|kkaṇṭa|aṇṭa|kku|ykku|kk|ykk)/;
+      const VALID_VERB_PRES_REST = /^(ppeṭuttēṇṭatallātta|peṭuttēṇṭatallātta|ppeṭuttēṇṭa|peṭuttēṇṭa|ppeṭuttātta|peṭuttātta|ppikkuka|ppikkunnu|ppikkunna|ppikkunnilla|ppikkumpōḷ|ppikkātta|ppikkukayilla|ppān|kkappeṭṭa|ykkappeṭṭa|appeṭṭa|kkuka|ykkuka|uka|kkunnu|ykkunnu|unnu|kkunna|ykkunna|unna|kkunnilla|ykkunnilla|unnilla|kkumpōḷ|ykkumpōḷ|umpōḷ|kkātta|ykkātta|ātta|kkukayilla|ykkukayilla|ukayilla|ukilla|kkāṁ|ykkāṁ|āṁ|kkuṁ|ykkuṁ|uṁ|kkāte|ykkāte|āte|kkān|ykkān|ān|uvān|kkaṇaṁ|aṇaṁ|kkaṇṭa|aṇṭa|kku|ykku|kk|ykk)/;
       for (const e of state.lexicon) {
         if (!e.verbRoot) continue;
         const rIso = mlToIso(normalizeMalayalam(e.verbRoot.replace(/-+$/, '')));
@@ -2154,8 +2154,8 @@
             if (lastSpanIso.startsWith(vBase) && lastSpanIso.length > vBase.length) {
               let vRest = lastSpanIso.slice(vBase.length);
               if (lastEntryIso === 'ceyyuka' && vRest.startsWith('y')) vRest = vRest.slice(1);
-              const isPast = /^(tu|ta|tiṭṭ|nnu|nna|ccu|cca|iṭṭ|i$)/.test(vRest);
-              const normVRest = (lastEntryIso === 'ceyyuka' && /^(tu|ta|tiṭṭ)/.test(vRest)) ? ('cc' + vRest.slice(1)) : vRest;
+              const isPast = /^(tu|tŭ|ta|tiṭṭ|nnu|nnŭ|nna|ccu|ccŭ|cca|iṭṭ|i$)/.test(vRest);
+              const normVRest = (lastEntryIso === 'ceyyuka' && /^(tu|tŭ|ta|tiṭṭ)/.test(vRest)) ? ('cc' + vRest.slice(1)) : vRest;
               return {
                 endIdx: wordIndices[n - 1],
                 raw: spanRaw,
@@ -2209,6 +2209,7 @@
         const rest = match.srcSuffix || '';
         if (match.caseType === 'verb_root_past') {
           const effPast = tgtPastIso || (baseTgtIso.endsWith('uka') ? (baseTgtIso.slice(0, -3) + 'i') : baseTgtIso);
+          if (rest === 'ccŭ' || rest === 'tŭ') return effPast.endsWith('u') ? (effPast.slice(0, -1) + 'ŭ') : effPast;
           if (/^(ccu|ppiccu|i)$/.test(rest)) return effPast;
           if (rest.startsWith('ccukoṇṭ')) return effPast + 'k' + rest.slice(3);
           if (rest === 'cca' || rest === 'ppeṭṭa' || rest === 'peṭṭa') {
@@ -2238,14 +2239,14 @@
             if (bridge && /^[ṭḍḷṟtkc]$/.test(bridge)) stem = stem + bridge;
           }
           const needsKk = baseTgtIso.endsWith('kkuka') || /[lr]$/.test(baseTgtIso);
-          let normRest = rest.replace(/^(ppikk|y?kk|pp)/, '');
+          let normRest = rest.replace(/^(ppeṭutt|peṭutt|ppikk|y?kk|pp)/, '');
           if (normRest === 'ukayilla') normRest = 'ukilla';
           if (normRest === 'ān' || normRest === 'uvān') {
             if (!needsKk && stem.endsWith('u')) return stem + 'vān';
             const cleanStem = (!needsKk && stem.endsWith('u')) ? stem.slice(0, -1) : stem;
             return cleanStem + (needsKk ? 'kk' : '') + 'ān';
           }
-          if (/^(uka|unnu|unna|unnilla|umpōḷ|ātta|ukilla|uṁ|āṁ|aṇaṁ|aṇṭa|āte|appeṭṭa)$/.test(normRest)) {
+          if (/^(uka|unnu|unna|unnilla|umpōḷ|ātta|ēṇṭa|ēṇṭatallātta|ukilla|uṁ|āṁ|aṇaṁ|aṇṭa|āte|appeṭṭa)$/.test(normRest)) {
             const cleanStem = (!needsKk && stem.endsWith('u') && /^[uāa]/.test(normRest)) ? stem.slice(0, -1) : stem;
             return cleanStem + (needsKk ? 'kk' : '') + normRest;
           }
