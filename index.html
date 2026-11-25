@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pacha trainer</title>
+  <title>പച്ചമലയാളം Data Trainer</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.7.0/sql-wasm.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -127,7 +127,7 @@
         </div>
         <div>
           <h1 class="text-base sm:text-lg font-bold tracking-tight text-[#102b26] leading-tight">
-            പച്ചമലയാളം <span class="font-semibold text-[#146c43]">; Data Trainer</span>
+            പച്ചമലയാളം <span class="font-semibold text-[#146c43]">Data Trainer</span>
           </h1>
           <p class="text-xs text-[#42635b] flex flex-wrap items-center gap-2">
             <span>Malayalam Engine</span>
@@ -226,7 +226,7 @@
           <!-- Purity Bar -->
           <div class="space-y-1.5 pt-1">
             <div class="flex items-center justify-between text-xs">
-              <span class="font-semibold text-[#102b26]">Pacha Score: <strong id="purity-score-text" class="text-[#146c43]">100%</strong></span>
+              <span class="font-semibold text-[#102b26]">Pacha Purity Score: <strong id="purity-score-text" class="text-[#146c43]">100%</strong></span>
               <span id="purity-counts" class="text-[#42635b]">0 replaced · 0 flagged</span>
             </div>
             <div class="w-full h-2.5 bg-gray-200 rounded-full border border-[#102b26] overflow-hidden">
@@ -1186,10 +1186,10 @@
       }
 
       const joinVowelSuffix = (s, suf, yGlide = true) => {
-        if (s.endsWith('am') || s.endsWith('aṁ')) return s.slice(0, -1) + 'm' + suf; // maram + āṇŭ -> maramāṇŭ
+        if (s.endsWith('m') || s.endsWith('ṁ')) return s.slice(0, -1) + 'm' + suf; // maram/karīṁ + āṇŭ -> maramāṇŭ/karīmāṇŭ
         if (s.endsWith('ŭ')) return s.slice(0, -1) + suf;
-        if (s.endsWith('a') || s.endsWith('ā') || s.endsWith('i') || s.endsWith('ī')) return s + (yGlide ? 'y' : '') + suf;
-        if (s.endsWith('u') || s.endsWith('ū')) return s + 'v' + suf;
+        if (s.endsWith('a') || s.endsWith('i') || s.endsWith('ī') || s.endsWith('e') || s.endsWith('ē') || s.endsWith('ai')) return s + (yGlide ? 'y' : '') + suf;
+        if (s.endsWith('ā') || s.endsWith('u') || s.endsWith('ū') || s.endsWith('o') || s.endsWith('ō') || s.endsWith('au')) return s + 'v' + suf;
         if (s.endsWith('ṇ') && isShortVowelBefore(s)) return s + 'ṇ' + suf;
         if (s.endsWith('r')) return rSandhi === 'ṟil' ? s.slice(0, -1) + 'ṟ' + suf : s + suf;
         return s + suf;
@@ -2036,7 +2036,12 @@
         if (suf === 'ine' && stem.endsWith('m')) candidates.push(stem.slice(0, -1) + 'ṁ');
         if (suf === 'nŭ') candidates.push(stem + 'n');
         if (suf.startsWith('tt') && !stem.endsWith('a')) candidates.push(stem + 'am', stem + 'aṁ');
-        if (stem.endsWith('y') || stem.endsWith('v')) candidates.push(stem.slice(0, -1));
+        if (stem.endsWith('yy')) candidates.push(stem.slice(0, -2) + 'ai', stem.slice(0, -2));
+        if (stem.endsWith('y') || stem.endsWith('v')) {
+          candidates.push(stem.slice(0, -1));
+          if (stem.endsWith('aiy')) candidates.push(stem.slice(0, -1));
+        }
+        if (stem.endsWith('ll') || stem.endsWith('ḷḷ')) candidates.push(stem.slice(0, -1));
         if (suf === 'ṅṅaḷ') candidates.push(stem + 'm', stem + 'ṁ');
         if ((suf === 'uvēṇṭi' || suf === 'vēṇṭi') && stem.endsWith('kk')) candidates.push(stem + 'ŭ', stem + 'u');
         if (suf === 'āyi' && stem.endsWith('kk')) candidates.push(stem + 'ŭ');
