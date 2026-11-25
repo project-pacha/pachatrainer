@@ -204,5 +204,11 @@
     <rule id="r76" src="paraṁ" caseType="skt_adj" notes="Sanskrit suffix (-para-)" />
     <rule id="r77" src="para" caseType="skt_adj" notes="Sanskrit suffix (-para)" />
     <rule id="r21" src="ŭ" caseType="dat" notes="Dative for -n stems (accan -> accanŭ)" />
+    <rule id="r_ar_caus_enta" src="ppeṭuttēṇṭa" caseType="verb_ēṇṭa" notes="Causative: -ppeṭuttēṇṭa (പ്പെടുത്തേണ്ട)" />
+    <rule id="r_ar_caus_enta2" src="peṭuttēṇṭa" caseType="verb_ēṇṭa" notes="Causative: -peṭuttēṇṭa (പ്പെടുത്തേണ്ട)" />
+    <rule id="r_ar_caus_atta" src="ppeṭuttātta" caseType="verb_ātta" notes="Causative: -ppeṭuttātta (പ്പെടുത്താത്ത)" />
+    <rule id="r_ar_caus_atta2" src="peṭuttātta" caseType="verb_ātta" notes="Causative: -peṭuttātta (പ്പെടുത്താത്ത)" />
+    <rule id="r_ar_caus_entatallatta" src="ppeṭuttēṇṭatallātta" caseType="verb_ēṇṭatallātta" notes="Causative: -ppeṭuttēṇṭatallātta (പ്പെടുത്തേണ്ടതല്ലാത്ത)" />
+    <rule id="r_ar_caus_entatallatta2" src="peṭuttēṇṭatallātta" caseType="verb_ēṇṭatallātta" notes="Causative: -peṭuttēṇṭatallātta (പ്പെടുത്തേണ്ടതല്ലാത്ത)" />
   </suffixRules>
 </pachaRules>
