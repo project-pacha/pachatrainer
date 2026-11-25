@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pachaRules version="2.0" transliteration="ISO-15919">
+  <!-- Loanword Phonology & Morphology Rules (rulesofpacha.txt 1.1 - 1.10) -->
+  <loanRules>
+    <mahaprana pattern="kh|gh|ch|jh|ṭh|ḍh|th|dh|ph|bh" exceptions="viḍḍhi,śēkhara,śēkhari" />
+    <voicedAndSibilant pattern="[gjḍdbṣ]" exceptions="daśa,daśanār,gaḍi,gaḍḍi,guṇṭ,viḷambu,viḍḍhi" />
+    <sRule pattern="s" exceptions="srāv,taṭassa,urasuka,urasal" />
+    <rVisarga pattern="r̥|ḥ" />
+    <englishClusters items="ḻs,sṯṯ,sk,bl,br,ḍr,phl,phr,gl,skr,sṭr,ṭv,kc,kṭ,isaṁ,isam,kla,kli,kle,klō,krō,krē,ṭra,ṭri,ṭrō,ṯṯai" />
+    <sanskritYClusters items="ky,cy,ṭy,ṇy,ty,ny,py,my,ry,ly,vy,śy" />
+    <sanskritVClusters items="kv,cv,ṭv,ṇv,tv,nv,pv,mv,rv,lv,śv" />
+    <sanskritClusters>
+      <cluster value="kt" /><cluster value="kn" /><cluster value="kp" /><cluster value="km" />
+      <cluster value="kr" exceptions="mākri,pōkri" />
+      <cluster value="kl" exceptions="klāv" />
+      <cluster value="kś" /><cluster value="ṅm" /><cluster value="ṅr" /><cluster value="ṅl" /><cluster value="ṅḷ" />
+      <cluster value="ct" /><cluster value="cn" /><cluster value="cm" /><cluster value="cr" /><cluster value="cl" />
+      <cluster value="ñk" /><cluster value="ṭk" /><cluster value="ṭṇ" /><cluster value="ṭn" /><cluster value="ṭp" />
+      <cluster value="ṭr" /><cluster value="ṭc" /><cluster value="ṅc" /><cluster value="pt" />
+      <cluster value="pr" exceptions="prāv" />
+      <cluster value="pl" exceptions="plāv,plāmpaḻa" />
+      <cluster value="mt" /><cluster value="mn" /><cluster value="mr" />
+      <cluster value="ml" exceptions="mlāv" />
+      <cluster value="śk" /><cluster value="śc" /><cluster value="śṇ" /><cluster value="śp" />
+      <cluster value="śn" /><cluster value="śm" /><cluster value="śl" /><cluster value="śr" />
+    </sanskritClusters>
+    <sanskritTenseMarkers pattern="karikku|kariccu|karikka|valkkari" />
+    <sanskritNominalMarkers items="tvaṁ,tvam,karaṇaṁ,karaṇam,ryaṁ,ryam,ikaṁ,ikam,īyaṁ,īyam,mayaṁ,mayam,paraṁ,param,pūrṇaṁ,pūrṇam,śīlaṁ,śīlam,ātmakaṁ,ātmakam,itaṁ,itam,anīyaṁ,anīyam,tyaṁ,tyam,tamaṁ,tamam,vān,mān,vati,mati,kāran,kāri,vādi,jñan,tāvŭ" />
+    <sanskritAdjectivalMarkers items="paraṁāya,paramāya,vattāya,mattāya,ātmaka,anīya,tavya,pūrṇa,śīla,maya,ika,īya,para,ita,tya,tama" />
+  </loanRules>
+
+  <!-- Noun, Copular, Case & Verb Suffix Rules (includes additional rules.txt) -->
+  <suffixRules count="173">
+    <rule id="r1" src="ttil" caseType="loc" notes="-am / -ttŭ locative" />
+    <rule id="r1_ttekku" src="ttēkkŭ" caseType="towards" notes="-am towards (-ttēkkŭ)" />
+    <rule id="r1_ekku" src="ēkkŭ" caseType="towards" notes="towards (-ēkkŭ)" />
+    <rule id="r_v_kkanam" src="kkaṇaṁ" caseType="verb_aṇaṁ" notes="Verb optative/must (-kkaṇaṁ)" />
+    <rule id="r_v_anam" src="aṇaṁ" caseType="verb_aṇaṁ" notes="Verb optative/must (-aṇaṁ)" />
+    <rule id="r_v_kkanta" src="kkaṇṭa" caseType="verb_aṇṭa" notes="Verb negative optative (-kkaṇṭa)" />
+    <rule id="r_v_anta" src="aṇṭa" caseType="verb_aṇṭa" notes="Verb negative optative (-aṇṭa)" />
+    <rule id="r_v_kkum" src="kkuṁ" caseType="verb_fut" notes="Verb future (-kkuṁ)" />
+    <rule id="r_cop_akanulla" src="ākānuḷḷa" caseType="ākānuḷḷa" notes="Copula becoming (-ākānuḷḷa)" />
+    <rule id="r_cop_akan" src="ākān" caseType="ākān" notes="Copula to become (-ākān)" />
+    <rule id="r_cop_akanam" src="ākaṇaṁ" caseType="ākaṇaṁ" notes="Copula must become (-ākaṇaṁ)" />
+    <rule id="r_cop_akanta" src="ākaṇṭa" caseType="ākaṇṭa" notes="Copula must not become (-ākaṇṭa)" />
+    <rule id="r_cop_akente" src="ākēṇṭē" caseType="ākēṇṭē" notes="Copula question (-ākēṇṭē)" />
+    <rule id="r_cop_akenam" src="ākēṇaṁ" caseType="ākēṇaṁ" notes="Copula should become (-ākēṇaṁ)" />
+    <rule id="r_cop_avunna" src="āvunna" caseType="āvunna" notes="Copula becoming (-āvunna)" />
+    <rule id="r_cop_akenta" src="ākēṇṭa" caseType="ākēṇṭa" notes="Copula need not (-ākēṇṭa)" />
+    <rule id="r_cop_ayirikkunna" src="āyirikkunna" caseType="āyirikkunna" notes="Copula being (-āyirikkunna)" />
+    <rule id="r_cop_ayirikkenta" src="āyirikkēṇṭa" caseType="āyirikkēṇṭa" notes="Copula should be (-āyirikkēṇṭa)" />
+    <rule id="r_cop_ayirunna" src="āyirunna" caseType="āyirunna" notes="Copula was (-āyirunna)" />
+    <rule id="r_cop_ayittulla" src="āyiṭṭuḷḷa" caseType="āyiṭṭuḷḷa" notes="Copula has become (-āyiṭṭuḷḷa)" />
+    <rule id="r_ar_unto" src="uṇṭō" caseType="uṇṭō" notes="Noun U-type: -uṇṭō" />
+    <rule id="r_ar_ullataya" src="uḷḷatāya" caseType="uḷḷatāya" notes="Noun U-type: -uḷḷatāya" />
+    <rule id="r_ar_untayirunna" src="uṇṭāyirunna" caseType="uṇṭāyirunna" notes="Noun U-type: -uṇṭāyirunna" />
+    <rule id="r_ar_untenkil" src="uṇṭeṅkil" caseType="uṇṭeṅkil" notes="Noun U-type: -uṇṭeṅkil" />
+    <rule id="r_ar_ille" src="illē" caseType="illē" notes="Noun I-type: -illē" />
+    <rule id="r_ar_illattataya" src="illāttatāya" caseType="illāttatāya" notes="Noun I-type: -illāttatāya" />
+    <rule id="r_ar_illenkil" src="illeṅkil" caseType="illeṅkil" notes="Noun I-type: -illeṅkil" />
+    <rule id="r_ar_ano" src="āṇō" caseType="āṇō" notes="Noun A-type: -āṇō" />
+    <rule id="r_ar_akum" src="ākuṁ" caseType="ākuṁ" notes="Noun A-type: -ākuṁ" />
+    <rule id="r_ar_akatta" src="ākātta" caseType="ākātta" notes="Noun A-type: -ākātta" />
+    <rule id="r_ar_alle" src="allē" caseType="allē" notes="Noun A-type: -allē" />
+    <rule id="r_ar_allatta" src="allātta" caseType="allātta" notes="Noun A-type: -allātta" />
+    <rule id="r_ar_allattataya" src="allāttatāya" caseType="allāttatāya" notes="Noun A-type: -allāttatāya" />
+    <rule id="r_ar_kontu" src="koṇṭŭ" caseType="c_koṇṭŭ" notes="Noun C1-C3: -koṇṭŭ" />
+    <rule id="r_ar_kontallate" src="koṇṭallāte" caseType="c_koṇṭallāte" notes="Noun C4: -koṇṭallāte" />
+    <rule id="r_ar_pole" src="pōle" caseType="c_pōle" notes="Noun C1-C3: -pōle" />
+    <rule id="r_ar_inalallate" src="inālallāte" caseType="inālallāte" notes="Noun C6: -inālallāte" />
+    <rule id="r_ar_alallate" src="ālallāte" caseType="ālallāte" notes="Noun C5: -ālallāte" />
+    <rule id="r_ar_inal" src="ināl" caseType="ināl" notes="Noun C6: -ināl" />
+    <rule id="r_ar_vkkarut" src="kkarutŭ" caseType="verb_arutŭ" notes="Verb V1: -kkarutŭ" />
+    <rule id="r_ar_vkattakka" src="kkattakka" caseType="verb_attakka" notes="Verb V1: -kkattakka" />
+    <rule id="r_ar_vkenta" src="kkēṇṭa" caseType="verb_ēṇṭa" notes="Verb V1: -kkēṇṭa" />
+    <rule id="r_ar_vkatte" src="kkaṭṭe" caseType="verb_aṭṭe" notes="Verb V1: -kkaṭṭe" />
+    <rule id="r_ar_vkumo" src="kkumō" caseType="verb_umō" notes="Verb V1: -kkumō" />
+    <rule id="r_ar_vkilla" src="kkilla" caseType="verb_illa" notes="Verb V1: -kkilla" />
+    <rule id="r_ar_v2_tilla" src="kkēṇṭatilla" caseType="verb_ēṇṭatilla" notes="Verb V2: -kkēṇṭatilla" />
+    <rule id="r_ar_v2_tillatta" src="kkēṇṭatillātta" caseType="verb_ēṇṭatillātta" notes="Verb V2: -kkēṇṭatillātta" />
+    <rule id="r_ar_v2_tunto" src="kkēṇṭatuṇṭō" caseType="verb_ēṇṭatuṇṭō" notes="Verb V2: -kkēṇṭatuṇṭō" />
+    <rule id="r_ar_v2_tano" src="kkēṇṭatāṇō" caseType="verb_ēṇṭatāṇō" notes="Verb V2: -kkēṇṭatāṇō" />
+    <rule id="r_ar_v2_taya" src="kkēṇṭatāya" caseType="verb_ēṇṭatāya" notes="Verb V2: -kkēṇṭatāya" />
+    <rule id="r2" src="ttinṯe" caseType="gen" notes="-am genitive" />
+    <rule id="r2a" src="ttinŭ" caseType="dat" notes="-am / -āṁ dative" />
+    <rule id="r2b" src="ttōṭŭ" caseType="soc" notes="-am sociative" />
+    <rule id="r2c" src="tte" caseType="acc" notes="-am accusative" />
+    <rule id="r3" src="ttŭ" caseType="loc" notes="-ttŭ locative (e.g. ākāśattŭ -> vānil)" />
+    <rule id="r4" src="ṅṅaḷ" caseType="pl" notes="-am plural" />
+    <rule id="r5" src="mār" caseType="pl" notes="Gendered plural" />
+    <rule id="r6a" src="ukaḷ" caseType="pl" notes="Non-gendered plural (-ŭ/-r/-l/-n/-ṇ/-ḷ)" />
+    <rule id="r6" src="kaḷ" caseType="pl" notes="Non-gendered plural" />
+    <rule id="r7" src="yuṭe" caseType="gen" notes="-a/-i genitive" />
+    <rule id="r8" src="vinṯe" caseType="gen" notes="-u genitive" />
+    <rule id="r9" src="inṯe" caseType="gen" notes="-ŭ/-ṇ/-r/-l/-ḷ/-n genitive" />
+    <rule id="r10" src="nṯe" caseType="gen" notes="-n (short vowel) genitive" />
+    <rule id="r11" src="uṭe" caseType="gen" notes="Generic genitive" />
+    <rule id="r12" src="yil" caseType="loc" notes="-a/-i locative" />
+    <rule id="r13" src="vil" caseType="loc" notes="-u locative" />
+    <rule id="r14" src="il" caseType="loc" notes="Locative (-ŭ/-n/-ṇ/-r/-l/-ḷ)" />
+    <rule id="r15" src="kkŭ" caseType="dat" notes="Dative (-ḷ short vowel / -a / -i)" />
+    <rule id="r16" src="kku" caseType="dat" notes="Dative" />
+    <rule id="r17" src="inŭ" caseType="dat" notes="Dative (-n long / -ṇ / -r / -l / -ḷ)" />
+    <rule id="r17a" src="nŭ" caseType="dat" notes="Dative (-n short vowel)" />
+    <rule id="r17b" src="vinōṭŭ" caseType="soc" notes="Long ā/ū sociative" />
+    <rule id="r17c" src="yinōṭŭ" caseType="soc" notes="Long ī/ē sociative" />
+    <rule id="r17d" src="inōṭŭ" caseType="soc" notes="Chandrakkala (-ŭ) sociative" />
+    <rule id="r17e" src="ōṭŭ" caseType="soc" notes="Consonant/chillu/vowel sociative" />
+    <rule id="r17f" src="vine" caseType="acc" notes="-u/-ū accusative" />
+    <rule id="r17g" src="ayye" caseType="acc" notes="-ai accusative" />
+    <rule id="r17h" src="ine" caseType="acc" notes="-ŭ/-ṇ/-r/-l/-n(long)/-āṁ accusative" />
+    <rule id="r17i" src="ye" caseType="acc" notes="-a/-ā/-i/-ī accusative" />
+    <rule id="r17n" src="e" caseType="acc" notes="Accusative (-ḷ / -n / -kaḷ)" />
+    <rule id="r17j" src="ile" caseType="adj_e" notes="Locative adjectival (-യിലെ / -ിലെ)" />
+    <rule id="r17k" src="yē" caseType="emph" notes="Emphatic/Vocative (-യേ)" />
+    <rule id="r17l" src="vē" caseType="emph" notes="Emphatic/Vocative (-വേ)" />
+    <rule id="r17m" src="ē" caseType="emph" notes="Emphatic/Vocative (-ഏ)" />
+    <rule id="r18" src="illa" caseType="neg" notes="Negation (-ttu+i=tti / -am+illa=-amilla)" />
+    <rule id="r18a" src="yilla" caseType="neg" notes="Negation (-a/-i)" />
+    <rule id="r18b" src="arutŭ" caseType="neg_arutŭ" notes="Negative (-arutŭ)" />
+    <rule id="r18c" src="yalla" caseType="neg_alla" notes="Negative (-alla)" />
+    <rule id="r18d" src="alla" caseType="neg_alla" notes="Negative (-alla)" />
+    <rule id="r18e" src="pōra" caseType="neg_pōra" notes="Negative (-pōra)" />
+    <rule id="r18f" src="vēṇṭa" caseType="neg_vēṇṭa" notes="Negative (-vēṇṭa)" />
+    <rule id="r18g" src="yumāyi" caseType="with" notes="With marker (-umāyi)" />
+    <rule id="r18h" src="umāyi" caseType="with" notes="With marker (-umāyi)" />
+    <rule id="r18i" src="yumottŭ" caseType="tog" notes="Together with (-umottŭ)" />
+    <rule id="r18j" src="umottŭ" caseType="tog" notes="Together with (-umottŭ)" />
+    <rule id="r18k" src="mottŭ" caseType="tog" notes="Together with (-mottŭ)" />
+    <rule id="r18l" src="ninnŭ" caseType="abl" notes="From marker (-ilninnŭ)" />
+    <rule id="r18m" src="yāyi" caseType="for_āyi" notes="For marker (-āyi)" />
+    <rule id="r18n" src="āyi" caseType="for_āyi" notes="For marker (-āyi / -kkāyi)" />
+    <rule id="r18o" src="uvēṇṭi" caseType="for_vēṇṭi" notes="For marker (-uvēṇṭi / -kkuvēṇṭi)" />
+    <rule id="r18p" src="vēṇṭi" caseType="for_vēṇṭi" notes="For marker (-vēṇṭi)" />
+    <rule id="r18q" src="yāṇŭ" caseType="cop" notes="Affirmative/Copula (-yāṇŭ)" />
+    <rule id="r18q1" src="māṇŭ" caseType="cop" notes="Affirmative/Copula (-māṇŭ)" />
+    <rule id="r18r" src="āṇŭ" caseType="cop" notes="Affirmative/Copula (-āṇŭ)" />
+    <rule id="r18s" src="yāṇu" caseType="cop" notes="Affirmative/Copula (-āṇu)" />
+    <rule id="r18t" src="āṇu" caseType="cop" notes="Affirmative/Copula (-āṇu)" />
+    <rule id="r18u" src="uṇṭŭ" caseType="aff_uṇṭŭ" notes="Affirmative (-uṇṭŭ)" />
+    <rule id="r18v" src="uṇṭu" caseType="aff_uṇṭŭ" notes="Affirmative (-uṇṭu)" />
+    <rule id="r18w" src="vēṇaṁ" caseType="aff_vēṇaṁ" notes="Affirmative (-vēṇaṁ)" />
+    <rule id="r19a" src="yuṁ" caseType="conj" notes="Conjunctive (-yuṁ)" />
+    <rule id="r20a" src="uṁ" caseType="conj" notes="Conjunctive (-uṁ)" />
+    <rule id="r19" src="yum" caseType="conj" notes="Conjunctive" />
+    <rule id="r20" src="um" caseType="conj" notes="Conjunctive" />
+    <rule id="r22" src="valkkarikkuka" caseType="skt_valkkari" notes="Sanskrit verb (-valkkari-)" />
+    <rule id="r23" src="valkkariccu" caseType="skt_valkkari" notes="Sanskrit past verb (-valkkari-)" />
+    <rule id="r24" src="karikkappeṭṭa" caseType="skt_karikka" notes="Sanskrit passive (-karikka-)" />
+    <rule id="r25" src="karikkattakka" caseType="skt_karikka" notes="Sanskrit adj (-karikka-)" />
+    <rule id="r26" src="karikkuka" caseType="skt_karikku" notes="Sanskrit verb (-karikku)" />
+    <rule id="r27" src="karikku" caseType="skt_karikku" notes="Sanskrit verb (-karikku)" />
+    <rule id="r28" src="kariccu" caseType="skt_kariccu" notes="Sanskrit past (-kariccu)" />
+    <rule id="r29" src="karikka" caseType="skt_karikka" notes="Sanskrit stem (-karikka-)" />
+    <rule id="r30" src="karaṇaṁ" caseType="skt_karaṇam" notes="Sanskrit noun (-karaṇam)" />
+    <rule id="r31" src="karaṇam" caseType="skt_karaṇam" notes="Sanskrit noun (-karaṇam)" />
+    <rule id="r32" src="ttunnu" caseType="pres" notes="Present tense (-ttunnu)" />
+    <rule id="r33" src="unnu" caseType="pres" notes="Present tense (-unnu)" />
+    <rule id="r34" src="kkuka" caseType="inf" notes="Verb infinitive (-kkuka)" />
+    <rule id="r35" src="lēkkuḷḷa" caseType="all_uḷḷa" notes="Towards having (-lēkkuḷḷa)" />
+    <rule id="r36" src="ilēkkŭ" caseType="allative" notes="Towards (-ilēkkŭ)" />
+    <rule id="r37" src="lēkkŭ" caseType="allative" notes="Towards (-lēkkŭ)" />
+    <rule id="r38" src="lēkk" caseType="allative" notes="Towards (-lēkk-)" />
+    <rule id="r39" src="koṇṭuḷḷa" caseType="mod_koṇṭuḷḷa" notes="Made with (-koṇṭuḷḷa)" />
+    <rule id="r40a" src="ppōluḷḷa" caseType="mod_ppōluḷḷa" notes="Similar (-ppōluḷḷa)" />
+    <rule id="r40" src="pōluḷḷa" caseType="mod_pōluḷḷa" notes="Similar (-pōluḷḷa)" />
+    <rule id="r41a" src="ppōlatte" caseType="mod_ppōlatte" notes="Similar (-ppōlatte)" />
+    <rule id="r41" src="pōlatte" caseType="mod_pōlatte" notes="Similar (-pōlatte)" />
+    <rule id="r42" src="niṟañña" caseType="mod_niṟañña" notes="Filled with (-niṟañña)" />
+    <rule id="r43" src="illātta" caseType="mod_illātta" notes="Not having (-illātta)" />
+    <rule id="r44" src="ākāvunna" caseType="mod_ākāvunna" notes="Probable (-ākāvunna)" />
+    <rule id="r45" src="ākunna" caseType="mod_ākunna" notes="Becoming (-ākunna)" />
+    <rule id="r46" src="yāya" caseType="mod_āya" notes="Copular (-yāya)" />
+    <rule id="r46a" src="māya" caseType="mod_āya" notes="Become/Copular (-māya)" />
+    <rule id="r47" src="āya" caseType="mod_āya" notes="Copular (-āya)" />
+    <rule id="r48" src="yuḷḷa" caseType="mod_uḷḷa" notes="Having (-yuḷḷa)" />
+    <rule id="r49" src="uḷḷa" caseType="mod_uḷḷa" notes="Having (-uḷḷa)" />
+    <rule id="r50" src="yaṯṯa" caseType="mod_aṯṯa" notes="Not having (-yaṯṯa)" />
+    <rule id="r51" src="aṯṯa" caseType="mod_aṯṯa" notes="Not having (-aṯṯa)" />
+    <rule id="r52" src="yuṯṯa" caseType="mod_uṯṯa" notes="Having (-yuṯṯa)" />
+    <rule id="r53" src="uṯṯa" caseType="mod_uṯṯa" notes="Having (-uṯṯa)" />
+    <rule id="r54" src="yārnna" caseType="mod_ārnna" notes="Filled (-yārnna)" />
+    <rule id="r55" src="ārnna" caseType="mod_ārnna" notes="Filled (-ārnna)" />
+    <rule id="r56" src="ppeṭṭa" caseType="mod_peṭṭa" notes="Included (-ppeṭṭa)" />
+    <rule id="r57" src="peṭṭa" caseType="mod_peṭṭa" notes="Included (-peṭṭa)" />
+    <rule id="r58" src="yenna" caseType="mod_enna" notes="That marker (-yenna)" />
+    <rule id="r59" src="enna" caseType="mod_enna" notes="That marker (-enna)" />
+    <rule id="r60" src="takka" caseType="mod_takka" notes="Suitable (-takka)" />
+    <rule id="r61" src="kkeṭṭa" caseType="mod_keṭṭa" notes="Not having/bad (-kkeṭṭa)" />
+    <rule id="r62" src="keṭṭa" caseType="mod_keṭṭa" notes="Not having/bad (-keṭṭa)" />
+    <rule id="r63" src="mayamāya" caseType="skt_adj" notes="Sanskrit adj (-mayamāya)" />
+    <rule id="r64" src="pūrṇṇamāya" caseType="skt_adj" notes="Sanskrit adj (-pūrṇṇa-)" />
+    <rule id="r65" src="pūrṇṇa" caseType="skt_adj" notes="Sanskrit adj (-pūrṇṇa-)" />
+    <rule id="r66" src="atītamāya" caseType="skt_adj" notes="Sanskrit adj (-atīta-)" />
+    <rule id="r67" src="atīta" caseType="skt_adj" notes="Sanskrit adj (-atīta)" />
+    <rule id="r68" src="īkaṁ" caseType="skt_noun" notes="Sanskrit noun (-īka)" />
+    <rule id="r69" src="īka" caseType="skt_noun" notes="Sanskrit noun (-īka)" />
+    <rule id="r70" src="īyaṁ" caseType="skt_noun_only" notes="Sanskrit noun (-īya, nouns only)" />
+    <rule id="r71" src="īya" caseType="skt_noun_only" notes="Sanskrit noun (-īya, nouns only)" />
+    <rule id="r72" src="vān" caseType="skt_poss_m" notes="Sanskrit possessive masc (-vān)" />
+    <rule id="r73" src="vāti" caseType="skt_poss_f" notes="Sanskrit possessive fem (-vāti)" />
+    <rule id="r74" src="śāli" caseType="skt_qual" notes="Sanskrit quality (-śāli)" />
+    <rule id="r75" src="paramāya" caseType="skt_adj" notes="Sanskrit suffix (-para-)" />
+    <rule id="r76" src="paraṁ" caseType="skt_adj" notes="Sanskrit suffix (-para-)" />
+    <rule id="r77" src="para" caseType="skt_adj" notes="Sanskrit suffix (-para)" />
+    <rule id="r21" src="ŭ" caseType="dat" notes="Dative for -n stems (accan -> accanŭ)" />
+  </suffixRules>
+</pachaRules>
