@@ -250,5 +250,7 @@
     <rule id="r_n_manennu" src="māṇennuṁ" caseType="āṇennuṁ" notes="Noun -am copula+quote: -māṇennuṁ" />
     <rule id="r_n_yanennu" src="yāṇennuṁ" caseType="āṇennuṁ" notes="Noun -a/-i copula+quote: -yāṇennuṁ" />
     <rule id="r_n_vanennu" src="vāṇennuṁ" caseType="āṇennuṁ" notes="Noun -ā/-u copula+quote: -vāṇennuṁ" />
+    <rule id="r_n_illate" src="illāte" caseType="illāte" notes="Noun without (-illāte: -മില്ലാതെ/-വില്ലാതെ/-യില്ലാതെ/-ഇല്ലാതെ/-റില്ലാതെ)" />
+    <rule id="r_n_illatulla" src="illātuḷḷa" caseType="illātuḷḷa" notes="Noun without-having (-illātuḷḷa: -മില്ലാതുള്ള/-വില്ലാതുള്ള/-യില്ലാതുള്ള)" />
   </suffixRules>
 </pachaRules>
