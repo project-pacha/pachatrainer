@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pachaRules version="3.0" transliteration="ISO-15919" model="slot-grammar">
+  <!-- 1. Loanword Phonology & Morphology Rules (rulesofpacha.txt 1.1 - 1.10) -->
+  <loanRules>
+    <mahaprana pattern="kh|gh|ch|jh|ṭh|ḍh|th|dh|ph|bh" exceptions="viḍḍhi,śēkhara,śēkhari" />
+    <voicedAndSibilant pattern="[gjḍdbṣ]" exceptions="daśa,daśanār,gaḍi,gaḍḍi,guṇṭ,viḷambu,viḍḍhi" />
+    <sRule pattern="s" exceptions="srāv,taṭassa,urasuka,urasal" />
+    <rVisarga pattern="r̥|ḥ" />
+    <englishClusters items="ḻs,sṯṯ,sk,bl,br,ḍr,phl,phr,gl,skr,sṭr,ṭv,kc,kṭ,isaṁ,isam,kla,kli,kle,klō,krō,krē,ṭra,ṭri,ṭrō,ṯṯai" />
+    <sanskritYClusters items="ky,cy,ṭy,ṇy,ty,ny,py,my,ry,ly,vy,śy" />
+    <sanskritVClusters items="kv,cv,ṭv,ṇv,tv,nv,pv,mv,rv,lv,śv" />
+    <sanskritClusters>
+      <cluster value="kt" /><cluster value="kn" /><cluster value="kp" /><cluster value="km" />
+      <cluster value="kr" exceptions="mākri,pōkri" /><cluster value="kl" exceptions="klāv" />
+      <cluster value="kś" /><cluster value="ṅm" /><cluster value="ṅr" /><cluster value="ṅl" /><cluster value="ṅḷ" />
+      <cluster value="ct" /><cluster value="cn" /><cluster value="cm" /><cluster value="cr" /><cluster value="cl" />
+      <cluster value="ñk" /><cluster value="ṭk" /><cluster value="ṭṇ" /><cluster value="ṭn" /><cluster value="ṭp" />
+      <cluster value="ṭr" /><cluster value="ṭc" /><cluster value="ṅc" /><cluster value="pt" />
+      <cluster value="pr" exceptions="prāv" /><cluster value="pl" exceptions="plāv,plāmpaḻa" />
+      <cluster value="mt" /><cluster value="mn" /><cluster value="mr" /><cluster value="ml" exceptions="mlāv" />
+      <cluster value="śk" /><cluster value="śc" /><cluster value="śṇ" /><cluster value="śp" />
+      <cluster value="śn" /><cluster value="śm" /><cluster value="śl" /><cluster value="śr" />
+    </sanskritClusters>
+    <sanskritTenseMarkers pattern="karikku|kariccu|karikka|valkkari" />
+    <sanskritNominalMarkers items="tvaṁ,tvam,karaṇaṁ,karaṇam,ryaṁ,ryam,ikaṁ,ikam,īyaṁ,īyam,mayaṁ,mayam,paraṁ,param,pūrṇaṁ,pūrṇam,śīlaṁ,śīlam,ātmakaṁ,ātmakam,itaṁ,itam,anīyaṁ,anīyam,tyaṁ,tyam,tamaṁ,tamam,vān,mān,vati,mati,kāran,kāri,vādi,jñan,tāvŭ" />
+    <sanskritAdjectivalMarkers items="paraṁāya,paramāya,vattāya,mattāya,ātmaka,anīya,tavya,pūrṇa,śīla,maya,ika,īya,para,ita,tya,tama" />
+  </loanRules>
+
+  <!-- 2. Atomic Morpheme Slots (Two-Level Slot Grammar) -->
+  <slots>
+    <slot name="PLURAL">
+      <m form="ṅṅaḷ" tag="pl" />
+      <m form="ukaḷ" tag="pl" />
+      <m form="kkaḷ" tag="pl" />
+      <m form="kaḷ" tag="pl" />
+      <m form="umār" tag="pl" />
+      <m form="amār" tag="pl" />
+      <m form="imār" tag="pl" />
+      <m form="īmār" tag="pl" />
+      <m form="āmār" tag="pl" />
+      <m form="ūmār" tag="pl" />
+      <m form="mār" tag="pl" />
+    </slot>
+
+    <slot name="CASE">
+      <m form="ttinmēl" tag="loc_mēl" /><m form="inmēl" tag="loc_mēl" /><m form="mēl" tag="loc_mēl" />
+      <m form="ttinaṭiyil" tag="loc_aṭiyil" /><m form="inaṭiyil" tag="loc_aṭiyil" /><m form="aṭiyil" tag="loc_aṭiyil" />
+      <m form="ttiṅkal" tag="loc" /><m form="iṅkal" tag="loc" />
+      <m form="ttil" tag="loc" /><m form="il" tag="loc" /><m form="ttŭ" tag="loc" />
+      <m form="ttinṟe" tag="gen" /><m form="inṟe" tag="gen" /><m form="uṭe" tag="gen" /><m form="nṟe" tag="gen" /><m form="ṟe" tag="gen" />
+      <m form="ttinŭ" tag="dat" /><m form="inŭ" tag="dat" /><m form="kkŭ" tag="dat" /><m form="nŭ" tag="dat" />
+      <m form="tte" tag="acc" /><m form="ine" tag="acc" /><m form="e" tag="acc" />
+      <m form="ttōṭŭ" tag="soc" /><m form="inōṭŭ" tag="soc" /><m form="ōṭŭ" tag="soc" />
+      <m form="ttāl" tag="ins" /><m form="ināl" tag="ināl" /><m form="āl" tag="ins" /><m form="ālē" tag="ālē" />
+    </slot>
+
+    <slot name="POSTP">
+      <m form="ilninnŭ" tag="abl" /><m form="ilninnu" tag="abl" />
+      <m form="ilēkkuḷḷa" tag="all_uḷḷa" /><m form="ilēkkŭ" tag="allative" />
+      <m form="ttēkkŭ" tag="towards" /><m form="ēkkŭ" tag="towards" />
+      <m form="ttināyi" tag="for_āyi" /><m form="ināyi" tag="for_āyi" /><m form="kkāyi" tag="for_āyi" /><m form="āyi" tag="for_āyi" />
+      <m form="uvēṇṭi" tag="for_vēṇṭi" /><m form="vēṇṭi" tag="for_vēṇṭi" />
+      <m form="umāyi" tag="with" /><m form="umottŭ" tag="tog" />
+      <m form="ōḷaṁ" tag="ōḷaṁ" /><m form="tōṟuṁ" tag="dist_tōṟuṁ" />
+      <m form="koṇṭŭ" tag="c_koṇṭŭ" /><m form="pōle" tag="c_pōle" />
+      <m form="otta" tag="dat_otta" />
+      <m form="ile" tag="adj_e" />
+    </slot>
+
+    <slot name="VERBALIZER">
+      <m form="ākk" tag="vz_ākk" />
+      <m form="āk" tag="vz_āk" />
+      <m form="āv" tag="vz_āv" />
+      <m form="ppeṭutt" tag="vz_ppeṭutt" />
+      <m form="peṭutt" tag="vz_peṭutt" />
+      <m form="ppeṭ" tag="vz_ppeṭ" />
+      <m form="peṭ" tag="vz_peṭ" />
+      <m form="āyirikk" tag="vz_āyirikk" />
+    </slot>
+
+    <slot name="VERB_END">
+      <m form="unnat" tag="v_unnat" />
+      <m form="unnilla" tag="v_unnilla" />
+      <m form="unnu" tag="v_unnu" />
+      <m form="unna" tag="v_unna" />
+      <m form="ātta" tag="v_ātta" />
+      <m form="ēṇṭa" tag="v_ēṇṭa" />
+      <m form="ēṇaṁ" tag="v_ēṇaṁ" />
+      <m form="aṇaṁ" tag="v_aṇaṁ" />
+      <m form="aṇṭa" tag="v_aṇṭa" />
+      <m form="arutŭ" tag="v_arutŭ" />
+      <m form="āvunna" tag="v_āvunna" />
+      <m form="iyiṭṭuṇṭŭ" tag="v_iyiṭṭuṇṭŭ" />
+      <m form="iyiṭṭilla" tag="v_iyiṭṭilla" />
+      <m form="iyiṭṭŭ" tag="v_iyiṭṭŭ" />
+      <m form="iyatināl" tag="v_iyatināl" />
+      <m form="iṭṭuḷḷa" tag="v_iṭṭuḷḷa" />
+      <m form="iṭṭuṇṭŭ" tag="v_iṭṭuṇṭŭ" />
+      <m form="iṭṭilla" tag="v_iṭṭilla" />
+      <m form="ikoṇṭŭ" tag="v_ikoṇṭŭ" />
+      <m form="iyilla" tag="v_iyilla" />
+      <m form="iya" tag="v_iya" />
+      <m form="illa" tag="v_illa" />
+      <m form="āluṁ" tag="v_āluṁ" />
+      <m form="āl" tag="v_āl" />
+      <m form="āte" tag="v_āte" />
+      <m form="āṁ" tag="v_āṁ" />
+      <m form="ān" tag="v_ān" />
+      <m form="uṁ" tag="v_uṁ" />
+      <m form="i" tag="v_i" />
+    </slot>
+
+    <slot name="PARTICIPLE">
+      <m form="uḷḷa" tag="mod_uḷḷa" />
+      <m form="illātta" tag="mod_illātta" />
+      <m form="allātta" tag="allātta" />
+      <m form="ākātta" tag="ākātta" />
+      <m form="ākunna" tag="mod_ākunna" />
+      <m form="āvunna" tag="āvunna" />
+      <m form="āyirunna" tag="āyirunna" />
+      <m form="āyiṭṭuḷḷa" tag="āyiṭṭuḷḷa" />
+      <m form="āyirikkunna" tag="āyirikkunna" />
+      <m form="āyirikkēṇṭa" tag="āyirikkēṇṭa" />
+      <m form="uṇṭāyirunna" tag="uṇṭāyirunna" />
+      <m form="āya" tag="mod_āya" />
+      <m form="aṟṟa" tag="mod_aṟṟa" />
+      <m form="uṟṟa" tag="mod_uṟṟa" />
+      <m form="ārnna" tag="mod_ārnna" />
+      <m form="peṭṭa" tag="mod_peṭṭa" />
+      <m form="takka" tag="mod_takka" />
+      <m form="pōluḷḷa" tag="mod_pōluḷḷa" />
+      <m form="pōlatte" tag="mod_pōlatte" />
+    </slot>
+
+    <slot name="NOMINALIZER">
+      <m form="tŭ" tag="nom_tŭ" />
+      <m form="t" tag="nom_tŭ" />
+    </slot>
+
+    <slot name="COP_NEG">
+      <m form="āṇŭ" tag="cop" /><m form="āṇu" tag="cop" />
+      <m form="alla" tag="neg_alla" />
+      <m form="illa" tag="neg" />
+      <m form="uṇṭŭ" tag="aff_uṇṭŭ" /><m form="uṇṭu" tag="aff_uṇṭŭ" />
+      <m form="arutŭ" tag="neg_arutŭ" />
+      <m form="pōra" tag="neg_pōra" />
+      <m form="vēṇṭa" tag="neg_vēṇṭa" />
+      <m form="vēṇaṁ" tag="aff_vēṇaṁ" />
+      <m form="ākuṁ" tag="ākuṁ" />
+      <m form="ākān" tag="ākān" />
+      <m form="ākaṇaṁ" tag="ākaṇaṁ" />
+      <m form="ākaṇṭa" tag="ākaṇṭa" />
+      <m form="ākēṇṭa" tag="ākēṇṭa" />
+      <m form="ākēṇaṁ" tag="ākēṇaṁ" />
+      <m form="āyiṭṭŭ" tag="āyiṭṭŭ" />
+      <m form="illāte" tag="illāte" />
+      <m form="eṅkil" tag="cond_eṅkil" />
+      <m form="allāte" tag="allāte" />
+    </slot>
+
+    <slot name="CLITIC">
+      <m form="uṁ" tag="conj" />
+      <m form="ō" tag="voc_ō" />
+      <m form="ē" tag="emph" />
+      <m form="atrē" tag="atrē" />
+      <m form="itrē" tag="itrē" />
+      <m form="āluṁ" tag="āluṁ" />
+      <m form="ennuṁ" tag="ennuṁ" />
+      <m form="enna" tag="mod_enna" />
+      <m form="uḷḷu" tag="uḷḷu" />
+      <m form="eviṭe" tag="q_eviṭe" />
+      <m form="ārŭ" tag="q_ārŭ" />
+      <m form="āru" tag="q_ārŭ" />
+      <m form="entŭ" tag="q_entŭ" />
+      <m form="entu" tag="q_entŭ" />
+      <m form="eppōḷ" tag="q_eppōḷ" />
+      <m form="eṅṅane" tag="q_eṅṅane" />
+      <m form="ētŭ" tag="q_ētŭ" />
+      <m form="ētu" tag="q_ētŭ" />
+      <m form="etra" tag="q_etra" />
+    </slot>
+  </slots>
+
+  <!-- 3. Legal Right-to-Left Morphotactic Transitions (includes NOMINALIZER tŭ -> PARTICIPLE loop) -->
+  <transitions>
+    <prev from="CLITIC" to="CLITIC,COP_NEG,NOMINALIZER,PARTICIPLE,VERB_END,POSTP,CASE,PLURAL" />
+    <prev from="COP_NEG" to="NOMINALIZER,PARTICIPLE,VERB_END,POSTP,CASE,PLURAL" />
+    <prev from="NOMINALIZER" to="PARTICIPLE,VERB_END" />
+    <prev from="PARTICIPLE" to="NOMINALIZER,POSTP,CASE,PLURAL" />
+    <prev from="VERB_END" to="VERBALIZER" />
+    <prev from="VERBALIZER" to="NOMINALIZER,CASE,PLURAL" />
+    <prev from="POSTP" to="CASE,PLURAL" />
+    <prev from="CASE" to="PLURAL" />
+    <prev from="PLURAL" to="" />
+  </transitions>
+
+  <!-- 4. Custom / Legacy Flat Suffix Rules (optional overrides) -->
+  <suffixRules>
+    <rule id="r_v_kkanam" src="kkaṇaṁ" caseType="verb_aṇaṁ" notes="Verb optative (-kkaṇaṁ)" />
+    <rule id="r_v_anam" src="aṇaṁ" caseType="verb_aṇaṁ" notes="Verb optative (-aṇaṁ)" />
+    <rule id="r_v_kkanta" src="kkaṇṭa" caseType="verb_aṇṭa" notes="Verb neg optative (-kkaṇṭa)" />
+    <rule id="r_v_anta" src="aṇṭa" caseType="verb_aṇṭa" notes="Verb neg optative (-aṇṭa)" />
+    <rule id="r_v_kkum" src="kkuṁ" caseType="verb_fut" notes="Verb future (-kkuṁ)" />
+  </suffixRules>
+</pachaRules>
