@@ -888,6 +888,8 @@
       { id: 'r_ins_ale', src_suffix: 'ālē', case_type: 'ālē', notes: 'Instrumental/emphatic (-ālē)' },
       { id: 'r_n_ayillenkil', src_suffix: 'āyilleṅkil', case_type: 'āyilleṅkil', notes: 'Noun: -āyilleṅkil (തയ്യാറായില്ലെങ്കിൽ)' },
       { id: 'r_n_ayittu', src_suffix: 'āyiṭṭŭ', case_type: 'āyiṭṭŭ', notes: 'Noun: -āyiṭṭŭ (തയ്യാറായിട്ട്)' },
+      { id: 'r_n_illate', src_suffix: 'illāte', case_type: 'illāte', notes: 'Noun without (-illāte: -മില്ലാതെ/-വില്ലാതെ/-യില്ലാതെ/-ഇല്ലാതെ/-റില്ലാതെ)' },
+      { id: 'r_n_illatulla', src_suffix: 'illātuḷḷa', case_type: 'illātuḷḷa', notes: 'Noun without-having (-illātuḷḷa: -മില്ലാതുള്ള/-വില്ലാതുള്ള/-യില്ലാതുള്ള)' },
       { id: 'r_n_anennu', src_suffix: 'āṇennuṁ', case_type: 'āṇennuṁ', notes: 'Noun copula+quote: -āṇennuṁ (സജ്ജമാണെന്നും)' },
       { id: 'r_n_manennu', src_suffix: 'māṇennuṁ', case_type: 'āṇennuṁ', notes: 'Noun -am copula+quote: -māṇennuṁ' },
       { id: 'r_n_yanennu', src_suffix: 'yāṇennuṁ', case_type: 'āṇennuṁ', notes: 'Noun -a/-i copula+quote: -yāṇennuṁ' },
@@ -2155,7 +2157,7 @@
       // 1b. Verb root + valid verb suffix match (prevents false compound matches like akrami + nāḷukaḷ)
       const PERS_NOUN_END = '(vanmār|vaḷumār|vaḷmār|van|vaḷ|var|tukaḷ|tŭ|va)';
       const VALID_VERB_PAST_REST = new RegExp(
-        '^(ccukoṇṭirikkunna' + PERS_NOUN_END + '?|ccukoṇṭirunnu|ccukoṇṭirikkunnu|ccukoṇṭirikk|ccukoṇṭu|ccukoṇṭŭ|ccukoḷḷāṁ|ccatukoṇṭŭ|ccirikkunnu|ccirikkāṁ|ccirunnu|cciṭṭuṇṭŭ|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ccēkkāṁ|cceṅkil|ccillātta|ccilla|ccāluṁ|ccāl|ccuṁ|cca' + PERS_NOUN_END + '?|ccu|ppiccilla|ppiccŭ|ppiccu|ppicca|ppeṭuttiya|peṭuttiya|ppeṭṭa|peṭṭa|ṭṭilla|ṭilla|tilla|nilla|ṭṭillātta|ṭillātta|tillātta|nillātta|ṭṭu|ṭṭŭ|ṭṭa|ṭu|ṭŭ|ṭa|ttu|nnu|nna' + PERS_NOUN_END + '?|ññu|ñña|ññ|iṭṭuṇṭŭ|iṭṭillātta|iṭṭilla|iṭṭŭ|iya|i$)'
+        '^(ccukoṇṭirikkunna' + PERS_NOUN_END + '?|ccukoṇṭirunnu|ccukoṇṭirikkunnu|ccukoṇṭirikk|ccukoṇṭu|ccukoṇṭŭ|ccukoḷḷāṁ|ccatukoṇṭŭ|ccirikkunnu|ccirikkāṁ|ccirunnu|cciṭṭuṇṭŭ|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ccēkkāṁ|cceṅkil|ccillātta|ccilla|ccāluṁ|ccāl|ccuṁ|cca' + PERS_NOUN_END + '?|ccu|ppiccilla|ppiccŭ|ppiccu|ppicca|ppeṭuttiya|peṭuttiya|ppeṭṭa|peṭṭa|ṭṭilla|ṭilla|tilla|nilla|ṭṭillātta|ṭillātta|tillātta|nillātta|ṭṭu|ṭṭŭ|ṭṭa|ṭu|ṭŭ|ṭa|ttu|nnu|nna' + PERS_NOUN_END + '?|ññu|ñña|ññ|u?ttikkoṇṭŭ|ikkoṇṭŭ|ccikoṇṭŭ|u?ttiyatināl|iyatināl|ccatināl|u?ttiyilla|iyilla|cciyilla|u?ttiyiṭṭuṇṭŭ|iyiṭṭuṇṭŭ|u?ttiyiṭṭilla|iyiṭṭilla|u?ttittu|u?tti|u?ttu|u?tta|ikoṇṭŭ|iyatināl|iṭṭuṇṭŭ|iṭṭillātta|iṭṭilla|iṭṭŭ|iya|i$)'
       );
       const VALID_VERB_PRES_REST = new RegExp(
         '^(ppeṭuttēṇṭatallātta|peṭuttēṇṭatallātta|ppeṭuttēṇṭa|peṭuttēṇṭa|ppeṭuttātta|peṭuttātta|' +
@@ -2451,6 +2453,31 @@
           if (rest === 'ppiccŭ') {
             let cStem = (derivedStem || tgtRootIso).replace(/ŭ$/, '').replace(/u$/, '').replace(/y?kk$/, '');
             return cStem + 'ppiccŭ';
+          }
+          if (rest.endsWith('koṇṭŭ') && /^(u?tti|cci|i)/.test(rest)) {
+            if (effPast.endsWith('i')) return effPast + 'kkoṇṭŭ';
+            if (effPast.endsWith('u') || effPast.endsWith('ŭ')) return effPast.slice(0, -1) + 'ukoṇṭŭ';
+            return effPast + 'koṇṭŭ';
+          }
+          if (rest.endsWith('atināl')) {
+            if (effPast.endsWith('i')) return effPast + 'yatināl';
+            if (effPast.endsWith('u') || effPast.endsWith('ŭ')) return effPast.slice(0, -1) + 'atināl';
+            return effPast + 'atināl';
+          }
+          if (rest.endsWith('iṭṭuṇṭŭ')) {
+            if (effPast.endsWith('i')) return effPast + 'yiṭṭuṇṭŭ';
+            if (effPast.endsWith('u') || effPast.endsWith('ŭ')) return effPast.slice(0, -1) + 'iṭṭuṇṭŭ';
+            return effPast + 'iṭṭuṇṭŭ';
+          }
+          if (rest.endsWith('iṭṭilla')) {
+            if (effPast.endsWith('i')) return effPast + 'yiṭṭilla';
+            if (effPast.endsWith('u') || effPast.endsWith('ŭ')) return effPast.slice(0, -1) + 'iṭṭilla';
+            return effPast + 'iṭṭilla';
+          }
+          if (rest.endsWith('illa') && !rest.endsWith('iṭṭilla')) {
+            if (effPast.endsWith('i')) return effPast + 'yilla';
+            if (effPast.endsWith('u') || effPast.endsWith('ŭ')) return effPast.slice(0, -1) + 'illa';
+            return effPast + 'illa';
           }
           if (rest.startsWith('ccukoṇṭ') || rest.startsWith('ccukoḷḷ')) {
             const uTail = rest.slice(2); // ukoṇṭ..., ukoḷḷāṁ
