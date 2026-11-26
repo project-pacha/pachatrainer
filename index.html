@@ -1140,7 +1140,7 @@
         if (stemIso.endsWith('ŭ')) return stemIso.slice(0, -1) + 'inṯe';
         if (stemIso.endsWith('ṇ')) return isShortVowelBefore(stemIso) ? stemIso + 'ṇinṯe' : stemIso + 'inṯe';
         if (stemIso.endsWith('n')) return isLongVowelBefore(stemIso) ? stemIso + 'inṯe' : stemIso + 'ṯe'; // māninṯe / avanṯe
-        if (stemIso.endsWith('kaḷ') || stemIso.endsWith('ṅṅaḷ') || stemIso.endsWith('mār')) return stemIso + 'uṭe'; // puḻakaḷuṭe, maraṅṅaḷuṭe
+        if (stemIso.endsWith('kaḷ') || stemIso.endsWith('ṅṅaḷ') || stemIso.endsWith('mār') || stemIso.endsWith('var')) return stemIso + 'uṭe'; // puḻakaḷuṭe, maraṅṅaḷuṭe
         if (stemIso.endsWith('l') || stemIso.endsWith('ḷ')) return stemIso + 'inṯe'; // kālinṯe, tāḷinṯe
         if (stemIso.endsWith('r')) {
           return rSandhi === 'ṟil' ? stemIso.slice(0, -1) + 'ṟinṯe' : stemIso + 'inṯe'; // kāṟinṯe / atirinṯe
@@ -1265,6 +1265,10 @@
         if (stemIso.endsWith('il')) return stemIso + 'ninnŭ';
         return applyCaseSandhiIso(stemIso, 'loc', entryMeta) + 'ninnŭ';
       }
+      if (caseType === 'for_ināyi') {
+        if (endsAm) return stemIso.slice(0, -2) + 'attināyi';
+        return joinVowelSuffix(stemIso, 'ināyi');
+      }
       if (caseType === 'for_āyi') {
         return joinVowelSuffix(stemIso, 'āyi');
       }
@@ -1282,6 +1286,12 @@
       if (caseType === 'neg_pōra') return stemIso + 'pōra';
       if (caseType === 'neg_vēṇṭa') return stemIso + 'vēṇṭa';
       if (caseType === 'nom_tŭ') return stemIso + 'tŭ';
+      if (caseType === 'nom_van' || caseType === 'nom_vaḷ' || caseType === 'nom_var' || caseType === 'nom_va') return stemIso + caseType.slice(4);
+      if (caseType === 'c_mūlaṁ' || caseType === 'c_vaḻi') return (stemIso.endsWith('ŭ') ? stemIso.slice(0, -1) + 'u' : stemIso) + caseType.slice(2);
+      if (caseType === 'emph_tanne') return (stemIso.endsWith('ŭ') ? stemIso.slice(0, -1) : stemIso) + 'tanne';
+      if (caseType === 'comp_inēkkāḷ') return joinVowelSuffix(stemIso, 'inēkkāḷ');
+      if (caseType.startsWith('adv_')) return joinVowelSuffix(stemIso, caseType.slice(4));
+      if (caseType.startsWith('cond_āy')) return joinVowelSuffix(stemIso, caseType.slice(5));
       if (caseType === 'cond_eṅkil') return joinVowelSuffix(stemIso, 'eṅkil');
       if (caseType === 'ennuṁ') return joinVowelSuffix(stemIso, 'ennuṁ');
       if (caseType === 'uḷḷu') return joinVowelSuffix(stemIso, 'uḷḷu');
@@ -1417,22 +1427,26 @@
         { form: 'ttinaṭiyil', tag: 'loc_aṭiyil' }, { form: 'inaṭiyil', tag: 'loc_aṭiyil' }, { form: 'aṭiyil', tag: 'loc_aṭiyil' },
         { form: 'ttiṅkal', tag: 'loc' }, { form: 'iṅkal', tag: 'loc' },
         { form: 'ttil', tag: 'loc' }, { form: 'il', tag: 'loc' }, { form: 'ttŭ', tag: 'loc' },
-        { form: 'ttinṟe', tag: 'gen' }, { form: 'inṟe', tag: 'gen' }, { form: 'uṭe', tag: 'gen' }, { form: 'nṟe', tag: 'gen' }, { form: 'ṟe', tag: 'gen' },
+        { form: 'ttinṯe', tag: 'gen' }, { form: 'ttinṟe', tag: 'gen' }, { form: 'inṯe', tag: 'gen' }, { form: 'inṟe', tag: 'gen' }, { form: 'uṭe', tag: 'gen' }, { form: 'nṯe', tag: 'gen' }, { form: 'nṟe', tag: 'gen' }, { form: 'ṯe', tag: 'gen' }, { form: 'ṟe', tag: 'gen' },
         { form: 'ttinŭ', tag: 'dat' }, { form: 'inŭ', tag: 'dat' }, { form: 'kkŭ', tag: 'dat' }, { form: 'nŭ', tag: 'dat' },
         { form: 'tte', tag: 'acc' }, { form: 'ine', tag: 'acc' }, { form: 'e', tag: 'acc' },
         { form: 'ttōṭŭ', tag: 'soc' }, { form: 'inōṭŭ', tag: 'soc' }, { form: 'ōṭŭ', tag: 'soc' },
-        { form: 'ttāl', tag: 'ins' }, { form: 'ināl', tag: 'ināl' }, { form: 'ālē', tag: 'ālē' }, { form: 'āl', tag: 'ins' }
+        { form: 'ttāl', tag: 'ins' }, { form: 'ināl', tag: 'ināl' }, { form: 'ālē', tag: 'ālē' }, { form: 'āl', tag: 'ins' }, { form: 'inēkkāḷ', tag: 'comp_inēkkāḷ' }, { form: 'ēkkāḷ', tag: 'comp_inēkkāḷ' }
       ],
       POSTP: [
         { form: 'ilninnŭ', tag: 'abl' }, { form: 'ilninnu', tag: 'abl' },
         { form: 'ilēkkuḷḷa', tag: 'all_uḷḷa' }, { form: 'ilēkkŭ', tag: 'allative' },
         { form: 'ttēkkŭ', tag: 'towards' }, { form: 'ēkkŭ', tag: 'towards' },
-        { form: 'ttināyi', tag: 'for_āyi' }, { form: 'ināyi', tag: 'for_āyi' }, { form: 'kkāyi', tag: 'for_āyi' }, { form: 'āyi', tag: 'for_āyi' },
+        { form: 'ttināyi', tag: 'for_ināyi' }, { form: 'ināyi', tag: 'for_ināyi' }, { form: 'kkāyi', tag: 'for_āyi' }, { form: 'āyi', tag: 'for_āyi' },
         { form: 'uvēṇṭi', tag: 'for_vēṇṭi' }, { form: 'vēṇṭi', tag: 'for_vēṇṭi' },
         { form: 'umāyi', tag: 'with' }, { form: 'umottŭ', tag: 'tog' },
         { form: 'ōḷaṁ', tag: 'ōḷaṁ' }, { form: 'tōṟuṁ', tag: 'dist_tōṟuṁ' },
         { form: 'koṇṭŭ', tag: 'c_koṇṭŭ' }, { form: 'pōle', tag: 'c_pōle' },
-        { form: 'otta', tag: 'dat_otta' }, { form: 'ile', tag: 'adj_e' }
+        { form: 'otta', tag: 'dat_otta' }, { form: 'ile', tag: 'adj_e' },
+        { form: 'mūlaṁ', tag: 'c_mūlaṁ' }, { form: 'mūlam', tag: 'c_mūlaṁ' }, { form: 'vaḻi', tag: 'c_vaḻi' },
+        { form: 'āyiṭṭuṇṭŭ', tag: 'āyiṭṭuṇṭŭ' }, { form: 'āyiṭṭilla', tag: 'āyiṭṭilla' }, { form: 'āyiṭṭuṁ', tag: 'āyiṭṭuṁ' },
+        { form: 'āyirikke', tag: 'adv_āyirikke' }, { form: 'āyappōḷ', tag: 'adv_āyappōḷ' },
+        { form: 'āyāluṁ', tag: 'cond_āyāluṁ' }, { form: 'āyāl', tag: 'cond_āyāl' }, { form: 'āyuṁ', tag: 'adv_āyuṁ' }
       ],
       VERBALIZER: [
         { form: 'ākk', tag: 'vz_ākk' }, { form: 'āk', tag: 'vz_āk' }, { form: 'āv', tag: 'vz_āv' },
@@ -1466,11 +1480,12 @@
         { form: 'pōluḷḷa', tag: 'mod_pōluḷḷa' }, { form: 'pōlatte', tag: 'mod_pōlatte' }
       ],
       NOMINALIZER: [
-        { form: 'tŭ', tag: 'nom_tŭ' }, { form: 't', tag: 'nom_tŭ' }
+        { form: 'tŭ', tag: 'nom_tŭ' }, { form: 'tu', tag: 'nom_tŭ' }, { form: 't', tag: 'nom_tŭ' },
+        { form: 'van', tag: 'nom_van' }, { form: 'vaḷ', tag: 'nom_vaḷ' }, { form: 'var', tag: 'nom_var' }, { form: 'va', tag: 'nom_va' }
       ],
       COP_NEG: [
         { form: 'āṇŭ', tag: 'cop' }, { form: 'āṇu', tag: 'cop' },
-        { form: 'alla', tag: 'neg_alla' }, { form: 'illa', tag: 'neg' },
+        { form: 'allē', tag: 'allē' }, { form: 'alla', tag: 'neg_alla' }, { form: 'āṇō', tag: 'āṇō' }, { form: 'illa', tag: 'neg' },
         { form: 'uṇṭŭ', tag: 'aff_uṇṭŭ' }, { form: 'uṇṭu', tag: 'aff_uṇṭŭ' },
         { form: 'arutŭ', tag: 'neg_arutŭ' }, { form: 'pōra', tag: 'neg_pōra' },
         { form: 'vēṇṭa', tag: 'neg_vēṇṭa' }, { form: 'vēṇaṁ', tag: 'aff_vēṇaṁ' },
@@ -1478,7 +1493,10 @@
         { form: 'ākaṇaṁ', tag: 'ākaṇaṁ' }, { form: 'ākaṇṭa', tag: 'ākaṇṭa' },
         { form: 'ākēṇṭa', tag: 'ākēṇṭa' }, { form: 'ākēṇaṁ', tag: 'ākēṇaṁ' },
         { form: 'āyiṭṭŭ', tag: 'āyiṭṭŭ' }, { form: 'illāte', tag: 'illāte' },
-        { form: 'eṅkil', tag: 'cond_eṅkil' }, { form: 'allāte', tag: 'allāte' }
+        { form: 'eṅkil', tag: 'cond_eṅkil' }, { form: 'allāte', tag: 'allāte' },
+        { form: 'āyirikkuṁ', tag: 'āyirikkuṁ' }, { form: 'āyirikkāṁ', tag: 'āyirikkāṁ' },
+        { form: 'āyirunnu', tag: 'āyirunnu' }, { form: 'āyirunniṭṭuṁ', tag: 'āyirunniṭṭuṁ' },
+        { form: 'āyirunneṅkil', tag: 'āyirunneṅkil' }, { form: 'āyē', tag: 'āyē' }, { form: 'eṅkiluṁ', tag: 'eṅkiluṁ' }
       ],
       CLITIC: [
         { form: 'uṁ', tag: 'conj' }, { form: 'ō', tag: 'voc_ō' }, { form: 'ē', tag: 'emph' },
@@ -1487,7 +1505,7 @@
         { form: 'eviṭe', tag: 'q_eviṭe' }, { form: 'ārŭ', tag: 'q_ārŭ' }, { form: 'āru', tag: 'q_ārŭ' },
         { form: 'entŭ', tag: 'q_entŭ' }, { form: 'entu', tag: 'q_entŭ' }, { form: 'eppōḷ', tag: 'q_eppōḷ' },
         { form: 'eṅṅane', tag: 'q_eṅṅane' }, { form: 'ētŭ', tag: 'q_ētŭ' }, { form: 'ētu', tag: 'q_ētŭ' },
-        { form: 'etra', tag: 'q_etra' }
+        { form: 'etra', tag: 'q_etra' }, { form: 'tanne', tag: 'emph_tanne' }, { form: 'tannē', tag: 'emph_tanne' }
       ]
     };
 
@@ -1498,9 +1516,9 @@
       PARTICIPLE: ['NOMINALIZER', 'POSTP', 'CASE', 'PLURAL'],
       VERB_END: ['VERBALIZER'],
       VERBALIZER: ['NOMINALIZER', 'CASE', 'PLURAL'],
-      POSTP: ['CASE', 'PLURAL'],
-      CASE: ['PLURAL'],
-      PLURAL: []
+      POSTP: ['NOMINALIZER', 'CASE', 'PLURAL'],
+      CASE: ['NOMINALIZER', 'PLURAL'],
+      PLURAL: ['NOMINALIZER']
     };
 
     let activeSlots = JSON.parse(JSON.stringify(DEFAULT_SLOTS));
