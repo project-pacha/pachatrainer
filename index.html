@@ -1507,10 +1507,11 @@
           stems.add(s);
           if (s.endsWith('ŭ')) stems.add(s.slice(0, -1));
           if (s.endsWith('m')) stems.add(s.slice(0, -1) + 'ṁ');
-          if (s.endsWith('ṁ')) stems.add(s.slice(0, -1) + 'm');
+          if (s.endsWith('ṁ')) { stems.add(s.slice(0, -1) + 'm'); stems.add(s.slice(0, -1)); }
         }
       };
 
+      addStem(w);
       // 2.1.1 -āmalla -> -āṁ + alla; -āmilla -> -āṁ + illa
       if (w.endsWith('āmalla') || w.endsWith('āmilla')) {
         addStem(w.slice(0, -4) + 'ṁ');
@@ -1801,6 +1802,14 @@
         categories.add('Sanskrit Loan');
       }
 
+      let compoundParts = null;
+      if (!rwEng && !skEng && !skSkt && typeof splitCompoundWordIso === 'function') {
+        const comp = splitCompoundWordIso(wIso);
+        if (comp) {
+          compoundParts = [comp.leftIso, comp.rightIso];
+          reasons.push(`Compound (${comp.leftIso} + ${comp.rightIso})`);
+        }
+      }
       const isLoan = Boolean(rwEng || ruleRes.reasons.length > 0 || skEng || skSkt);
       const step = (skEng || skSkt) ? 4 : (ruleRes.reasons.length > 0 ? 3 : 2);
 
@@ -1811,6 +1820,7 @@
         step,
         isLoan,
         isName: false,
+        compoundParts,
         categories: Array.from(categories),
         reasons
       };
@@ -2035,6 +2045,79 @@
     }
 
     // ==================== 5. ISO-FIRST TOKEN LOOKUP & TRANSLATION ====================
+
+    function isKnownAnyRootIso(isoCand) {
+      if (!isoCand || isoCand.length < 2) return false;
+      if (state.lexicon.some(e => e.srcIso === isoCand)) return true;
+      if (csvDicts.loaded) {
+        const rwCols = ['NOUNS', 'VERBS', 'ADJECTIVES', 'ADVERBS', 'ENGLISH LOANS', 'COMPANY NAMES', 'PRONOUNS'];
+        for (const col of rwCols) {
+          const s = csvDicts.rootwords[col];
+          if (s && (s.has(isoCand) || (isoCand.endsWith('ŭ') && s.has(isoCand.slice(0, -1))))) return true;
+        }
+        const skCols = ['nouns', 'adjectives', 'verb roots', 'adverbs', 'known english loans'];
+        for (const col of skCols) {
+          const s = csvDicts.sktNonDet[col];
+          if (s && (s.has(isoCand) || (isoCand.endsWith('ŭ') && s.has(isoCand.slice(0, -1))))) return true;
+        }
+      }
+      return false;
+    }
+
+    function findLexiconOrStemMatch(isoWord) {
+      const exact = state.lexicon.find(e => e.srcIso === isoWord);
+      if (exact) return { entry: exact, chain: [] };
+      const rules = [...state.suffixRules].sort((a, b) => b.src_suffix.length - a.src_suffix.length);
+      for (const rule of rules) {
+        const suf = rule.src_suffix;
+        if (isoWord.length > suf.length + 1 && isoWord.endsWith(suf)) {
+          const stem = isoWord.slice(0, isoWord.length - suf.length);
+          const cands = [stem, stem + 'ŭ', stem + 'ṁ', stem + 'm'];
+          if (stem.endsWith('ṟ')) cands.push(stem.slice(0, -1) + 'r');
+          for (const c of cands) {
+            const m = state.lexicon.find(e => e.srcIso === c);
+            if (m) return { entry: m, chain: [rule.case_type] };
+          }
+        }
+      }
+      return null;
+    }
+
+    // Two-sided compound splitter: word = left + right where BOTH halves are valid roots
+    function splitCompoundWordIso(wordIso) {
+      if (!wordIso || wordIso.length < 6) return null;
+      for (let split = wordIso.length - 3; split >= 3; split--) {
+        const rawL = wordIso.slice(0, split);
+        const rawR = wordIso.slice(split);
+
+        const leftCands = [rawL];
+        if (rawL.endsWith('a')) leftCands.push(rawL + 'ṁ', rawL + 'm');
+        if (rawL.endsWith('ā')) leftCands.push(rawL.slice(0, -1) + 'aṁ');
+        if (!/[aāiīuūeēoōŭṁ]$/.test(rawL)) leftCands.push(rawL + 'ŭ');
+
+        let matchedLeft = leftCands.find(lc => state.lexicon.some(e => e.srcIso === lc)) || null;
+        if (!matchedLeft) {
+          for (const lc of leftCands) {
+            if (isKnownAnyRootIso(lc)) { matchedLeft = lc; break; }
+          }
+        }
+        if (!matchedLeft) continue;
+
+        const rightCands = [rawR];
+        // Handle compound gemination (kk, cc, tt, pp) e.g. vr̥kṣa + t + talappŭ
+        if (/^(kk|cc|tt|pp)/.test(rawR) && rawR.length > 3) rightCands.push(rawR.slice(1));
+
+        for (const rc of rightCands) {
+          const rStems = isolateIsoStems(rc);
+          const rightValid = rStems.some(rs => isKnownAnyRootIso(rs));
+          if (rightValid) {
+            return { leftIso: matchedLeft, rawLeft: rawL, rightIso: rc, rightStems: rStems };
+          }
+        }
+      }
+      return null;
+    }
+
     function lookupIsoToken(wordIso) {
       // 0. Exact Inflection Override in ISO
       const ov = state.overrides.find(o => o.src_iso === wordIso);
@@ -2072,7 +2155,7 @@
       // 1b. Verb root + valid verb suffix match (prevents false compound matches like akrami + nāḷukaḷ)
       const PERS_NOUN_END = '(vanmār|vaḷumār|vaḷmār|van|vaḷ|var|tukaḷ|tŭ|va)';
       const VALID_VERB_PAST_REST = new RegExp(
-        '^(ccukoṇṭirikkunna' + PERS_NOUN_END + '?|ccukoṇṭirunnu|ccukoṇṭirikkunnu|ccukoṇṭirikk|ccukoṇṭu|ccukoṇṭŭ|ccukoḷḷāṁ|ccatukoṇṭŭ|ccirikkunnu|ccirikkāṁ|ccirunnu|cciṭṭuṇṭŭ|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ccēkkāṁ|cceṅkil|ccāluṁ|ccāl|ccuṁ|cca' + PERS_NOUN_END + '?|ccu|ppiccŭ|ppiccu|ppicca|ppeṭuttiya|peṭuttiya|ppeṭṭa|peṭṭa|ttu|nnu|nna' + PERS_NOUN_END + '?|ññu|ñña|ññ|iṭṭuṇṭŭ|iṭṭillātta|iṭṭilla|iṭṭŭ|iya|i$)'
+        '^(ccukoṇṭirikkunna' + PERS_NOUN_END + '?|ccukoṇṭirunnu|ccukoṇṭirikkunnu|ccukoṇṭirikk|ccukoṇṭu|ccukoṇṭŭ|ccukoḷḷāṁ|ccatukoṇṭŭ|ccirikkunnu|ccirikkāṁ|ccirunnu|cciṭṭuṇṭŭ|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ccēkkāṁ|cceṅkil|ccillātta|ccilla|ccāluṁ|ccāl|ccuṁ|cca' + PERS_NOUN_END + '?|ccu|ppiccilla|ppiccŭ|ppiccu|ppicca|ppeṭuttiya|peṭuttiya|ppeṭṭa|peṭṭa|ṭṭilla|ṭilla|tilla|nilla|ṭṭillātta|ṭillātta|tillātta|nillātta|ṭṭu|ṭṭŭ|ṭṭa|ṭu|ṭŭ|ṭa|ttu|nnu|nna' + PERS_NOUN_END + '?|ññu|ñña|ññ|iṭṭuṇṭŭ|iṭṭillātta|iṭṭilla|iṭṭŭ|iya|i$)'
       );
       const VALID_VERB_PRES_REST = new RegExp(
         '^(ppeṭuttēṇṭatallātta|peṭuttēṇṭatallātta|ppeṭuttēṇṭa|peṭuttēṇṭa|ppeṭuttātta|peṭuttātta|' +
@@ -2086,7 +2169,7 @@
         'y?kkunnilla|unnilla|y?kkunnatalla|unnatalla|y?kkumpōḷ|umpōḷ|y?kkukayilla|ukayilla|ukilla|' +
         'y?kkāṟuṇṭŭ|āṟuṇṭŭ|y?kkāṟilla|āṟilla|y?kkātta|ātta|y?kkāte|āte|' +
         'y?kkaṇaṁ|aṇaṁ|y?kkaṇṭa|aṇṭa|y?kkarutŭ|arutŭ|y?kkaṭṭe|aṭṭe|' +
-        'y?kkuka|y?uka|y?kkunnu|y?unnu|y?kkunna|y?unna|y?kkāṁ|y?āṁ|y?kkuṁ|y?uṁ|y?kkaṇaṁ|y?aṇaṁ|y?kkēṇṭa|y?ēṇṭa|y?kkātta|y?ātta|y?kkān|uvān|y?ān)'
+        'y?kkuka|y?uka|y?kkunnu|y?unnu|y?kkunna|y?unna|y?kkillē|y?illē|y?kkilla|y?illa|y?kkāṁ|y?āṁ|y?kkuṁ|y?uṁ|y?kkaṇaṁ|y?aṇaṁ|y?kkēṇṭa|y?ēṇṭa|y?kkātta|y?ātta|y?kkān|uvān|y?ān)'
       );
       for (const e of state.lexicon) {
         if (!e.verbRoot) continue;
@@ -2190,7 +2273,29 @@
         return null;
       }
 
-      return searchRecursive(wordIso, 0, [], '');
+      const sufRes = searchRecursive(wordIso, 0, [], '');
+      if (sufRes) return sufRes;
+
+      // 3. Compound word fallback (only when both halves are valid roots and at least one is in lexicon)
+      const comp = splitCompoundWordIso(wordIso);
+      if (comp) {
+        const leftLex = state.lexicon.find(e => e.srcIso === comp.leftIso);
+        const rightLex = findLexiconOrStemMatch(comp.rightIso);
+        if (leftLex || rightLex) {
+          return {
+            isOverride: false,
+            isCompound: true,
+            compound: comp,
+            leftLex,
+            rightLex,
+            entry: leftLex || rightLex.entry,
+            caseChain: [],
+            caseType: 'compound',
+            srcSuffix: ''
+          };
+        }
+      }
+      return null;
     }
 
     function matchPhraseAt(rawTokens, startIdx) {
@@ -2247,8 +2352,8 @@
             if (lastSpanIso.startsWith(vBase) && lastSpanIso.length > vBase.length) {
               let vRest = lastSpanIso.slice(vBase.length);
               if (lastEntryIso === 'ceyyuka' && vRest.startsWith('y')) vRest = vRest.slice(1);
-              const isPast = /^(tu|tŭ|ta|tiṭṭ|nnu|nnŭ|nna|ccu|ccŭ|cca|iṭṭ|i$)/.test(vRest);
-              const normVRest = (lastEntryIso === 'ceyyuka' && /^(tu|tŭ|ta|tiṭṭ)/.test(vRest)) ? ('cc' + vRest.slice(1)) : vRest;
+              const isPast = /^(tu|tŭ|ta|tiṭṭ|tilla|tillātta|teṅkil|tāl|tāluṁ|tēkkāṁ|tirunnu|tirikk|tukoṇṭ|nnu|nnŭ|nna|ccu|ccŭ|cca|iṭṭ|i$)/.test(vRest);
+              const normVRest = (lastEntryIso === 'ceyyuka' && /^t/.test(vRest)) ? ('cc' + vRest.slice(1)) : vRest;
               return {
                 endIdx: wordIndices[n - 1],
                 raw: spanRaw,
@@ -2307,6 +2412,16 @@
     }
 
     function inflectEntryAltIso(entry, altIdx, match, baseTgtIso) {
+      if (match.isCompound && match.compound) {
+        const lIso = match.leftLex ? (match.leftLex.tgtIso[altIdx] || match.leftLex.tgtIso[0]) : match.compound.rawLeft;
+        const lJoin = (lIso.endsWith('aṁ') || lIso.endsWith('am')) ? lIso.slice(0, -1) : lIso.replace(/ŭ$/, '');
+        let rIso = match.compound.rightIso;
+        if (match.rightLex) {
+          const rBase = match.rightLex.tgtIso[0];
+          rIso = applyCaseSandhiChainIso(rBase, match.rightLex.chain, { pos: match.rightLex.entry.pos, isGendered: match.rightLex.entry.isGendered, rSandhi: match.rightLex.entry.rSandhi });
+        }
+        return lJoin + rIso;
+      }
       if (match.isOverride) return baseTgtIso;
       const pastList = entry.tgtVerbPast ? entry.tgtVerbPast.split(',').map(s => s.trim()).filter(Boolean) : [];
       const rootList = entry.tgtVerbRoot ? entry.tgtVerbRoot.split(',').map(s => s.trim().replace(/-+$/, '')).filter(Boolean) : [];
@@ -2356,7 +2471,7 @@
             cStem = cStem.replace(/u$/, '').replace(/y?kk$/, '');
             return cStem + 'ppicca';
           }
-          const tail = rest.replace(/^(ppicc|cc)/, '');
+          const tail = rest.replace(/^(ppicc|cc|ṭṭ|ṭ|t|n)/, '');
           if (/^[aāiīuūeēoō]/.test(tail)) {
             if (effPast.endsWith('ŭ') || effPast.endsWith('u')) return effPast.slice(0, -1) + tail;
             if (effPast.endsWith('i')) return effPast + 'y' + tail;
@@ -2388,7 +2503,7 @@
             const inf = (!needsKk && stem.endsWith('u')) ? (stem + 'vān') : (stem.replace(/u$/, '') + (needsKk ? 'kk' : '') + 'ān');
             return inf + tail;
           }
-          if (/^(uka|unnu|unna|unnilla|unnatalla|umpōḷ|ātta|ātirikkuka|ānākuṁ|āvunna|āmeṇṇu|āmennŭ|āmennu|ēṇṭa|ēṇṭatilla|ēṇṭatāyirunnu|ēṇṭatallātta|ukilla|uṁ|āṁ|aṇaṁ|aṇṭa|arutŭ|aṭṭe|āte|āṟuṇṭŭ|āṟilla|appeṭunnu|appeṭṭu|appeṭuṁ|appeṭṭa)/.test(normRest) || /^(unna|ēṇṭa)(van|vaḷ|var|tŭ|va|tukaḷ)/.test(normRest)) {
+          if (/^(uka|unnu|unna|unnilla|unnatalla|umpōḷ|ātta|ātirikkuka|ānākuṁ|āvunna|āmeṇṇu|āmennŭ|āmennu|ēṇṭa|ēṇṭatilla|ēṇṭatāyirunnu|ēṇṭatallātta|illē|illa|ukilla|uṁ|āṁ|aṇaṁ|aṇṭa|arutŭ|aṭṭe|āte|āṟuṇṭŭ|āṟilla|appeṭunnu|appeṭṭu|appeṭuṁ|appeṭṭa)/.test(normRest) || /^(unna|ēṇṭa)(van|vaḷ|var|tŭ|va|tukaḷ)/.test(normRest)) {
             const cleanStem = (!needsKk && stem.endsWith('u') && /^[uāaē]/.test(normRest)) ? stem.slice(0, -1) : stem;
             return cleanStem + (needsKk ? 'kk' : '') + normRest;
           }
