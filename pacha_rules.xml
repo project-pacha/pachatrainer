@@ -86,6 +86,9 @@
     </slot>
 
     <slot name="VERB_END">
+      <m form="ukayilla" tag="v_ukayilla" />
+      <m form="ukilla" tag="v_ukilla" />
+      <m form="uka" tag="v_uka" />
       <m form="unnat" tag="v_unnat" />
       <m form="unnilla" tag="v_unnilla" />
       <m form="unnu" tag="v_unnu" />
