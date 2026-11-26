@@ -1535,7 +1535,7 @@
       // 1b. Verb root + valid verb suffix match (prevents false compound matches like akrami + nāḷukaḷ)
       const PERS_NOUN_END = '(vanmār|vaḷumār|vaḷmār|van|vaḷ|var|tukaḷ|tŭ|va)';
       const VALID_VERB_PAST_REST = new RegExp(
-        '^(ccukoṇṭirikkunna' + PERS_NOUN_END + '?|ccukoṇṭirunnu|ccukoṇṭirikkunnu|ccukoṇṭirikk|ccukoṇṭu|ccukoṇṭŭ|ccukoḷḷāṁ|ccatukoṇṭŭ|ccirikkunnu|ccirikkāṁ|ccirunnu|cciṭṭuṇṭŭ|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ccēkkāṁ|cceṅkil|ccāluṁ|ccāl|ccuṁ|cca' + PERS_NOUN_END + '?|ccu|ppiccŭ|ppiccu|ppicca|ppeṭuttiya|peṭuttiya|ppeṭṭa|peṭṭa|ttu|nnu|nna' + PERS_NOUN_END + '?|iṭṭuṇṭŭ|iṭṭillātta|iṭṭilla|iṭṭŭ|i$)'
+        '^(ccukoṇṭirikkunna' + PERS_NOUN_END + '?|ccukoṇṭirunnu|ccukoṇṭirikkunnu|ccukoṇṭirikk|ccukoṇṭu|ccukoṇṭŭ|ccukoḷḷāṁ|ccatukoṇṭŭ|ccirikkunnu|ccirikkāṁ|ccirunnu|cciṭṭuṇṭŭ|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ccēkkāṁ|cceṅkil|ccāluṁ|ccāl|ccuṁ|cca' + PERS_NOUN_END + '?|ccu|ppiccŭ|ppiccu|ppicca|ppeṭuttiya|peṭuttiya|ppeṭṭa|peṭṭa|ttu|nnu|nna' + PERS_NOUN_END + '?|ññu|ñña|ññ|iṭṭuṇṭŭ|iṭṭillātta|iṭṭilla|iṭṭŭ|iya|i$)'
       );
       const VALID_VERB_PRES_REST = new RegExp(
         '^(ppeṭuttēṇṭatallātta|peṭuttēṇṭatallātta|ppeṭuttēṇṭa|peṭuttēṇṭa|ppeṭuttātta|peṭuttātta|' +
@@ -1549,11 +1549,11 @@
         'y?kkunnilla|unnilla|y?kkunnatalla|unnatalla|y?kkumpōḷ|umpōḷ|y?kkukayilla|ukayilla|ukilla|' +
         'y?kkāṟuṇṭŭ|āṟuṇṭŭ|y?kkāṟilla|āṟilla|y?kkātta|ātta|y?kkāte|āte|' +
         'y?kkaṇaṁ|aṇaṁ|y?kkaṇṭa|aṇṭa|y?kkarutŭ|arutŭ|y?kkaṭṭe|aṭṭe|' +
-        'y?kkuka|uka|y?kkunnu|unnu|y?kkāṁ|āṁ|y?kkuṁ|uṁ|y?kkān|uvān|ān)'
+        'y?kkuka|y?uka|y?kkunnu|y?unnu|y?kkunna|y?unna|y?kkāṁ|y?āṁ|y?kkuṁ|y?uṁ|y?kkaṇaṁ|y?aṇaṁ|y?kkēṇṭa|y?ēṇṭa|y?kkātta|y?ātta|y?kkān|uvān|y?ān)'
       );
       for (const e of state.lexicon) {
         if (!e.verbRoot) continue;
-        const rIso = mlToIso(normalizeMalayalam(e.verbRoot.replace(/-+$/, '')));
+        const rIso = mlToIso(normalizeMalayalam(e.verbRoot.replace(/-+$/, ''))).replace(/[ŭu]$/, '');
         if (rIso && wordIso.startsWith(rIso) && wordIso.length > rIso.length) {
           const rest = wordIso.slice(rIso.length);
           if (VALID_VERB_PAST_REST.test(rest)) {
@@ -1839,7 +1839,7 @@
             const cStem = stem.replace(/u$/, '').replace(/y?kk$/, '');
             return cStem + rest.replace(/^y?/, '');
           }
-          let normRest = rest.replace(/^(ppeṭutt|peṭutt|y?kk|pp)/, '');
+          let normRest = rest.replace(/^(ppeṭutt|peṭutt|y?kk|pp|y(?=[auāē]))/, '');
           if (normRest === 'ukayilla') normRest = 'ukilla';
           if (normRest === 'ān' || normRest === 'uvān') {
             if (!needsKk && stem.endsWith('u')) return stem + 'vān';
