@@ -244,5 +244,11 @@
     <rule id="r_dist_ttorum" src="ttōṟuṁ" caseType="dist_tōṟuṁ" notes="Distributive (-ttōṟuṁ)" />
     <rule id="r_dist_ntorum" src="ntōṟuṁ" caseType="dist_tōṟuṁ" notes="Distributive (-ntōṟuṁ)" />
     <rule id="r_ins_ale" src="ālē" caseType="ālē" notes="Instrumental/emphatic (-ālē)" />
+    <rule id="r_n_ayillenkil" src="āyilleṅkil" caseType="āyilleṅkil" notes="Noun: -āyilleṅkil (തയ്യാറായില്ലെങ്കിൽ)" />
+    <rule id="r_n_ayittu" src="āyiṭṭŭ" caseType="āyiṭṭŭ" notes="Noun: -āyiṭṭŭ (തയ്യാറായിട്ട്)" />
+    <rule id="r_n_anennu" src="āṇennuṁ" caseType="āṇennuṁ" notes="Noun copula+quote: -āṇennuṁ (സജ്ജമാണെന്നും)" />
+    <rule id="r_n_manennu" src="māṇennuṁ" caseType="āṇennuṁ" notes="Noun -am copula+quote: -māṇennuṁ" />
+    <rule id="r_n_yanennu" src="yāṇennuṁ" caseType="āṇennuṁ" notes="Noun -a/-i copula+quote: -yāṇennuṁ" />
+    <rule id="r_n_vanennu" src="vāṇennuṁ" caseType="āṇennuṁ" notes="Noun -ā/-u copula+quote: -vāṇennuṁ" />
   </suffixRules>
 </pachaRules>
