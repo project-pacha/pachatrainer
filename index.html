@@ -886,6 +886,12 @@
       { id: 'r_dist_ttorum', src_suffix: 'ttōṟuṁ', case_type: 'dist_tōṟuṁ', notes: 'Distributive (-ttōṟuṁ)' },
       { id: 'r_dist_ntorum', src_suffix: 'ntōṟuṁ', case_type: 'dist_tōṟuṁ', notes: 'Distributive (-ntōṟuṁ)' },
       { id: 'r_ins_ale', src_suffix: 'ālē', case_type: 'ālē', notes: 'Instrumental/emphatic (-ālē)' },
+      { id: 'r_n_ayillenkil', src_suffix: 'āyilleṅkil', case_type: 'āyilleṅkil', notes: 'Noun: -āyilleṅkil (തയ്യാറായില്ലെങ്കിൽ)' },
+      { id: 'r_n_ayittu', src_suffix: 'āyiṭṭŭ', case_type: 'āyiṭṭŭ', notes: 'Noun: -āyiṭṭŭ (തയ്യാറായിട്ട്)' },
+      { id: 'r_n_anennu', src_suffix: 'āṇennuṁ', case_type: 'āṇennuṁ', notes: 'Noun copula+quote: -āṇennuṁ (സജ്ജമാണെന്നും)' },
+      { id: 'r_n_manennu', src_suffix: 'māṇennuṁ', case_type: 'āṇennuṁ', notes: 'Noun -am copula+quote: -māṇennuṁ' },
+      { id: 'r_n_yanennu', src_suffix: 'yāṇennuṁ', case_type: 'āṇennuṁ', notes: 'Noun -a/-i copula+quote: -yāṇennuṁ' },
+      { id: 'r_n_vanennu', src_suffix: 'vāṇennuṁ', case_type: 'āṇennuṁ', notes: 'Noun -ā/-u copula+quote: -vāṇennuṁ' },
       { id: 'r_v_kkum', src_suffix: 'kkuṁ', case_type: 'verb_fut', notes: 'Verb future (-kkuṁ)' },
       { id: 'r_cop_akanulla', src_suffix: 'ākānuḷḷa', case_type: 'ākānuḷḷa', notes: 'Copula becoming (-ākānuḷḷa)' },
       { id: 'r_cop_akan', src_suffix: 'ākān', case_type: 'ākān', notes: 'Copula to become (-ākān)' },
@@ -2064,8 +2070,24 @@
         return { isOverride: false, entry: pastMatch, caseChain: [], caseType: 'verb_past', srcSuffix: '' };
       }
       // 1b. Verb root + valid verb suffix match (prevents false compound matches like akrami + nāḷukaḷ)
-      const VALID_VERB_PAST_REST = /^(ccukoṇṭirikk|ccukoṇṭ|ccirikk|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ppicc|ppeṭuttiya|peṭuttiya|ppeṭṭa|peṭṭa|ccuṁ|ccāl|cca|ccu|ttu|nnu|nna|iṭṭillātta|iṭṭilla|iṭṭŭ|i$)/;
-      const VALID_VERB_PRES_REST = /^(ppeṭuttēṇṭatallātta|peṭuttēṇṭatallātta|ppeṭuttēṇṭa|peṭuttēṇṭa|ppeṭuttātta|peṭuttātta|ppikkuka|ppikkunnu|ppikkunna|ppikkunnilla|ppikkumpōḷ|ppikkātta|ppikkukayilla|ppān|kkappeṭṭa|ykkappeṭṭa|appeṭṭa|kkuka|ykkuka|uka|kkunnu|ykkunnu|unnu|kkunna|ykkunna|unna|kkunnilla|ykkunnilla|unnilla|kkumpōḷ|ykkumpōḷ|umpōḷ|kkātta|ykkātta|ātta|kkukayilla|ykkukayilla|ukayilla|ukilla|kkāṁ|ykkāṁ|āṁ|kkuṁ|ykkuṁ|uṁ|kkāte|ykkāte|āte|kkān|ykkān|ān|uvān|kkaṇaṁ|aṇaṁ|kkaṇṭa|aṇṭa|kku|ykku|kk|ykk)/;
+      const PERS_NOUN_END = '(vanmār|vaḷumār|vaḷmār|van|vaḷ|var|tukaḷ|tŭ|va)';
+      const VALID_VERB_PAST_REST = new RegExp(
+        '^(ccukoṇṭirikkunna' + PERS_NOUN_END + '?|ccukoṇṭirunnu|ccukoṇṭirikkunnu|ccukoṇṭirikk|ccukoṇṭu|ccukoṇṭŭ|ccukoḷḷāṁ|ccatukoṇṭŭ|ccirikkunnu|ccirikkāṁ|ccirunnu|cciṭṭuṇṭŭ|cciṭṭillātta|cciṭṭilla|cciṭṭŭ|cciṭṭu|ccēkkāṁ|cceṅkil|ccāluṁ|ccāl|ccuṁ|cca' + PERS_NOUN_END + '?|ccu|ppiccŭ|ppiccu|ppicca|ppeṭuttiya|peṭuttiya|ppeṭṭa|peṭṭa|ttu|nnu|nna' + PERS_NOUN_END + '?|iṭṭuṇṭŭ|iṭṭillātta|iṭṭilla|iṭṭŭ|i$)'
+      );
+      const VALID_VERB_PRES_REST = new RegExp(
+        '^(ppeṭuttēṇṭatallātta|peṭuttēṇṭatallātta|ppeṭuttēṇṭa|peṭuttēṇṭa|ppeṭuttātta|peṭuttātta|' +
+        'y?kkānpōkunna' + PERS_NOUN_END + '?|ānpōkunna' + PERS_NOUN_END + '?|' +
+        'y?kkunna' + PERS_NOUN_END + '?|unna' + PERS_NOUN_END + '?|' +
+        'y?kkēṇṭa' + PERS_NOUN_END + '?|ēṇṭa' + PERS_NOUN_END + '?|' +
+        'y?kkēṇṭatāyirunnu|ēṇṭatāyirunnu|y?kkēṇṭatilla|ēṇṭatilla|y?kkēṇṭa|ēṇṭa|' +
+        'y?kkappeṭunnu|y?kkappeṭṭu|y?kkappeṭuṁ|y?kkappeṭṭa|appeṭunnu|appeṭṭu|appeṭuṁ|appeṭṭa|' +
+        'y?ppikkuka|y?ppikkunnu|y?ppiccu|y?ppiccŭ|ppikkuka|ppikkunnu|ppikkunna|ppikkunnilla|ppikkumpōḷ|ppikkātta|ppikkukayilla|ppān|' +
+        'y?kkātirikkuka|ātirikkuka|y?kkānākuṁ|ānākuṁ|y?kkāvunna|āvunna|y?kkāmeṇṇu|y?kkāmennŭ|āmennŭ|āmennu|' +
+        'y?kkunnilla|unnilla|y?kkunnatalla|unnatalla|y?kkumpōḷ|umpōḷ|y?kkukayilla|ukayilla|ukilla|' +
+        'y?kkāṟuṇṭŭ|āṟuṇṭŭ|y?kkāṟilla|āṟilla|y?kkātta|ātta|y?kkāte|āte|' +
+        'y?kkaṇaṁ|aṇaṁ|y?kkaṇṭa|aṇṭa|y?kkarutŭ|arutŭ|y?kkaṭṭe|aṭṭe|' +
+        'y?kkuka|uka|y?kkunnu|unnu|y?kkāṁ|āṁ|y?kkuṁ|uṁ|y?kkān|uvān|ān)'
+      );
       for (const e of state.lexicon) {
         if (!e.verbRoot) continue;
         const rIso = mlToIso(normalizeMalayalam(e.verbRoot.replace(/-+$/, '')));
@@ -2236,18 +2258,41 @@
             }
           }
           const rules = [...state.suffixRules].sort((a, b) => b.src_suffix.length - a.src_suffix.length);
-          for (const rule of rules) {
-            if (lastSpanIso.length > rule.src_suffix.length + 1 && lastSpanIso.endsWith(rule.src_suffix)) {
-              const stem = lastSpanIso.slice(0, lastSpanIso.length - rule.src_suffix.length);
-              if (stem === lastEntryIso || stem + 'ŭ' === lastEntryIso || stem + 'ṁ' === lastEntryIso || stem + 'm' === lastEntryIso || (stem.endsWith('ṟ') && stem.slice(0, -1) + 'r' === lastEntryIso)) {
-                return {
-                  endIdx: wordIndices[n - 1],
-                  raw: spanRaw,
-                  srcIso: spanIso,
-                  match: { isOverride: false, entry: tempEntry, caseChain: [rule.case_type], caseType: rule.case_type, srcSuffix: rule.src_suffix }
-                };
+          const matchLastRec = (curIso, depth, accChain, accSuf) => {
+            if (curIso === lastEntryIso) {
+              return { isOverride: false, entry, caseChain: accChain, caseType: accChain.join('+'), srcSuffix: accSuf };
+            }
+            if (depth >= 3) return null;
+            for (const rule of rules) {
+              const suf = rule.src_suffix;
+              if (curIso.length > suf.length + 1 && curIso.endsWith(suf)) {
+                const stem = curIso.slice(0, curIso.length - suf.length);
+                const nextChain = [rule.case_type, ...accChain];
+                const nextSuf = suf + (accSuf ? '+' + accSuf : '');
+                const cands = [stem, stem + 'ŭ', stem + 'ṁ', stem + 'm'];
+                if (stem.endsWith('ṟ')) cands.push(stem.slice(0, -1) + 'r');
+                if (suf === 'ṅṅaḷ') cands.push(stem + 'ṁ', stem + 'm');
+                if (cands.includes(lastEntryIso)) {
+                  return { isOverride: false, entry, caseChain: nextChain, caseType: nextChain.join('+'), srcSuffix: nextSuf };
+                }
+                if (depth < 2) {
+                  for (const c of cands) {
+                    const sub = matchLastRec(c, depth + 1, nextChain, nextSuf);
+                    if (sub) return sub;
+                  }
+                }
               }
             }
+            return null;
+          };
+          const phraseSubMatch = matchLastRec(lastSpanIso, 0, [], '');
+          if (phraseSubMatch) {
+            return {
+              endIdx: wordIndices[n - 1],
+              raw: spanRaw,
+              srcIso: spanIso,
+              match: phraseSubMatch
+            };
           }
         }
       }
@@ -2280,20 +2325,36 @@
         const rest = match.srcSuffix || '';
         if (match.caseType === 'verb_root_past') {
           const effPast = tgtPastIso || (baseTgtIso.endsWith('uka') ? (baseTgtIso.slice(0, -3) + 'i') : baseTgtIso);
+          const toPastAdj = p => {
+            if (p.endsWith('ōyi') || p.endsWith('āyi')) return p.slice(0, -1) + 'a';
+            if (p.endsWith('i')) return p + 'ya';
+            if (p.endsWith('u') || p.endsWith('ŭ')) return p.slice(0, -1) + 'a';
+            return p + 'a';
+          };
           if (rest === 'ccŭ' || rest === 'tŭ') return effPast.endsWith('u') ? (effPast.slice(0, -1) + 'ŭ') : effPast;
           if (/^(ccu|ppiccu|i)$/.test(rest)) return effPast;
-          if (rest.startsWith('ccukoṇṭ')) return effPast + 'k' + rest.slice(3);
-          if (rest === 'cca' || rest === 'ppeṭṭa' || rest === 'peṭṭa') {
-            if (effPast.endsWith('ōyi') || effPast.endsWith('āyi')) return effPast.slice(0, -1) + 'a'; // pōyi -> pōya
-            if (effPast.endsWith('i')) return effPast + 'ya'; // taḻuki -> taḻukiya, cāṭi -> cāṭiya
-            if (effPast.endsWith('u') || effPast.endsWith('ŭ')) return effPast.slice(0, -1) + 'a'; // maṟannu -> maṟanna, tōṯṯu -> tōṯṯa
-            return effPast + 'a';
+          if (rest === 'ppiccŭ') {
+            let cStem = (derivedStem || tgtRootIso).replace(/ŭ$/, '').replace(/u$/, '').replace(/y?kk$/, '');
+            return cStem + 'ppiccŭ';
           }
+          if (rest.startsWith('ccukoṇṭ') || rest.startsWith('ccukoḷḷ')) {
+            const uTail = rest.slice(2); // ukoṇṭ..., ukoḷḷāṁ
+            if (effPast.endsWith('i')) return effPast + 'k' + uTail.slice(1); // kayyēṟi + kkoṇṭ...
+            if (effPast.endsWith('u') || effPast.endsWith('ŭ')) return effPast.slice(0, -1) + uTail; // vann + ukoṇṭ...
+            return effPast + uTail;
+          }
+          if (rest.startsWith('cca') && rest !== 'ccatukoṇṭŭ') {
+            return toPastAdj(effPast) + rest.slice(3); // ചെയ്തവൻ -> വന്നവൻ / കയ്യേറിയവൻ
+          }
+          if (rest === 'ccatukoṇṭŭ') {
+            return toPastAdj(effPast) + 'tukoṇṭŭ';
+          }
+          if (rest === 'ppeṭṭa' || rest === 'peṭṭa') return toPastAdj(effPast);
           if (rest === 'ppicca' || rest === 'ppeṭuttiya' || rest === 'peṭuttiya') {
             let cStem = tgtRootIso.replace(/ŭ$/, '');
             if (derivedStem && derivedStem.length > cStem.length && derivedStem.slice(0, 3) === cStem.slice(0, 3)) cStem = derivedStem;
             cStem = cStem.replace(/u$/, '').replace(/y?kk$/, '');
-            return cStem + 'ppicca'; // tōlku -> tōlppicca, kēḷkku -> kēḷppicca
+            return cStem + 'ppicca';
           }
           const tail = rest.replace(/^(ppicc|cc)/, '');
           if (/^[aāiīuūeēoō]/.test(tail)) {
@@ -2310,15 +2371,25 @@
             if (bridge && /^[ṭḍḷṟtkc]$/.test(bridge)) stem = stem + bridge;
           }
           const needsKk = baseTgtIso.endsWith('kkuka') || /[lr]$/.test(baseTgtIso);
-          let normRest = rest.replace(/^(ppeṭutt|peṭutt|ppikk|y?kk|pp)/, '');
+          // Causative -ppikk- / -yppikk-
+          if (/^y?ppikk/.test(rest)) {
+            const cStem = stem.replace(/u$/, '').replace(/y?kk$/, '');
+            return cStem + rest.replace(/^y?/, '');
+          }
+          let normRest = rest.replace(/^(ppeṭutt|peṭutt|y?kk|pp)/, '');
           if (normRest === 'ukayilla') normRest = 'ukilla';
           if (normRest === 'ān' || normRest === 'uvān') {
             if (!needsKk && stem.endsWith('u')) return stem + 'vān';
             const cleanStem = (!needsKk && stem.endsWith('u')) ? stem.slice(0, -1) : stem;
             return cleanStem + (needsKk ? 'kk' : '') + 'ān';
           }
-          if (/^(uka|unnu|unna|unnilla|umpōḷ|ātta|ēṇṭa|ēṇṭatallātta|ukilla|uṁ|āṁ|aṇaṁ|aṇṭa|āte|appeṭṭa)$/.test(normRest)) {
-            const cleanStem = (!needsKk && stem.endsWith('u') && /^[uāa]/.test(normRest)) ? stem.slice(0, -1) : stem;
+          if (normRest.startsWith('ānpōkunna')) {
+            const tail = normRest.slice(2); // pōkunna...
+            const inf = (!needsKk && stem.endsWith('u')) ? (stem + 'vān') : (stem.replace(/u$/, '') + (needsKk ? 'kk' : '') + 'ān');
+            return inf + tail;
+          }
+          if (/^(uka|unnu|unna|unnilla|unnatalla|umpōḷ|ātta|ātirikkuka|ānākuṁ|āvunna|āmeṇṇu|āmennŭ|āmennu|ēṇṭa|ēṇṭatilla|ēṇṭatāyirunnu|ēṇṭatallātta|ukilla|uṁ|āṁ|aṇaṁ|aṇṭa|arutŭ|aṭṭe|āte|āṟuṇṭŭ|āṟilla|appeṭunnu|appeṭṭu|appeṭuṁ|appeṭṭa)/.test(normRest) || /^(unna|ēṇṭa)(van|vaḷ|var|tŭ|va|tukaḷ)/.test(normRest)) {
+            const cleanStem = (!needsKk && stem.endsWith('u') && /^[uāaē]/.test(normRest)) ? stem.slice(0, -1) : stem;
             return cleanStem + (needsKk ? 'kk' : '') + normRest;
           }
           return stem + normRest;
