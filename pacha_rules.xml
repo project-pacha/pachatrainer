@@ -47,24 +47,31 @@
       <m form="ttinaṭiyil" tag="loc_aṭiyil" /><m form="inaṭiyil" tag="loc_aṭiyil" /><m form="aṭiyil" tag="loc_aṭiyil" />
       <m form="ttiṅkal" tag="loc" /><m form="iṅkal" tag="loc" />
       <m form="ttil" tag="loc" /><m form="il" tag="loc" /><m form="ttŭ" tag="loc" />
-      <m form="ttinṟe" tag="gen" /><m form="inṟe" tag="gen" /><m form="uṭe" tag="gen" /><m form="nṟe" tag="gen" /><m form="ṟe" tag="gen" />
+      <m form="ttinṯe" tag="gen" /><m form="ttinṟe" tag="gen" /><m form="inṯe" tag="gen" /><m form="inṟe" tag="gen" /><m form="uṭe" tag="gen" /><m form="nṯe" tag="gen" /><m form="nṟe" tag="gen" /><m form="ṯe" tag="gen" /><m form="ṟe" tag="gen" />
       <m form="ttinŭ" tag="dat" /><m form="inŭ" tag="dat" /><m form="kkŭ" tag="dat" /><m form="nŭ" tag="dat" />
       <m form="tte" tag="acc" /><m form="ine" tag="acc" /><m form="e" tag="acc" />
       <m form="ttōṭŭ" tag="soc" /><m form="inōṭŭ" tag="soc" /><m form="ōṭŭ" tag="soc" />
       <m form="ttāl" tag="ins" /><m form="ināl" tag="ināl" /><m form="āl" tag="ins" /><m form="ālē" tag="ālē" />
+      <m form="inēkkāḷ" tag="comp_inēkkāḷ" /><m form="ēkkāḷ" tag="comp_inēkkāḷ" />
     </slot>
 
     <slot name="POSTP">
       <m form="ilninnŭ" tag="abl" /><m form="ilninnu" tag="abl" />
       <m form="ilēkkuḷḷa" tag="all_uḷḷa" /><m form="ilēkkŭ" tag="allative" />
       <m form="ttēkkŭ" tag="towards" /><m form="ēkkŭ" tag="towards" />
-      <m form="ttināyi" tag="for_āyi" /><m form="ināyi" tag="for_āyi" /><m form="kkāyi" tag="for_āyi" /><m form="āyi" tag="for_āyi" />
+      <m form="ttināyi" tag="for_ināyi" /><m form="ināyi" tag="for_ināyi" /><m form="kkāyi" tag="for_āyi" /><m form="āyi" tag="for_āyi" />
       <m form="uvēṇṭi" tag="for_vēṇṭi" /><m form="vēṇṭi" tag="for_vēṇṭi" />
       <m form="umāyi" tag="with" /><m form="umottŭ" tag="tog" />
       <m form="ōḷaṁ" tag="ōḷaṁ" /><m form="tōṟuṁ" tag="dist_tōṟuṁ" />
       <m form="koṇṭŭ" tag="c_koṇṭŭ" /><m form="pōle" tag="c_pōle" />
       <m form="otta" tag="dat_otta" />
       <m form="ile" tag="adj_e" />
+      <m form="mūlaṁ" tag="c_mūlaṁ" /><m form="mūlam" tag="c_mūlaṁ" />
+      <m form="vaḻi" tag="c_vaḻi" />
+      <m form="āyiṭṭuṇṭŭ" tag="āyiṭṭuṇṭŭ" /><m form="āyiṭṭilla" tag="āyiṭṭilla" /><m form="āyiṭṭuṁ" tag="āyiṭṭuṁ" />
+      <m form="āyirikke" tag="adv_āyirikke" /><m form="āyappōḷ" tag="adv_āyappōḷ" />
+      <m form="āyāluṁ" tag="cond_āyāluṁ" /><m form="āyāl" tag="cond_āyāl" />
+      <m form="āyuṁ" tag="adv_āyuṁ" />
     </slot>
 
     <slot name="VERBALIZER">
@@ -134,12 +141,17 @@
 
     <slot name="NOMINALIZER">
       <m form="tŭ" tag="nom_tŭ" />
+      <m form="tu" tag="nom_tŭ" />
       <m form="t" tag="nom_tŭ" />
+      <m form="van" tag="nom_van" />
+      <m form="vaḷ" tag="nom_vaḷ" />
+      <m form="var" tag="nom_var" />
+      <m form="va" tag="nom_va" />
     </slot>
 
     <slot name="COP_NEG">
       <m form="āṇŭ" tag="cop" /><m form="āṇu" tag="cop" />
-      <m form="alla" tag="neg_alla" />
+      <m form="allē" tag="allē" /><m form="alla" tag="neg_alla" /><m form="āṇō" tag="āṇō" />
       <m form="illa" tag="neg" />
       <m form="uṇṭŭ" tag="aff_uṇṭŭ" /><m form="uṇṭu" tag="aff_uṇṭŭ" />
       <m form="arutŭ" tag="neg_arutŭ" />
@@ -156,6 +168,13 @@
       <m form="illāte" tag="illāte" />
       <m form="eṅkil" tag="cond_eṅkil" />
       <m form="allāte" tag="allāte" />
+      <m form="āyirikkuṁ" tag="āyirikkuṁ" />
+      <m form="āyirikkāṁ" tag="āyirikkāṁ" />
+      <m form="āyirunnu" tag="āyirunnu" />
+      <m form="āyirunniṭṭuṁ" tag="āyirunniṭṭuṁ" />
+      <m form="āyirunneṅkil" tag="āyirunneṅkil" />
+      <m form="āyē" tag="āyē" />
+      <m form="eṅkiluṁ" tag="eṅkiluṁ" />
     </slot>
 
     <slot name="CLITIC">
@@ -168,6 +187,8 @@
       <m form="ennuṁ" tag="ennuṁ" />
       <m form="enna" tag="mod_enna" />
       <m form="uḷḷu" tag="uḷḷu" />
+      <m form="tanne" tag="emph_tanne" />
+      <m form="tannē" tag="emph_tanne" />
       <m form="eviṭe" tag="q_eviṭe" />
       <m form="ārŭ" tag="q_ārŭ" />
       <m form="āru" tag="q_ārŭ" />
@@ -189,9 +210,9 @@
     <prev from="PARTICIPLE" to="NOMINALIZER,POSTP,CASE,PLURAL" />
     <prev from="VERB_END" to="VERBALIZER" />
     <prev from="VERBALIZER" to="NOMINALIZER,CASE,PLURAL" />
-    <prev from="POSTP" to="CASE,PLURAL" />
-    <prev from="CASE" to="PLURAL" />
-    <prev from="PLURAL" to="" />
+    <prev from="POSTP" to="NOMINALIZER,CASE,PLURAL" />
+    <prev from="CASE" to="NOMINALIZER,PLURAL" />
+    <prev from="PLURAL" to="NOMINALIZER" />
   </transitions>
 
   <!-- 4. Custom / Legacy Flat Suffix Rules (optional overrides) -->
