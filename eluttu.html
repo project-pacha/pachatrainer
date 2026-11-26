@@ -150,9 +150,10 @@
     // Set your GitHub "username/repo" to send corrections directly as pre-filled GitHub Issues/Comments.
     // Leave as '' to copy formatted Markdown corrections to clipboard instead.
     const CONFIG = {
-      githubRepo: 'project-pacha/pachatrainer', // e.g. 'project-pacha/pachezhuthu'
+      correctionEndpoint: 'https://formspree.io/f/xppdbepb',
+      githubRepo: 'project-pacha/pachatrainer',
       githubLabels: 'correction',
-      logoUrl: '' // e.g. './logo.png' or 'https://.../logo.png' when hosted on GitHub Pages
+      logoUrl: '' 
     };
 
     // ==================== 1. ISO 15919 + ŭ TRANSLITERATION LAYER ====================
@@ -2641,7 +2642,7 @@
         }
       });
 
-      popEl.addEventListener('submit', e => {
+      popEl.addEventListener('submit', async e => {
         if (e.target.id !== 'lt-corr-form' || activeTokIdx === null) return;
         e.preventDefault();
         const t = state.lastTranslation[activeTokIdx];
@@ -2653,19 +2654,47 @@
         state.customReplacements[t.key] = sug;
         renderOutput();
 
-        const title = encodeURIComponent(`Correction: ${t.raw} -> ${sug}`);
-        const body = encodeURIComponent(
-          `**Original:** ${t.raw}\n**Suggested Pacha Malayalam:** ${sug}\n**Current Output:** ${t.out}\n` +
-          (note ? `**Note:** ${note}\n` : '') +
-          `**Context:** \`${document.getElementById('source-input').value.trim().slice(0, 200)}\``
-        );
+        const contextTxt = document.getElementById('source-input').value.trim().slice(0, 200);
 
-        if (CONFIG.githubRepo) {
+        if (CONFIG.correctionEndpoint) {
+          try {
+            const res = await fetch(CONFIG.correctionEndpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({
+                original: t.raw,
+                suggested_pacha: sug,
+                current_output: t.out,
+                note,
+                context: contextTxt
+              })
+            });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            showToast('നന്ദി! Correction sent!');
+          } catch (err) {
+            copyToClipboard(`Correction: ${t.raw} -> ${sug}${note ? ' (' + note + ')' : ''}`, 'Could not reach endpoint; copied correction to clipboard.');
+          }
+          closePopover();
+          return;
+        }
+
+        const repoSlug = String(CONFIG.githubRepo || '').trim()
+          .replace(/^https?:\/\/github\.com\//i, '')
+          .replace(/\.git$/i, '')
+          .replace(/^\/+|\/+$/g, '');
+
+        if (repoSlug) {
+          const title = encodeURIComponent(`Correction: ${t.raw} -> ${sug}`);
+          const body = encodeURIComponent(
+            `**Original:** ${t.raw}\n**Suggested Pacha Malayalam:** ${sug}\n**Current Output:** ${t.out}\n` +
+            (note ? `**Note:** ${note}\n` : '') +
+            `**Context:** \`${contextTxt}\``
+          );
           const labels = CONFIG.githubLabels ? `&labels=${encodeURIComponent(CONFIG.githubLabels)}` : '';
-          window.open(`https://github.com/${CONFIG.githubRepo}/issues/new?title=${title}&body=${body}${labels}`, '_blank', 'noopener');
+          window.open(`https://github.com/${repoSlug}/issues/new?title=${title}&body=${body}${labels}`, '_blank', 'noopener');
           showToast('Opened GitHub correction form!');
         } else {
-          copyToClipboard(`Correction: ${t.raw} -> ${sug}${note ? ' (' + note + ')' : ''}`, 'Correction applied & copied! Set CONFIG.githubRepo for GitHub Issues.');
+          copyToClipboard(`Correction: ${t.raw} -> ${sug}${note ? ' (' + note + ')' : ''}`, 'Correction applied & copied! Set CONFIG.correctionEndpoint for no-login submissions.');
         }
         closePopover();
       });
