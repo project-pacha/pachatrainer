@@ -349,7 +349,8 @@
               (cons === 'ṇ' && nextCons === 'ṭ') ||
               (cons === 'n' && ['t', 'ṯ', 'd', 'm', 'r', 'ś', 's', 'y', 'v'].includes(nextCons)) ||
               (cons === 'ḷ' && nextCons === 'y') ||
-              (cons === 'l' && nextCons === 'y');
+              (cons === 'l' && nextCons === 'y') ||
+              (cons === 'r' && nextCons === 'y');
             out += isAllowedConjunct ? (ISO_CONS_MAP[cons] + '്') : ISO_CHILLU_END_MAP[cons];
           } else {
             out += ISO_CONS_MAP[cons] + '്';
@@ -988,7 +989,7 @@
         { form: 'āyirikk', tag: 'vz_āyirikk' }
       ],
       VERB_END: [
-        { form: 'unnat', tag: 'v_unnat' }, { form: 'unnilla', tag: 'v_unnilla' },
+        { form: 'ukayilla', tag: 'v_ukayilla' }, { form: 'ukilla', tag: 'v_ukilla' }, { form: 'uka', tag: 'v_uka' }, { form: 'unnat', tag: 'v_unnat' }, { form: 'unnilla', tag: 'v_unnilla' },
         { form: 'unnu', tag: 'v_unnu' }, { form: 'unna', tag: 'v_unna' },
         { form: 'ātta', tag: 'v_ātta' }, { form: 'ēṇṭa', tag: 'v_ēṇṭa' },
         { form: 'ēṇaṁ', tag: 'v_ēṇaṁ' }, { form: 'aṇaṁ', tag: 'v_aṇaṁ' },
@@ -1803,21 +1804,35 @@
         'y?kkaṇaṁ|aṇaṁ|y?kkaṇṭa|aṇṭa|y?kkarutŭ|arutŭ|y?kkaṭṭe|aṭṭe|' +
         'y?kkuka|y?uka|y?kkunnu|y?unnu|y?kkunna|y?unna|y?kkillē|y?illē|y?kkilla|y?illa|y?kkāṁ|y?āṁ|y?kkuṁ|y?uṁ|y?kkaṇaṁ|y?aṇaṁ|y?kkēṇṭa|y?ēṇṭa|y?kkātta|y?ātta|y?kkān|uvān|y?ān)'
       );
+      let bestVerbMatch = null;
+      let bestVerbLen = -1;
       for (const e of state.lexicon) {
-        const rIso = e.verbRoot
-          ? mlToIso(normalizeMalayalam(e.verbRoot.replace(/-+$/, ''))).replace(/[ŭu]$/, '')
-          : (e.pos === 'ക്രിയ' && e.srcIso && e.srcIso.endsWith('uka') ? e.srcIso.replace(/(ykkuka|kkuka|uka)$/, '') : '');
-        if (!rIso) continue;
-        if (rIso && wordIso.startsWith(rIso) && wordIso.length > rIso.length) {
-          const rest = wordIso.slice(rIso.length);
-          if (VALID_VERB_PAST_REST.test(rest)) {
-            return { isOverride: false, entry: e, caseChain: [], caseType: 'verb_root_past', srcSuffix: rest };
+        const rCands = [];
+        if (e.verbRoot) {
+          const r = mlToIso(normalizeMalayalam(e.verbRoot.replace(/-+$/, ''))).replace(/[ŭu]$/, '');
+          if (r) rCands.push(r);
+        } else if (e.pos === 'ക്രിയ' && e.srcIso && e.srcIso.endsWith('uka')) {
+          const base = e.srcIso.replace(/(ykkuka|kkuka|uka)$/, '');
+          if (base) rCands.push(base);
+          if (e.srcIso.endsWith('kkuka')) {
+            const pBase = e.srcIso.slice(0, -5);
+            if (pBase && pBase !== base) rCands.push(pBase);
           }
-          if (VALID_VERB_PRES_REST.test(rest)) {
-            return { isOverride: false, entry: e, caseChain: [], caseType: 'verb_root_pres', srcSuffix: rest };
+        }
+        for (const rIso of rCands) {
+          if (rIso.length > bestVerbLen && wordIso.startsWith(rIso) && wordIso.length > rIso.length) {
+            const rest = wordIso.slice(rIso.length);
+            if (VALID_VERB_PAST_REST.test(rest)) {
+              bestVerbMatch = { isOverride: false, entry: e, caseChain: [], caseType: 'verb_root_past', srcSuffix: rest };
+              bestVerbLen = rIso.length;
+            } else if (VALID_VERB_PRES_REST.test(rest)) {
+              bestVerbMatch = { isOverride: false, entry: e, caseChain: [], caseType: 'verb_root_pres', srcSuffix: rest };
+              bestVerbLen = rIso.length;
+            }
           }
         }
       }
+      if (bestVerbMatch) return bestVerbMatch;
 
       const rules = [...state.suffixRules].sort((a, b) => b.src_suffix.length - a.src_suffix.length);
 
